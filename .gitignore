@@ -1,0 +1,13 @@
+# Backup folder
+assets_backup/
+
+# macOS
+.DS_Store
+*.DS_Store
+
+# Temporary files
+*.tmp
+*.log
+
+# Script de compresie (nu mai e necesar)
+compress-images.sh
