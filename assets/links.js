@@ -48,4 +48,22 @@ var tiktokLinks = {
     "Symphonia Residualis": "https://www.tiktok.com/@ilascu99/video/7416399187358190881",
 
     // --- ORBITA ZERO ---
-    "Prietenul meu ARGO": "
+    "Prietenul meu ARGO": "https://www.tiktok.com/@ilascu99/video/7409292857413684513",
+    "Clara's Song": "https://www.tiktok.com/@ilascu99/video/7411931346571595040",
+    "Taste of Life": "https://www.tiktok.com/@ilascu99/video/7412297123912994080",
+    "Taste of Light": "https://www.tiktok.com/@ilascu99/video/7412643516104101153",
+    "Taste of Truth": "https://www.tiktok.com/@ilascu99/video/7413038670833077536",
+    "ARGO-9's Dream": "https://www.tiktok.com/@ilascu99/video/7413411030027275553",
+    "Nodo del Plata": "https://www.tiktok.com/@ilascu99/video/7413757656910728480",
+    "Matías Verón": "https://www.tiktok.com/@ilascu99/video/7414152501068221728",
+    "Taste of Colour": "https://www.tiktok.com/@ilascu99/video/7414513904622718241",
+
+    // --- ABOUT THE MOTH ---
+    "About the Moth": "https://www.tiktok.com/@ilascu99/video/7410069357591104800",
+    "Loving my little Moth": "https://www.tiktok.com/@ilascu99/video/7410406856427326752",
+    "Jack": "https://www.tiktok.com/@ilascu99/video/7410776735517101344",
+    "Sadhguru's Steps": "https://www.tiktok.com/@ilascu99/video/7411162464013470992",
+    "Siberian Wind": "https://www.tiktok.com/@ilascu99/video/7411548680323992864",
+    "Silenus": "https://www.tiktok.com/@ilascu99/video/7411904732001553696",
+    "Amphibian": "https://www.tiktok.com/@ilascu99/video/7412271379769970001"
+};
