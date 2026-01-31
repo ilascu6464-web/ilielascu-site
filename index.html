@@ -11,7 +11,7 @@
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
 
-<script src="assets/links.js?v=2064"></script>
+<script src="assets/links.js?v=2065"></script>
 
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -36,6 +36,7 @@
     --color-rumble:#85c742;
     --color-incurs:#bf5af2;
     --color-bio:#48dbfb;
+    --color-bluegeo:#5aa9e6; /* Culoare noua pentru Blue Geometry */
 }
 
 /* --- 2. RESET SI BASE --- */
@@ -158,6 +159,11 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.bio img.thumb { border-color: rgba(72, 219, 251, 0.5); box-shadow: 0 0 20px rgba(72, 219, 251, 0.25); }
 .media-row.bio figure.tile figcaption {color: #ccf6ff; text-shadow: 0 0 6px rgba(72, 219, 251, 0.2);}
 
+.media-row.bluegeo h3 { color: var(--color-bluegeo); }
+.media-row.bluegeo img.thumb { border-color: rgba(90, 169, 230, 0.5); box-shadow: 0 0 20px rgba(90, 169, 230, 0.25); }
+.media-row.bluegeo figure.tile figcaption {color: #d0e8ff; text-shadow: 0 0 6px rgba(90, 169, 230, 0.2);}
+
+
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
 /* --- 7. BUTOANE --- */
@@ -202,6 +208,7 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.dance { --pulse-color: rgba(0, 255, 157, 0.4); }
 .media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); }
 .media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
+.media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); }
 
 .btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
 .btn.rumble:hover{ background: #85c742; color: #000; }
@@ -386,6 +393,24 @@ document.addEventListener('DOMContentLoaded', () => {
         <figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
         <figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
     </div>
+</div>
+</div>
+
+<div class="media-row bluegeo">
+<img alt="Blue Geometry Waltz" class="thumb" src="assets/bluewalz.webp">
+<div class="media-content">
+<h3>Blue Geometry Waltz</h3>
+<div>Un triptic muzical urban: geometrie, emoție și ritm de vals.</div>
+<div class="en">An urban musical triptych: geometry, emotion, and waltz rhythm.</div>
+<div class="btns">
+    <a class="btn ytmusic" href="#" rel="noopener" target="_blank">🎧 YouTube Music</a>
+    <a class="btn rumble" href="#" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+    <figure class="tile"><img alt="Sibiu" loading="lazy" src="assets/sibiu.webp"><figcaption>Sibiu</figcaption></figure>
+    <figure class="tile"><img alt="Sankt Petersburg" loading="lazy" src="assets/sankt.webp"><figcaption>Sankt Petersburg</figcaption></figure>
+    <figure class="tile"><img alt="Paris" loading="lazy" src="assets/paris.webp"><figcaption>Paris</figcaption></figure>
+</div>
 </div>
 </div>
 

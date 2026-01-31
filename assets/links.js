@@ -1,4 +1,9 @@
 var tiktokLinks = {
+    // --- BLUE GEOMETRY WALTZ ---
+    "Sibiu": "https://www.tiktok.com/@ilascu99/video/7601438252972641558",
+    "Sankt Petersburg": "https://www.tiktok.com/@ilascu99/video/7601437933203098902",
+    "Paris": "https://www.tiktok.com/@ilascu99/video/7601437635504049430",
+
     // --- INCURSIUNE IN IMPOSIBIL ---
     "Xorax on the wings of a swan": "https://www.tiktok.com/@ilascu99/video/7417537604464872737",
     "NINA": "https://www.tiktok.com/@ilascu99/video/7419131641042996513",
