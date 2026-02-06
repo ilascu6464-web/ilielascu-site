@@ -11,7 +11,7 @@
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
 
-<script src="assets/links.js?v=2065"></script>
+<script src="assets/links.js?v=2066"></script>
 
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -36,7 +36,8 @@
     --color-rumble:#85c742;
     --color-incurs:#bf5af2;
     --color-bio:#48dbfb;
-    --color-bluegeo:#5aa9e6; /* Culoare noua pentru Blue Geometry */
+    --color-bluegeo:#5aa9e6; 
+    --color-dys:#e056fd; /* Culoare Magenta pentru Contemporary Dysfunction */
 }
 
 /* --- 2. RESET SI BASE --- */
@@ -163,6 +164,10 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.bluegeo img.thumb { border-color: rgba(90, 169, 230, 0.5); box-shadow: 0 0 20px rgba(90, 169, 230, 0.25); }
 .media-row.bluegeo figure.tile figcaption {color: #d0e8ff; text-shadow: 0 0 6px rgba(90, 169, 230, 0.2);}
 
+.media-row.dys h3 { color: var(--color-dys); }
+.media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); }
+.media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
+
 
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
@@ -209,6 +214,7 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); }
 .media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
 .media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); }
+.media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
 
 .btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
 .btn.rumble:hover{ background: #85c742; color: #000; }
@@ -393,6 +399,23 @@ document.addEventListener('DOMContentLoaded', () => {
         <figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
         <figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
     </div>
+</div>
+</div>
+
+<div class="media-row dys">
+<img alt="Contemporary dysfunction" class="thumb" src="assets/cont.webp">
+<div class="media-content">
+<h3>Contemporary dysfunction</h3>
+<div>Un album despre haosul modern și sufletul neînfricat.</div>
+<div class="en">An album about modern chaos and the fearless soul.</div>
+<div class="btns">
+    <a class="btn ytmusic" href="#" rel="noopener" target="_blank">🎧 YouTube Music</a>
+    <a class="btn rumble" href="#" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+    <figure class="tile"><img alt="The World in Chaos" loading="lazy" src="assets/chaos.webp"><figcaption>The World in Chaos</figcaption></figure>
+    <figure class="tile"><img alt="The brave Siberian soul" loading="lazy" src="assets/sib.webp"><figcaption>The brave Siberian soul</figcaption></figure>
+</div>
 </div>
 </div>
 

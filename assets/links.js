@@ -1,4 +1,8 @@
 var tiktokLinks = {
+    // --- CONTEMPORARY DYSFUNCTION ---
+    "The World in Chaos": "https://www.tiktok.com/@ilascu99/video/7603645672599883030",
+    "The brave Siberian soul": "https://www.tiktok.com/@ilascu99/video/7603646098967776534",
+
     // --- BLUE GEOMETRY WALTZ ---
     "Sibiu": "https://www.tiktok.com/@ilascu99/video/7601438252972641558",
     "Sankt Petersburg": "https://www.tiktok.com/@ilascu99/video/7601437933203098902",
