@@ -38,6 +38,7 @@
     --color-bio:#48dbfb;
     --color-bluegeo:#5aa9e6; 
     --color-dys:#e056fd; 
+    --color-perc:#ff4757; /* Culoare noua pentru Perceptia Realitatii */
 }
 
 /* --- 2. RESET SI BASE --- */
@@ -168,6 +169,10 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); }
 .media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
 
+.media-row.perc h3 { color: var(--color-perc); }
+.media-row.perc img.thumb { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 20px rgba(255, 71, 87, 0.25); }
+.media-row.perc figure.tile figcaption {color: #ffcccf; text-shadow: 0 0 6px rgba(255, 71, 87, 0.2);}
+
 
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
@@ -215,6 +220,7 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
 .media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); }
 .media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
+.media-row.perc { --pulse-color: rgba(255, 71, 87, 0.4); }
 
 .btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
 .btn.rumble:hover{ background: #85c742; color: #000; }
@@ -337,6 +343,18 @@ document.addEventListener('DOMContentLoaded', () => {
 <section aria-label="Books" class="wrapper">
 <h2 class="section-title">Cărțile mele / My Books</h2>
 
+<div class="media-row perc">
+<img alt="Coperta — Percepția Realității" class="thumb" src="assets/perc.png">
+<div class="media-content">
+<h3>Percepția Realității</h3>
+<div>O nouă perspectivă asupra realității înconjurătoare și a adevărului personal.</div>
+<div class="en">A new perspective on surrounding reality and personal truth.</div>
+<div class="btns">
+<a class="btn fxbtn" href="https://www.youtube.com/watch?v=uyOoHp3eW0E&list=PLmvmJ6LhMAd8k05-K4qyH67cFSuQn0XA5&pp=sAgC" rel="noopener" target="_blank">🎬 YouTube Podcast</a>
+</div>
+</div>
+</div>
+
 <div class="media-row incurs">
 <img alt="Coperta — Incursiune în imposibil" class="thumb" src="assets/incurs.webp">
 <div class="media-content">
@@ -351,20 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div class="media-row blue-accent">
-<img alt="Coperta — Cine ne mângâie pe creștet" class="thumb" src="assets/cine-ne-mangaie-pe-crestet.webp">
-<div class="media-content">
-<h3>Cine ne mângâie pe creștet</h3>
-<div>Un roman despre conștiință, libertate și mirajul adevărului.</div>
-<div class="en">A novel about consciousness, freedom, and mirage of truth.</div>
-<div class="btns">
-<a class="btn fxbtn" href="https://youtu.be/hiViaG5YS7k?si=kNHpQ6D7rtEdsHXs" rel="noopener" target="_blank">🎬 YouTube Podcast</a>
-<a class="btn fxbtn" href="https://podcasts.apple.com/us/podcast/cine-ne-m%C3%A2ng%C3%A2ie-pe-cres%CC%8Ftet/id1839106793" rel="noopener" target="_blank">🍎 Apple Podcasts</a>
-<a class="btn fxbtn" href="https://drive.google.com/file/d/1yg94zPTJepKVKJSLqnSBlGgcIm2qnKzA/view?usp=sharing" rel="noopener" target="_blank">📕 PDF</a>
-</div>
-</div>
-</div>
-
 <div class="media-row orbita">
 <img alt="Coperta — Orbita Zero" class="thumb" src="assets/orbita-zero.webp">
 <div class="media-content">
@@ -375,6 +379,20 @@ document.addEventListener('DOMContentLoaded', () => {
 <a class="btn fxbtn" href="https://youtu.be/hiViaG5YS7k?si=kNHpQ6D7rtEdsHXs" rel="noopener" target="_blank">🎬 YouTube Podcast</a>
 <a class="btn fxbtn" href="https://podcasts.apple.com/us/podcast/cine-ne-m%C3%A2ng%C3%A2ie-pe-cres%CC%8Ftet/id1839106793" rel="noopener" target="_blank">🍎 Apple Podcasts</a>
 <a class="btn fxbtn" href="https://drive.google.com/drive/folders/17YeLYLr1RfK4jUEZlIh5d1UxIsEnerZE" rel="noopener" target="_blank">📕 PDF</a>
+</div>
+</div>
+</div>
+
+<div class="media-row blue-accent">
+<img alt="Coperta — Cine ne mângâie pe creștet" class="thumb" src="assets/cine-ne-mangaie-pe-crestet.webp">
+<div class="media-content">
+<h3>Cine ne mângâie pe creștet</h3>
+<div>Un roman despre conștiință, libertate și mirajul adevărului.</div>
+<div class="en">A novel about consciousness, freedom, and mirage of truth.</div>
+<div class="btns">
+<a class="btn fxbtn" href="https://youtu.be/hiViaG5YS7k?si=kNHpQ6D7rtEdsHXs" rel="noopener" target="_blank">🎬 YouTube Podcast</a>
+<a class="btn fxbtn" href="https://podcasts.apple.com/us/podcast/cine-ne-m%C3%A2ng%C3%A2ie-pe-cres%CC%8Ftet/id1839106793" rel="noopener" target="_blank">🍎 Apple Podcasts</a>
+<a class="btn fxbtn" href="https://drive.google.com/file/d/1yg94zPTJepKVKJSLqnSBlGgcIm2qnKzA/view?usp=sharing" rel="noopener" target="_blank">📕 PDF</a>
 </div>
 </div>
 </div>
