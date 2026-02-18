@@ -25,6 +25,7 @@ var tiktokLinks = {
     "Echoes of the Giants-Tribute to the Titans": "https://www.tiktok.com/@ilascu99/video/7599686551995452694",
 
     // --- NEW SINGLES ---
+    "Odessa, passion and tears": "https://www.tiktok.com/@ilascu99/video/7608095456278727958",
     "Barrio Tango": "https://www.tiktok.com/@ilascu99/video/7440656096504286486",
     "Please, love me too": "https://www.tiktok.com/@ilascu99/video/7442171279861058838",
     "HAI LA JOC DE ANUL NOU": "https://www.tiktok.com/@ilascu99/video/7452610582537833750",

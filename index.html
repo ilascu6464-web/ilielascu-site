@@ -11,7 +11,7 @@
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
 
-<script src="assets/links.js?v=2066"></script>
+<script src="assets/links.js?v=2070"></script>
 
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -19,207 +19,79 @@
 <style>
 /* --- 1. CULORI SI VARIABILI --- */
 :root{
-    --bg-deep:#05070a;
-    --fg:#ece6dd;
-    --gold:#c9a45a;
-    --muted:#8c857b;
-    --divider:rgba(201,164,90,0.15);
-    --maxw:1000px; 
-    
-    --color-blue:#00B2FF; 
-    --color-analog:#d67f55;
-    --color-hop:#9b59b6;
-    --color-scratch:#ff3f34;
-    --color-viral:#ff0050; 
-    --color-best:#ffd700; 
-    --color-dance:#00ff9d;
-    --color-rumble:#85c742;
-    --color-incurs:#bf5af2;
-    --color-bio:#48dbfb;
-    --color-bluegeo:#5aa9e6; 
-    --color-dys:#e056fd; 
-    --color-perc:#ff4757; /* Culoare noua pentru Perceptia Realitatii */
+    --bg-deep:#05070a; --fg:#ece6dd; --gold:#c9a45a; --muted:#8c857b;
+    --divider:rgba(201,164,90,0.15); --maxw:1000px; 
+    --color-blue:#00B2FF; --color-analog:#d67f55; --color-hop:#9b59b6;
+    --color-scratch:#ff3f34; --color-viral:#ff0050; --color-best:#ffd700; 
+    --color-dance:#00ff9d; --color-rumble:#85c742; --color-incurs:#bf5af2;
+    --color-bio:#48dbfb; --color-bluegeo:#5aa9e6; --color-dys:#e056fd; --color-perc:#ff4757;
 }
 
 /* --- 2. RESET SI BASE --- */
 *{box-sizing:border-box}
 html{scroll-behavior: smooth;}
-
 body{margin:0;background:radial-gradient(circle at 50% 0%, #1a1d29 0%, var(--bg-deep) 60%, #000000 100%);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.5; min-height: 100vh;}
-
 a{color:var(--gold);text-decoration:none; transition: color 0.3s ease;} 
 a:hover{text-decoration:underline; color: #e5c06f;}
-
-:focus-visible {
-    outline: 1px solid var(--gold);
-    outline-offset: 4px;
-    box-shadow: 0 0 15px rgba(201,164,90,0.3);
-}
-
+:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; box-shadow: 0 0 15px rgba(201,164,90,0.3); }
 .wrapper{max-width:var(--maxw);margin:0 auto;padding:20px; position: relative; z-index: 2;}
 
 /* --- 3. FILM GRAIN TEXTURE --- */
 .film-grain {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.04; 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.04; 
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* --- 4. HERO BANNER --- */
 .hero{
-    position:relative;
-    width:100%;
-    aspect-ratio: 1920/426; 
-    border-bottom:1px solid var(--divider);
-    background:#000 url('assets/banner.jpg?v=2060') center center / cover no-repeat;
-    overflow:hidden; 
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%); 
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    position:relative; width:100%; aspect-ratio: 1920/426; border-bottom:1px solid var(--divider);
+    background:#000 url('assets/banner.jpg?v=2060') center center / cover no-repeat; overflow:hidden; 
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0)0%,rgba(255,255,255,.08)50%,rgba(255,255,255,0)100%);transform:translateX(-120%) rotate(5deg);animation:shine 8s ease-in-out infinite;pointer-events:none;}
 @keyframes shine{0%, 100%{transform:translateX(-120%) rotate(5deg)} 50%{transform:translateX(120%) rotate(5deg)}}
 
 /* --- 5. TYPOGRAPHY --- */
-.section-title{
-    margin:40px 0 20px;
-    font-size:clamp(24px, 3.5vw, 38px);
-    color:var(--fg);
-    font-family:"Playfair Display",Georgia,serif;
-    letter-spacing: -0.02em; 
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-    line-height: 1.2;
-}
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background: var(--gold);
-    box-shadow: 0 0 10px var(--gold);
-    transition: width 0.5s ease;
-}
+.section-title{ margin:40px 0 20px; font-size:clamp(24px, 3.5vw, 38px); color:var(--fg); font-family:"Playfair Display",Georgia,serif; letter-spacing: -0.02em; font-weight: 700; position: relative; display: inline-block; line-height: 1.2; }
+.section-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 30px; height: 2px; background: var(--gold); box-shadow: 0 0 10px var(--gold); transition: width 0.5s ease; }
 .media-row:hover ~ .section-title::after { width: 100%; }
-
 .en{color:var(--muted);font-size:0.8rem;margin-top:4px;text-transform:uppercase;letter-spacing: 0.08em; font-weight: 500;}
 
 /* --- 6. GLASSMORPHISM CARDS --- */
 .media-row{
-    display:grid;
-    grid-template-columns:110px 1fr;
-    gap:18px;
-    align-items:center;
-    background: rgba(20, 25, 35, 0.4); 
-    backdrop-filter: blur(16px); 
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    border-radius: 8px; 
-    padding:16px;
-    margin:16px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.3);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display:grid; grid-template-columns:110px 1fr; gap:18px; align-items:center; background: rgba(20, 25, 35, 0.4); 
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-top: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding:16px; margin:16px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,.3); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
-.media-row:hover {
-    transform: translateY(-5px); 
-    background: rgba(30, 35, 50, 0.6);
-    border-color: rgba(201, 164, 90, 0.4); 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.2);
-}
-
-.media-row img.thumb{
-    width:110px;height:110px;
-    object-fit:cover;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    transition: transform 0.5s ease;
-}
+.media-row:hover { transform: translateY(-5px); background: rgba(30, 35, 50, 0.6); border-color: rgba(201, 164, 90, 0.4); box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.2); }
+.media-row img.thumb{ width:110px;height:110px; object-fit:cover; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: transform 0.5s ease; }
 .media-row:hover img.thumb { transform: scale(1.05); }
-
-.media-content h3{
-    margin:0 0 4px;
-    font-size:1.35rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: #fff;
-}
+.media-content h3{ margin:0 0 4px; font-size:1.35rem; font-weight: 500; letter-spacing: -0.01em; color: #fff; }
 
 /* Culori Specifice */
-.media-row.incurs h3 { color: var(--color-incurs); }
-.media-row.incurs img.thumb { border-color: rgba(191, 90, 242, 0.5); box-shadow: 0 0 20px rgba(191, 90, 242, 0.25); }
-.media-row.incurs figure.tile figcaption {color: #e5ccff; text-shadow: 0 0 6px rgba(191, 90, 242, 0.2);}
-
-.media-row.bio h3 { color: var(--color-bio); }
-.media-row.bio img.thumb { border-color: rgba(72, 219, 251, 0.5); box-shadow: 0 0 20px rgba(72, 219, 251, 0.25); }
-.media-row.bio figure.tile figcaption {color: #ccf6ff; text-shadow: 0 0 6px rgba(72, 219, 251, 0.2);}
-
-.media-row.bluegeo h3 { color: var(--color-bluegeo); }
-.media-row.bluegeo img.thumb { border-color: rgba(90, 169, 230, 0.5); box-shadow: 0 0 20px rgba(90, 169, 230, 0.25); }
-.media-row.bluegeo figure.tile figcaption {color: #d0e8ff; text-shadow: 0 0 6px rgba(90, 169, 230, 0.2);}
-
-.media-row.dys h3 { color: var(--color-dys); }
-.media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); }
-.media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
-
-.media-row.perc h3 { color: var(--color-perc); }
-.media-row.perc img.thumb { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 20px rgba(255, 71, 87, 0.25); }
-.media-row.perc figure.tile figcaption {color: #ffcccf; text-shadow: 0 0 6px rgba(255, 71, 87, 0.2);}
-
+.media-row.incurs h3 { color: var(--color-incurs); } .media-row.incurs img.thumb { border-color: rgba(191, 90, 242, 0.5); box-shadow: 0 0 20px rgba(191, 90, 242, 0.25); } .media-row.incurs figure.tile figcaption {color: #e5ccff; text-shadow: 0 0 6px rgba(191, 90, 242, 0.2);}
+.media-row.bio h3 { color: var(--color-bio); } .media-row.bio img.thumb { border-color: rgba(72, 219, 251, 0.5); box-shadow: 0 0 20px rgba(72, 219, 251, 0.25); } .media-row.bio figure.tile figcaption {color: #ccf6ff; text-shadow: 0 0 6px rgba(72, 219, 251, 0.2);}
+.media-row.bluegeo h3 { color: var(--color-bluegeo); } .media-row.bluegeo img.thumb { border-color: rgba(90, 169, 230, 0.5); box-shadow: 0 0 20px rgba(90, 169, 230, 0.25); } .media-row.bluegeo figure.tile figcaption {color: #d0e8ff; text-shadow: 0 0 6px rgba(90, 169, 230, 0.2);}
+.media-row.dys h3 { color: var(--color-dys); } .media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); } .media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
+.media-row.perc h3 { color: var(--color-perc); } .media-row.perc img.thumb { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 20px rgba(255, 71, 87, 0.25); } .media-row.perc figure.tile figcaption {color: #ffcccf; text-shadow: 0 0 6px rgba(255, 71, 87, 0.2);}
 
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
 /* --- 7. BUTOANE --- */
-.btn{
-    padding:8px 14px;
-    border-radius: 20px; 
-    border: 1px solid rgba(201,164,90, 0.3);
-    background: rgba(10, 12, 18, 0.6);
-    color:var(--gold);
-    font-weight:500;
-    font-size:0.8rem;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-.btn:hover{
-    background: var(--gold);
-    color: #000;
-    box-shadow: 0 0 15px rgba(201,164,90,0.4);
-    border-color: var(--gold);
-    text-decoration: none;
-}
+.btn{ padding:8px 14px; border-radius: 20px; border: 1px solid rgba(201,164,90, 0.3); background: rgba(10, 12, 18, 0.6); color:var(--gold); font-weight:500; font-size:0.8rem; display:inline-flex; align-items:center; gap:6px; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+.btn:hover{ background: var(--gold); color: #000; box-shadow: 0 0 15px rgba(201,164,90,0.4); border-color: var(--gold); text-decoration: none; }
 .btn:active{transform: scale(0.95);}
 
-@keyframes glow-pulse {
-    0% { box-shadow: 0 0 0 0 var(--pulse-color); }
-    70% { box-shadow: 0 0 0 8px var(--pulse-color); opacity: 0; }
-    100% { box-shadow: 0 0 0 0 transparent; }
-}
-.btn.ytmusic::before, .btn.rumble::before, .btn.fxbtn::before {
-    content:""; position:absolute; left:0; top:0; width:100%; height:100%; border-radius: 30px; pointer-events:none; opacity: 0.6; animation: glow-pulse 3s infinite;
-}
-.media-row.orbita { --pulse-color: rgba(0,178,255,0.4); }
-.media-row.moth { --pulse-color: rgba(201,164,90,0.4); }
-.media-row.analog { --pulse-color: rgba(214, 127, 85, 0.4); }
-.media-row.hop { --pulse-color: rgba(155, 89, 182, 0.4); }
-.media-row.scratches { --pulse-color: rgba(255, 63, 52, 0.4); }
-.media-row.singles { --pulse-color: rgba(255, 0, 80, 0.4); }
-.media-row.best { --pulse-color: rgba(255, 215, 0, 0.4); }
-.media-row.dance { --pulse-color: rgba(0, 255, 157, 0.4); }
-.media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); }
-.media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
-.media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); }
-.media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
+@keyframes glow-pulse { 0% { box-shadow: 0 0 0 0 var(--pulse-color); } 70% { box-shadow: 0 0 0 8px var(--pulse-color); opacity: 0; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.btn.ytmusic::before, .btn.rumble::before, .btn.fxbtn::before { content:""; position:absolute; left:0; top:0; width:100%; height:100%; border-radius: 30px; pointer-events:none; opacity: 0.6; animation: glow-pulse 3s infinite; }
+
+.media-row.orbita { --pulse-color: rgba(0,178,255,0.4); } .media-row.moth { --pulse-color: rgba(201,164,90,0.4); }
+.media-row.analog { --pulse-color: rgba(214, 127, 85, 0.4); } .media-row.hop { --pulse-color: rgba(155, 89, 182, 0.4); }
+.media-row.scratches { --pulse-color: rgba(255, 63, 52, 0.4); } .media-row.singles { --pulse-color: rgba(255, 0, 80, 0.4); }
+.media-row.best { --pulse-color: rgba(255, 215, 0, 0.4); } .media-row.dance { --pulse-color: rgba(0, 255, 157, 0.4); }
+.media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); } .media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
+.media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); } .media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
 .media-row.perc { --pulse-color: rgba(255, 71, 87, 0.4); }
 
 .btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
@@ -227,76 +99,19 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 
 /* --- 8. GALERIE --- */
 .gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill, minmax(70px, 1fr));gap:8px}
-figure.tile {
-    margin: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; position: relative; display: flex; flex-direction: column; height: 100%; transition: border-color 0.3s;
-}
+figure.tile { margin: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; position: relative; display: flex; flex-direction: column; height: 100%; transition: border-color 0.3s; }
 figure.tile:hover { border-color: var(--gold); }
 figure.tile img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover; opacity: 0.8; transition: opacity 0.3s, transform 0.5s;}
 figure.tile:hover img { opacity: 1; transform: scale(1.1); }
-figure.tile figcaption {
-    padding:4px; font-size:0.65rem; text-align:center; color:#b0aba3; letter-spacing:0.02em; line-height:1.2; flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 30px; font-size: 9px;
-}
+figure.tile figcaption { padding:4px; font-size:0.65rem; text-align:center; color:#b0aba3; letter-spacing:0.02em; line-height:1.2; flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 30px; font-size: 9px; }
 .orbita figure.tile figcaption{color:#aaddff}.moth figure.tile figcaption{color:#ffeac0}.analog figure.tile figcaption{color:#ffd6c1}.hop figure.tile figcaption{color:#ebd0f2}.scratches figure.tile figcaption{color:#ffd0d0}.singles figure.tile figcaption{color:#ffcce5}
 
 /* --- 9. TIKTOK BUTTON --- */
-.mini-tiktok {
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    width: 100%;
-    margin-top: auto; 
-    background: linear-gradient(90deg, #25F4EE 0%, #1a1a1a 30%, #FE2C55 100%);
-    color: #ffffff;
-    font-size: 0.65rem;
-    font-weight: 800; 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 0;
-    border-top: none; 
-    border-radius: 0 0 4px 4px; 
-    cursor: pointer;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 5;
-    animation: tiktok-breathe 3s ease-in-out infinite;
-    box-shadow: 0 0 0px rgba(254, 44, 85, 0);
-    transition: all 0.3s ease;
-}
-
-.mini-tiktok svg { 
-    width: 12px;
-    height: 12px; 
-    fill: #fff; 
-    margin-right: 4px; 
-}
-
-@keyframes tiktok-breathe {
-    0%, 100% { 
-        transform: scale(1); 
-        opacity: 0.9; 
-        box-shadow: 0 0 0px rgba(254, 44, 85, 0); 
-    }
-    50% { 
-        transform: scale(1.03); 
-        opacity: 1; 
-        box-shadow: 0 0 15px rgba(254, 44, 85, 0.3); 
-    }
-}
-
-.mini-tiktok:hover {
-    background: #FE2C55; 
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 15px rgba(254, 44, 85, 0.6);
-    text-decoration: none;
-    animation: none; 
-}
-
-.mini-tiktok:hover svg { 
-    fill: #fff; 
-    transform: rotate(10deg); 
-    transition: transform 0.3s ease;
-}
+.mini-tiktok { display: flex; align-items: center; justify-content: center; width: 100%; margin-top: auto; background: linear-gradient(90deg, #25F4EE 0%, #1a1a1a 30%, #FE2C55 100%); color: #ffffff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 0; border-top: none; border-radius: 0 0 4px 4px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; z-index: 5; animation: tiktok-breathe 3s ease-in-out infinite; box-shadow: 0 0 0px rgba(254, 44, 85, 0); transition: all 0.3s ease; }
+.mini-tiktok svg { width: 12px; height: 12px; fill: #fff; margin-right: 4px; }
+@keyframes tiktok-breathe { 0%, 100% { transform: scale(1); opacity: 0.9; box-shadow: 0 0 0px rgba(254, 44, 85, 0); } 50% { transform: scale(1.03); opacity: 1; box-shadow: 0 0 15px rgba(254, 44, 85, 0.3); } }
+.mini-tiktok:hover { background: #FE2C55; transform: translateY(-2px) scale(1.02); box-shadow: 0 4px 15px rgba(254, 44, 85, 0.6); text-decoration: none; animation: none; }
+.mini-tiktok:hover svg { fill: #fff; transform: rotate(10deg); transition: transform 0.3s ease; }
 
 /* --- 10. FOOTER --- */
 footer{margin:40px auto 20px;text-align:center;color:var(--muted); font-size: 0.8rem; border-top: 1px solid var(--divider); padding-top: 20px;}
@@ -312,7 +127,6 @@ footer{margin:40px auto 20px;text-align:center;color:var(--muted); font-size: 0.
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // DOAR LOGICA PENTRU TIKTOK - FARA FALLBACK DE IMAGINI
     if (typeof tiktokLinks !== 'undefined') {
         const tiles = document.querySelectorAll('figure.tile');
         tiles.forEach(tile => {
@@ -336,8 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div class="film-grain"></div>
 
-<header class="hero" role="banner">
-</header>
+<header class="hero" role="banner"></header>
 
 <main role="main">
 <section aria-label="Books" class="wrapper">
@@ -412,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
     </div>
     <div class="gallery">
+        <figure class="tile"><img alt="Odessa, passion and tears" loading="lazy" src="assets/odesa.webp"><figcaption>Odessa, passion and tears</figcaption></figure>
         <figure class="tile"><img alt="Barrio Tango" loading="lazy" src="assets/bario.webp"><figcaption>Barrio Tango</figcaption></figure>
         <figure class="tile"><img alt="Please, love me too" loading="lazy" src="assets/lovemetoo.webp"><figcaption>Please, love me too</figcaption></figure>
         <figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
@@ -608,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
-
 <div class="gallery">
     <figure class="tile"><img alt="Prietenul meu ARGO" loading="lazy" src="assets/argo-prietenul-meu.jpg"><figcaption>Prietenul meu ARGO</figcaption></figure>
     <figure class="tile"><img alt="Clara's Song" loading="lazy" src="assets/Clara's%20Song.webp"><figcaption>Clara's Song</figcaption></figure>
