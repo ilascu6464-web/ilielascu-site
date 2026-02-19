@@ -1,4 +1,9 @@
 var tiktokLinks = {
+    // --- TIBETHANA ---
+    "Tibethana - The First Breath": "https://www.tiktok.com/@ilascu99/video/7608470531465137430",
+    "Tibethana - The Second Breath": "https://www.tiktok.com/@ilascu99/video/7608470932914507030",
+    "Tibethana - The Third Breath": "https://www.tiktok.com/@ilascu99/video/7608471266919648514",
+
     // --- CONTEMPORARY DYSFUNCTION ---
     "The World in Chaos": "https://www.tiktok.com/@ilascu99/video/7603645672599883030",
     "The brave Siberian soul": "https://www.tiktok.com/@ilascu99/video/7603646098967776534",
