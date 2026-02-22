@@ -1,4 +1,10 @@
 var tiktokLinks = {
+    // --- NIGHT FLIGHT WITH FREDERIC ---
+    "Moonlit Departure": "https://www.tiktok.com/@ilascu99/video/7609706493994323203",
+    "Suspended in Blue": "https://www.tiktok.com/@ilascu99/video/7609699579566492950",
+    "Gentle Landing": "https://www.tiktok.com/@ilascu99/video/7609689804288167190",
+    "Between Light and Silence": "https://www.tiktok.com/@ilascu99/video/7609631870174694678",
+
     // --- TIBETHANA ---
     "Tibethana - The First Breath": "https://www.tiktok.com/@ilascu99/video/7608470531465137430",
     "Tibethana - The Second Breath": "https://www.tiktok.com/@ilascu99/video/7608470932914507030",

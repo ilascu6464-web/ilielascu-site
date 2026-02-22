@@ -11,7 +11,7 @@
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
 
-<script src="assets/links.js?v=2072"></script>
+<script src="assets/links.js?v=2075"></script>
 
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
     --color-scratch:#ff3f34; --color-viral:#ff0050; --color-best:#ffd700; 
     --color-dance:#00ff9d; --color-rumble:#85c742; --color-incurs:#bf5af2;
     --color-bio:#48dbfb; --color-bluegeo:#5aa9e6; --color-dys:#e056fd; --color-perc:#ff4757;
-    --color-tib:#e67e22; 
+    --color-tib:#e67e22; --color-night:#8c7ae6;
 }
 
 /* --- 2. RESET SI BASE --- */
@@ -77,6 +77,7 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.dys h3 { color: var(--color-dys); } .media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); } .media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
 .media-row.perc h3 { color: var(--color-perc); } .media-row.perc img.thumb { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 20px rgba(255, 71, 87, 0.25); } .media-row.perc figure.tile figcaption {color: #ffcccf; text-shadow: 0 0 6px rgba(255, 71, 87, 0.2);}
 .media-row.tib h3 { color: var(--color-tib); } .media-row.tib img.thumb { border-color: rgba(230, 126, 34, 0.5); box-shadow: 0 0 20px rgba(230, 126, 34, 0.25); } .media-row.tib figure.tile figcaption {color: #ffdab3; text-shadow: 0 0 6px rgba(230, 126, 34, 0.2);}
+.media-row.night h3 { color: var(--color-night); } .media-row.night img.thumb { border-color: rgba(140, 122, 230, 0.5); box-shadow: 0 0 20px rgba(140, 122, 230, 0.25); } .media-row.night figure.tile figcaption {color: #d1ccff; text-shadow: 0 0 6px rgba(140, 122, 230, 0.2);}
 
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
@@ -95,6 +96,7 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); } .media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
 .media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); } .media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
 .media-row.perc { --pulse-color: rgba(255, 71, 87, 0.4); } .media-row.tib { --pulse-color: rgba(230, 126, 34, 0.4); }
+.media-row.night { --pulse-color: rgba(140, 122, 230, 0.4); }
 
 .btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
 .btn.rumble:hover{ background: #85c742; color: #000; }
@@ -234,6 +236,25 @@ document.addEventListener('DOMContentLoaded', () => {
         <figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
         <figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
     </div>
+</div>
+</div>
+
+<div class="media-row night">
+<img alt="Night Flight with Frédéric" class="thumb" src="assets/frederic.webp">
+<div class="media-content">
+<h3>Night Flight with Frédéric</h3>
+<div>O călătorie muzicală nocturnă, la granița dintre vis și realitate.</div>
+<div class="en">A nocturnal musical journey on the border between dream and reality.</div>
+<div class="btns">
+    <a class="btn ytmusic" href="#" rel="noopener" target="_blank">🎧 YouTube Music</a>
+    <a class="btn rumble" href="#" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+    <figure class="tile"><img alt="Moonlit Departure" loading="lazy" src="assets/moonlit.webp"><figcaption>Moonlit Departure</figcaption></figure>
+    <figure class="tile"><img alt="Suspended in Blue" loading="lazy" src="assets/suspended.webp"><figcaption>Suspended in Blue</figcaption></figure>
+    <figure class="tile"><img alt="Gentle Landing" loading="lazy" src="assets/gentle.webp"><figcaption>Gentle Landing</figcaption></figure>
+    <figure class="tile"><img alt="Between Light and Silence" loading="lazy" src="assets/between.webp"><figcaption>Between Light and Silence</figcaption></figure>
+</div>
 </div>
 </div>
 
