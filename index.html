@@ -70,6 +70,11 @@ a:hover{text-decoration:underline; color: #e5c06f;}
 .media-row:hover img.thumb { transform: scale(1.05); }
 .media-content h3{ margin:0 0 4px; font-size:1.35rem; font-weight: 500; letter-spacing: -0.01em; color: #fff; }
 
+/* 6.1 PLATFORME EBOOK ICON (NOU) */
+.media-row.with-platforms { grid-template-columns: 110px 1fr 110px; }
+.platforms-icon { width: 100%; height: auto; object-fit: contain; opacity: 0.85; transition: all 0.4s ease; border-radius: 6px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); }
+.platforms-icon:hover { opacity: 1; transform: scale(1.08) translateY(-2px); filter: drop-shadow(0 8px 15px rgba(255,255,255,0.15)); }
+
 /* Culori Specifice */
 .media-row.incurs h3 { color: var(--color-incurs); } .media-row.incurs img.thumb { border-color: rgba(191, 90, 242, 0.5); box-shadow: 0 0 20px rgba(191, 90, 242, 0.25); } .media-row.incurs figure.tile figcaption {color: #e5ccff; text-shadow: 0 0 6px rgba(191, 90, 242, 0.2);}
 .media-row.bio h3 { color: var(--color-bio); } .media-row.bio img.thumb { border-color: rgba(72, 219, 251, 0.5); box-shadow: 0 0 20px rgba(72, 219, 251, 0.25); } .media-row.bio figure.tile figcaption {color: #ccf6ff; text-shadow: 0 0 6px rgba(72, 219, 251, 0.2);}
@@ -124,6 +129,8 @@ footer{margin:40px auto 20px;text-align:center;color:var(--muted); font-size: 0.
 /* --- 11. RESPONSIVE --- */
 @media(max-width:720px){
     .media-row{grid-template-columns:1fr; gap:12px; padding: 12px;}
+    .media-row.with-platforms {grid-template-columns: 1fr;}
+    .platforms-icon { max-width: 140px; margin: 15px 0 0 0; align-self: flex-start; }
     .media-row img.thumb{width:100%; height: auto; aspect-ratio: 1/1; max-height: 180px;}
     .section-title{font-size: 1.5rem;}
 }
@@ -172,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div class="media-row incurs">
+<div class="media-row incurs with-platforms">
 <img alt="Coperta — Incursiune în imposibil" class="thumb" src="assets/incurs.webp">
 <div class="media-content">
 <h3>Incursiune în imposibil</h3>
@@ -184,9 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
 <a class="btn fxbtn" href="https://drive.google.com/file/d/1Np6BFDRd0EeCWqCckTCCuj69z5QuOkp1/view?usp=drive_link" rel="noopener" target="_blank">📕 PDF</a>
 </div>
 </div>
+<img alt="Disponibil pe platforme globale eBook" class="platforms-icon" src="assets/platforme.webp">
 </div>
 
-<div class="media-row orbita">
+<div class="media-row orbita with-platforms">
 <img alt="Coperta — Orbita Zero" class="thumb" src="assets/orbita-zero.webp">
 <div class="media-content">
 <h3>Orbita Zero</h3>
@@ -198,9 +206,10 @@ document.addEventListener('DOMContentLoaded', () => {
 <a class="btn fxbtn" href="https://drive.google.com/drive/folders/17YeLYLr1RfK4jUEZlIh5d1UxIsEnerZE" rel="noopener" target="_blank">📕 PDF</a>
 </div>
 </div>
+<img alt="Disponibil pe platforme globale eBook" class="platforms-icon" src="assets/platforme.webp">
 </div>
 
-<div class="media-row blue-accent">
+<div class="media-row blue-accent with-platforms">
 <img alt="Coperta — Cine ne mângâie pe creștet" class="thumb" src="assets/cine-ne-mangaie-pe-crestet.webp">
 <div class="media-content">
 <h3>Cine ne mângâie pe creștet</h3>
@@ -212,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <a class="btn fxbtn" href="https://drive.google.com/file/d/1yg94zPTJepKVKJSLqnSBlGgcIm2qnKzA/view?usp=sharing" rel="noopener" target="_blank">📕 PDF</a>
 </div>
 </div>
+<img alt="Disponibil pe platforme globale eBook" class="platforms-icon" src="assets/platforme.webp">
 </div>
 </section>
 
