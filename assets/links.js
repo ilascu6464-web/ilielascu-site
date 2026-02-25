@@ -3,6 +3,7 @@ var tiktokLinks = {
     "Even the Wailing Wall Weeps": "https://www.tiktok.com/@ilascu99/video/7610363219852414230",
     "The Whispers of Samiotissa": "https://www.tiktok.com/@ilascu99/video/7610362731186670870",
     "When Zorba Breaks Free": "https://www.tiktok.com/@ilascu99/video/7610362066498506006",
+    "When Joy Awakens": "https://www.tiktok.com/@ilascu99/video/7610696275582930198",
 
     // --- NIGHT FLIGHT WITH FREDERIC ---
     "Moonlit Departure": "https://www.tiktok.com/@ilascu99/video/7609706493994323203",
