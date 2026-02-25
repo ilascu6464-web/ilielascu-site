@@ -18,6 +18,9 @@ var tiktokLinks = {
     // --- CONTEMPORARY DYSFUNCTION ---
     "The World in Chaos": "https://www.tiktok.com/@ilascu99/video/7603645672599883030",
     "The brave Siberian soul": "https://www.tiktok.com/@ilascu99/video/7603646098967776534",
+    "Caravan of Disillusionment": "https://www.tiktok.com/@ilascu99/video/7605280973206342934",
+    "My Geisha": "https://www.tiktok.com/@ilascu99/video/7604925299989515542",
+    "Perception’s Paradox": "https://www.tiktok.com/@ilascu99/video/7604408666246188310",
 
     // --- BLUE GEOMETRY WALTZ ---
     "Sibiu": "https://www.tiktok.com/@ilascu99/video/7601438252972641558",
