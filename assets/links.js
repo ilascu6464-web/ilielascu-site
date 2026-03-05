@@ -45,6 +45,7 @@ var tiktokLinks = {
     "Echoes of the Giants-Tribute to the Titans": "https://www.tiktok.com/@ilascu99/video/7599686551995452694",
 
     // --- NEW SINGLES ---
+    "The 7th Sense of the Samba": "https://www.tiktok.com/@ilascu99/video/7613663146309405974",
     "Thunder de Fuego": "https://www.tiktok.com/@ilascu99/video/7612366676843187478",
     "Odessa, passion and tears": "https://www.tiktok.com/@ilascu99/video/7608095456278727958",
     "Barrio Tango": "https://www.tiktok.com/@ilascu99/video/7440656096504286486",
