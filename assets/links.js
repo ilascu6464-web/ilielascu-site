@@ -1,4 +1,7 @@
 var tiktokLinks = {
+    // --- THE PERCEPTION OF REALITY ---
+    "Silent Wavelength": "https://www.tiktok.com/@ilascu99/video/7614212663127723286",
+
     // --- THE WAILING WALL WEEPS ---
     "Even the Wailing Wall Weeps": "https://www.tiktok.com/@ilascu99/video/7610363219852414230",
     "The Whispers of Samiotissa": "https://www.tiktok.com/@ilascu99/video/7610362731186670870",
