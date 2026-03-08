@@ -1,6 +1,7 @@
 var tiktokLinks = {
     // --- THE PERCEPTION OF REALITY ---
     "Silent Wavelength": "https://www.tiktok.com/@ilascu99/video/7614212663127723286",
+    "Scent of Memory": "https://www.tiktok.com/@ilascu99/video/7614817367935175958",
 
     // --- THE WAILING WALL WEEPS ---
     "Even the Wailing Wall Weeps": "https://www.tiktok.com/@ilascu99/video/7610363219852414230",
