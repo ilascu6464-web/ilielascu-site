@@ -1,6 +1,8 @@
 var tiktokLinks = {
     "test": "https://www.tiktok.com/@ilascu99/video/7618870262578023702?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
 
+    "test": "https://www.tiktok.com/@ilascu99/video/7618870262578023702?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
+
     // --- CONTEMPORARY DYSFUNCTION ---
     "The World in Chaos": "https://www.tiktok.com/@ilascu99/video/7603645672599883030",
     "The brave Siberian soul": "https://www.tiktok.com/@ilascu99/video/7603646098967776534",
