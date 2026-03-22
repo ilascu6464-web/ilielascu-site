@@ -1,14 +1,47 @@
 var tiktokLinks = {
+    // --- NEW SINGLES ---
     "SHELBY BLOOD": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
-    "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
+    "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254",
+    "BIRDY NAM NAM": "https://www.tiktok.com/@ilascu99/video/7618870262578023702",
+    "The 7th Sense of the Samba": "https://www.tiktok.com/@ilascu99/video/7613663146309405974",
+    "Thunder de Fuego": "https://www.tiktok.com/@ilascu99/video/7612366676843187478",
+    "Odessa, passion and tears": "https://www.tiktok.com/@ilascu99/video/7608095456278727958",
+    "Barrio Tango": "https://www.tiktok.com/@ilascu99/video/7440656096504286486",
+    "Please, love me too": "https://www.tiktok.com/@ilascu99/video/7442171279861058838",
+    "HAI LA JOC DE ANUL NOU": "https://www.tiktok.com/@ilascu99/video/7452610582537833750",
+    "One Last Christmas": "https://www.tiktok.com/@ilascu99/video/7450702434520517910",
+    "The Bread She Never Ate": "https://www.tiktok.com/@ilascu99/video/7453715830912306454",
 
-    "test": "https://www.tiktok.com/@ilascu99/video/7618870262578023702?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
+    // --- THE PERCEPTION OF REALITY ---
+    "Silent Wavelength": "https://www.tiktok.com/@ilascu99/video/7614212663127723286",
+    "Scent of Memory": "https://www.tiktok.com/@ilascu99/video/7614817367935175958",
+    "Blind Frequency": "https://www.tiktok.com/@ilascu99/video/7615280203429874946",
+    "IL TOCCO CHE RESTA": "https://www.tiktok.com/@ilascu99/video/7616295961408654614",
+    "MOMENTO GUSTO": "https://www.tiktok.com/@ilascu99/video/7615705539846130966",
 
-    "test": "https://www.tiktok.com/@ilascu99/video/7618870262578023702?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
+    // --- THE WAILING WALL WEEPS ---
+    "Even the Wailing Wall Weeps": "https://www.tiktok.com/@ilascu99/video/7610363219852414230",
+    "The Whispers of Samiotissa": "https://www.tiktok.com/@ilascu99/video/7610362731186670870",
+    "When Zorba Breaks Free": "https://www.tiktok.com/@ilascu99/video/7610362066498506006",
+    "When Joy Awakens": "https://www.tiktok.com/@ilascu99/video/7610696275582930198",
+
+    // --- NIGHT FLIGHT WITH FREDERIC ---
+    "Moonlit Departure": "https://www.tiktok.com/@ilascu99/video/7609706493994323203",
+    "Suspended in Blue": "https://www.tiktok.com/@ilascu99/video/7609699579566492950",
+    "Gentle Landing": "https://www.tiktok.com/@ilascu99/video/7609689804288167190",
+    "Between Light and Silence": "https://www.tiktok.com/@ilascu99/video/7609631870174694678",
+
+    // --- TIBETHANA ---
+    "Tibethana - The First Breath": "https://www.tiktok.com/@ilascu99/video/7608470531465137430",
+    "Tibethana - The Second Breath": "https://www.tiktok.com/@ilascu99/video/7608470932914507030",
+    "Tibethana - The Third Breath": "https://www.tiktok.com/@ilascu99/video/7608471266919648514",
 
     // --- CONTEMPORARY DYSFUNCTION ---
     "The World in Chaos": "https://www.tiktok.com/@ilascu99/video/7603645672599883030",
     "The brave Siberian soul": "https://www.tiktok.com/@ilascu99/video/7603646098967776534",
+    "Caravan of Disillusionment": "https://www.tiktok.com/@ilascu99/video/7605280973206342934",
+    "My Geisha": "https://www.tiktok.com/@ilascu99/video/7604925299989515542",
+    "Perception's Paradox": "https://www.tiktok.com/@ilascu99/video/7604408666246188310",
 
     // --- BLUE GEOMETRY WALTZ ---
     "Sibiu": "https://www.tiktok.com/@ilascu99/video/7601438252972641558",
@@ -27,16 +60,9 @@ var tiktokLinks = {
     "Look what you've done to me": "https://www.tiktok.com/@ilascu99/video/7429107955518917920",
     "Got my hands on my phone": "https://www.tiktok.com/@ilascu99/video/7432135245806931222",
     "Daddy's on my side": "https://www.tiktok.com/@ilascu99/video/7433221971715558678",
-    "Don’t be a Blackrock": "https://www.tiktok.com/@ilascu99/video/7434720932225879318",
+    "Don't be a Blackrock": "https://www.tiktok.com/@ilascu99/video/7434720932225879318",
     "FIVE BEATS FORWARD": "https://www.tiktok.com/@ilascu99/video/7437340237937446166",
     "Echoes of the Giants-Tribute to the Titans": "https://www.tiktok.com/@ilascu99/video/7599686551995452694",
-
-    // --- NEW SINGLES ---
-    "Barrio Tango": "https://www.tiktok.com/@ilascu99/video/7440656096504286486",
-    "Please, love me too": "https://www.tiktok.com/@ilascu99/video/7442171279861058838",
-    "HAI LA JOC DE ANUL NOU": "https://www.tiktok.com/@ilascu99/video/7452610582537833750",
-    "One Last Christmas": "https://www.tiktok.com/@ilascu99/video/7450702434520517910",
-    "The Bread She Never Ate": "https://www.tiktok.com/@ilascu99/video/7453715830912306454",
 
     // --- THE BEST OF ---
     "Too late for crying": "https://www.tiktok.com/@ilascu99/video/7430983083651517718",
