@@ -24,7 +24,7 @@ app.whenReady().then(() => {
       nodeIntegration: false
     }
   });
-  win.loadFile('index.html');
+  win.loadFile('form.html');
 });
 
 app.on('window-all-closed', () => app.quit());
