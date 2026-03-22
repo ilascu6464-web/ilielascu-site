@@ -1,5 +1,5 @@
 var tiktokLinks = {
-    "SHELBY BLOOD - ROMANI KHER": "https://www.tiktok.com/@ilascu99/video/7620011448651091222?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
+    "SHELBY BLOOD - ROMANI KHER": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
     "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
 
     "test": "https://www.tiktok.com/@ilascu99/video/7618870262578023702?is_from_webapp=1&sender_device=pc&web_id=7600471105052460566",
