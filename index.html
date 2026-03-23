@@ -333,6 +333,19 @@ document.addEventListener('DOMContentLoaded', () => {
 <header class="hero" role="banner">
 </header>
 
+<div style="text-align:center; padding: 12px 0 0 0;">
+  <a id="mailto-link" href="#" style="display:inline-block; opacity:0.75; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
+    <img src="assets/mailto.webp" alt="Contact" width="44" height="44" style="border-radius:50%; vertical-align:middle;">
+  </a>
+</div>
+<script>
+(function(){
+  var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';
+  var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';
+  document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;
+})();
+</script>
+
 <main role="main">
 <section aria-label="Books" class="wrapper">
 <h2 class="section-title">Cărțile mele / My Books</h2>
