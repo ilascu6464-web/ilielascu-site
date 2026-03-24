@@ -74,8 +74,8 @@ ipcMain.handle('fly', async (event, data) => {
     // 3. Actualizăm index.html
     updateIndexHTML({ title, album, albumColor, webpName, slug, ytlink, rumblelink, isNewAlbum });
 
-    // 4. Git commit
-    const gitCmd = `cd "${SITE_DIR}" && git add -A && git commit -m "FlyDBX Auto: ${title}"`;
+    // 4. Git pull + commit
+    const gitCmd = `cd "${SITE_DIR}" && git pull --rebase origin main && git add -A && git commit -m "FlyDBX Auto: ${title}"`;
     execSync(gitCmd, { stdio: 'pipe' });
 
     return { ok: true, message: `✅ "${title}" adăugat! Mergi pe GitHub și apasă Push.` };
