@@ -64,10 +64,14 @@ ipcMain.handle('fly', async (event, data) => {
     // 2. Actualizăm links.js (adăugăm TikTok)
     if (tiktok) {
       let linksContent = fs.readFileSync(LINKS_JS, 'utf8');
-      // Găsim locul după primul { și inserăm
-      const insertAfter = 'var tiktokLinks = {';
       const newEntry = `\n    "${title}": "${tiktok}",`;
-      linksContent = linksContent.replace(insertAfter, insertAfter + newEntry);
+      const marker = '// --- NEW SINGLES ---';
+      if (linksContent.includes(marker)) {
+        linksContent = linksContent.replace(marker, marker + newEntry);
+      } else {
+        const insertAfter = 'var tiktokLinks = {';
+        linksContent = linksContent.replace(insertAfter, insertAfter + `\n    // --- NEW SINGLES ---` + newEntry);
+      }
       fs.writeFileSync(LINKS_JS, linksContent, 'utf8');
     }
 
