@@ -1,6 +1,7 @@
 // Lista albumelor existente din site
 const ALBUMS = [
-  { name: 'New Singles',                  key: 'singles' },
+  { name: 'Singles 2026',                 key: 'singles2026' },
+  { name: 'Singles 2025',                 key: 'singles2025' },
   { name: 'The Perception of Reality',    key: 'perc' },
   { name: 'The Wailing Wall Weeps',       key: 'wall' },
   { name: 'Night Flight with Frédéric',   key: 'night' },

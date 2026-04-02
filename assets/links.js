@@ -1,6 +1,7 @@
 var tiktokLinks = {
     // --- NEW SINGLES ---
     "The Guardian of the Code": "https://www.tiktok.com/@ilascu99/video/7620725908147735810",
+    "Crying in the Irish Autumn": "https://www.tiktok.com/@ilascu99/video/7623064976495758614",
     "SHELBY BLOOD": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
     "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254",
     "BIRDY NAM NAM": "https://www.tiktok.com/@ilascu99/video/7618870262578023702",
