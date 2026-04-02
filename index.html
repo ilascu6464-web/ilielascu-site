@@ -6,364 +6,87 @@
 <title>Ilie Lascu — Cinematic Edition</title>
 <meta content="Ilie Lascu: books, music, videos, downloads." name="description">
 <meta content="#0c0f18" name="theme-color">
-<meta content="dark light" name="color-scheme">
-
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
-
-<script src="assets/links.js?v=2094"></script>
-
+<script src="assets/links.js?v=2095"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
 <style>
-/* --- 1. CULORI SI VARIABILI --- */
-:root{
-    --bg-deep:#05070a;
-    --fg:#ece6dd;
-    --gold:#c9a45a;
-    --muted:#8c857b;
-    --divider:rgba(201,164,90,0.15);
-    --maxw:1000px; 
-    
-    --color-blue:#00B2FF; 
-    --color-analog:#d67f55;
-    --color-hop:#9b59b6;
-    --color-scratch:#ff3f34;
-    --color-viral:#ff0050; 
-    --color-best:#ffd700; 
-    --color-dance:#00ff9d;
-    --color-rumble:#85c742;
-    --color-incurs:#bf5af2;
-    --color-bio:#48dbfb;
-    --color-bluegeo:#5aa9e6; 
-    --color-dys:#e056fd; /* Culoare Magenta pentru Contemporary Dysfunction */
-}
-
-/* --- 2. RESET SI BASE --- */
+:root{--bg-deep:#05070a;--fg:#ece6dd;--gold:#c9a45a;--muted:#8c857b;--divider:rgba(201,164,90,0.15);--maxw:1000px;--color-blue:#00B2FF;--color-analog:#d67f55;--color-hop:#9b59b6;--color-scratch:#ff3f34;--color-viral:#ff0050;--color-best:#ffd700;--color-dance:#00ff9d;--color-rumble:#85c742;--color-incurs:#bf5af2;--color-bio:#48dbfb;--color-bluegeo:#5aa9e6;--color-dys:#e056fd;--color-perc:#ff4757;--color-tib:#e67e22;--color-night:#8c7ae6;--color-wall:#00d2d3;}
 *{box-sizing:border-box}
-html{scroll-behavior: smooth;}
-
-body{margin:0;background:radial-gradient(circle at 50% 0%, #1a1d29 0%, var(--bg-deep) 60%, #000000 100%);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.5; min-height: 100vh;}
-
-a{color:var(--gold);text-decoration:none; transition: color 0.3s ease;} 
-a:hover{text-decoration:underline; color: #e5c06f;}
-
-:focus-visible {
-    outline: 1px solid var(--gold);
-    outline-offset: 4px;
-    box-shadow: 0 0 15px rgba(201,164,90,0.3);
-}
-
-.wrapper{max-width:var(--maxw);margin:0 auto;padding:20px; position: relative; z-index: 2;}
-
-/* --- 3. FILM GRAIN TEXTURE --- */
-.film-grain {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.04; 
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* --- 4. HERO BANNER --- */
-.hero{
-    position:relative;
-    width:100%;
-    aspect-ratio: 1920/426; 
-    border-bottom:1px solid var(--divider);
-    background:#000 url('assets/banner.jpg?v=2060') center center / cover no-repeat;
-    overflow:hidden; 
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%); 
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-}
+html{scroll-behavior:smooth;}
+body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d29 0%,var(--bg-deep) 60%,#000 100%);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.5;min-height:100vh;}
+a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
+a:hover{text-decoration:underline;color:#e5c06f;}
+.wrapper{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;z-index:2;}
+.film-grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");}
+.hero{position:relative;width:100%;aspect-ratio:1920/426;border-bottom:1px solid var(--divider);background:#000 url('assets/banner.jpg?v=2060') center center/cover no-repeat;overflow:hidden;mask-image:linear-gradient(to bottom,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 85%,transparent 100%);}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0)0%,rgba(255,255,255,.08)50%,rgba(255,255,255,0)100%);transform:translateX(-120%) rotate(5deg);animation:shine 8s ease-in-out infinite;pointer-events:none;}
-@keyframes shine{0%, 100%{transform:translateX(-120%) rotate(5deg)} 50%{transform:translateX(120%) rotate(5deg)}}
-
-/* --- 5. TYPOGRAPHY --- */
-.section-title{
-    margin:40px 0 20px;
-    font-size:clamp(24px, 3.5vw, 38px);
-    color:var(--fg);
-    font-family:"Playfair Display",Georgia,serif;
-    letter-spacing: -0.02em; 
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-    line-height: 1.2;
-}
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background: var(--gold);
-    box-shadow: 0 0 10px var(--gold);
-    transition: width 0.5s ease;
-}
-.media-row:hover ~ .section-title::after { width: 100%; }
-
-.en{color:var(--muted);font-size:0.8rem;margin-top:4px;text-transform:uppercase;letter-spacing: 0.08em; font-weight: 500;}
-
-/* --- 6. GLASSMORPHISM CARDS --- */
-.media-row{
-    display:grid;
-    grid-template-columns:110px 1fr;
-    gap:18px;
-    align-items:center;
-    background: rgba(20, 25, 35, 0.4); 
-    backdrop-filter: blur(16px); 
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    border-radius: 8px; 
-    padding:16px;
-    margin:16px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.3);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.media-row:hover {
-    transform: translateY(-5px); 
-    background: rgba(30, 35, 50, 0.6);
-    border-color: rgba(201, 164, 90, 0.4); 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.2);
-}
-
-.media-row img.thumb{
-    width:110px;height:110px;
-    object-fit:cover;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    transition: transform 0.5s ease;
-}
-.media-row:hover img.thumb { transform: scale(1.05); }
-
-.media-content h3{
-    margin:0 0 4px;
-    font-size:1.35rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: #fff;
-}
-
-/* Culori Specifice */
-.media-row.incurs h3 { color: var(--color-incurs); }
-.media-row.incurs img.thumb { border-color: rgba(191, 90, 242, 0.5); box-shadow: 0 0 20px rgba(191, 90, 242, 0.25); }
-.media-row.incurs figure.tile figcaption {color: #e5ccff; text-shadow: 0 0 6px rgba(191, 90, 242, 0.2);}
-
-.media-row.bio h3 { color: var(--color-bio); }
-.media-row.bio img.thumb { border-color: rgba(72, 219, 251, 0.5); box-shadow: 0 0 20px rgba(72, 219, 251, 0.25); }
-.media-row.bio figure.tile figcaption {color: #ccf6ff; text-shadow: 0 0 6px rgba(72, 219, 251, 0.2);}
-
-.media-row.bluegeo h3 { color: var(--color-bluegeo); }
-.media-row.bluegeo img.thumb { border-color: rgba(90, 169, 230, 0.5); box-shadow: 0 0 20px rgba(90, 169, 230, 0.25); }
-.media-row.bluegeo figure.tile figcaption {color: #d0e8ff; text-shadow: 0 0 6px rgba(90, 169, 230, 0.2);}
-
-.media-row.dys h3 { color: var(--color-dys); }
-.media-row.dys img.thumb { border-color: rgba(224, 86, 253, 0.5); box-shadow: 0 0 20px rgba(224, 86, 253, 0.25); }
-.media-row.dys figure.tile figcaption {color: #f6baff; text-shadow: 0 0 6px rgba(224, 86, 253, 0.2);}
-
-
+@keyframes shine{0%,100%{transform:translateX(-120%) rotate(5deg)}50%{transform:translateX(120%) rotate(5deg)}}
+.section-title{margin:40px 0 20px;font-size:clamp(24px,3.5vw,38px);color:var(--fg);font-family:"Playfair Display",Georgia,serif;letter-spacing:-0.02em;font-weight:700;position:relative;display:inline-block;line-height:1.2;}
+.section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:30px;height:2px;background:var(--gold);box-shadow:0 0 10px var(--gold);}
+.en{color:var(--muted);font-size:0.8rem;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+.media-row{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;background:rgba(20,25,35,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.05);border-top:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:16px;margin:16px 0;box-shadow:0 8px 20px rgba(0,0,0,.3);transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+.media-row:hover{transform:translateY(-5px);background:rgba(30,35,50,0.6);border-color:rgba(201,164,90,0.4);box-shadow:0 15px 40px rgba(0,0,0,0.5);}
+.media-row img.thumb{width:110px;height:110px;object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 5px 15px rgba(0,0,0,0.5);transition:transform 0.5s ease;}
+.media-row:hover img.thumb{transform:scale(1.05);}
+.media-content h3{margin:0 0 4px;font-size:1.35rem;font-weight:500;letter-spacing:-0.01em;color:#fff;}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-
-/* --- 7. BUTOANE --- */
-.btn{
-    padding:8px 14px;
-    border-radius: 20px; 
-    border: 1px solid rgba(201,164,90, 0.3);
-    background: rgba(10, 12, 18, 0.6);
-    color:var(--gold);
-    font-weight:500;
-    font-size:0.8rem;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-.btn:hover{
-    background: var(--gold);
-    color: #000;
-    box-shadow: 0 0 15px rgba(201,164,90,0.4);
-    border-color: var(--gold);
-    text-decoration: none;
-}
-.btn:active{transform: scale(0.95);}
-
-@keyframes glow-pulse {
-    0% { box-shadow: 0 0 0 0 var(--pulse-color); }
-    70% { box-shadow: 0 0 0 8px var(--pulse-color); opacity: 0; }
-    100% { box-shadow: 0 0 0 0 transparent; }
-}
-.btn.ytmusic::before, .btn.rumble::before, .btn.fxbtn::before {
-    content:""; position:absolute; left:0; top:0; width:100%; height:100%; border-radius: 30px; pointer-events:none; opacity: 0.6; animation: glow-pulse 3s infinite;
-}
-.media-row.orbita { --pulse-color: rgba(0,178,255,0.4); }
-.media-row.moth { --pulse-color: rgba(201,164,90,0.4); }
-.media-row.analog { --pulse-color: rgba(214, 127, 85, 0.4); }
-.media-row.hop { --pulse-color: rgba(155, 89, 182, 0.4); }
-.media-row.scratches { --pulse-color: rgba(255, 63, 52, 0.4); }
-.media-row.singles { --pulse-color: rgba(255, 0, 80, 0.4); }
-.media-row.best { --pulse-color: rgba(255, 215, 0, 0.4); }
-.media-row.dance { --pulse-color: rgba(0, 255, 157, 0.4); }
-.media-row.incurs { --pulse-color: rgba(191, 90, 242, 0.4); }
-.media-row.bio { --pulse-color: rgba(72, 219, 251, 0.4); }
-.media-row.bluegeo { --pulse-color: rgba(90, 169, 230, 0.4); }
-.media-row.dys { --pulse-color: rgba(224, 86, 253, 0.4); }
-
-.btn.rumble { --pulse-color: rgba(133, 199, 66, 0.4); border-color:rgba(133, 199, 66, 0.3); color:#b7e0a6; }
-.btn.rumble:hover{ background: #85c742; color: #000; }
-
-/* --- 8. GALERIE --- */
-.gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill, minmax(70px, 1fr));gap:8px}
-figure.tile {
-    margin: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; position: relative; display: flex; flex-direction: column; height: 100%; transition: border-color 0.3s;
-}
-figure.tile:hover { border-color: var(--gold); }
-figure.tile img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover; opacity: 0.8; transition: opacity 0.3s, transform 0.5s;}
-figure.tile:hover img { opacity: 1; transform: scale(1.1); }
-figure.tile figcaption {
-    padding:4px; font-size:0.65rem; text-align:center; color:#b0aba3; letter-spacing:0.02em; line-height:1.2; flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 30px; font-size: 9px;
-}
-.orbita figure.tile figcaption{color:#aaddff}.moth figure.tile figcaption{color:#ffeac0}.analog figure.tile figcaption{color:#ffd6c1}.hop figure.tile figcaption{color:#ebd0f2}.scratches figure.tile figcaption{color:#ffd0d0}.singles figure.tile figcaption{color:#ffcce5}
-
-/* --- 9. TIKTOK BUTTON --- */
-.mini-tiktok {
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    width: 100%;
-    margin-top: auto; 
-    background: linear-gradient(90deg, #25F4EE 0%, #1a1a1a 30%, #FE2C55 100%);
-    color: #ffffff;
-    font-size: 0.65rem;
-    font-weight: 800; 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 0;
-    border-top: none; 
-    border-radius: 0 0 4px 4px; 
-    cursor: pointer;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 5;
-    animation: tiktok-breathe 3s ease-in-out infinite;
-    box-shadow: 0 0 0px rgba(254, 44, 85, 0);
-    transition: all 0.3s ease;
-}
-
-.mini-tiktok svg { 
-    width: 12px;
-    height: 12px; 
-    fill: #fff; 
-    margin-right: 4px; 
-}
-
-@keyframes tiktok-breathe {
-    0%, 100% { 
-        transform: scale(1); 
-        opacity: 0.9; 
-        box-shadow: 0 0 0px rgba(254, 44, 85, 0); 
-    }
-    50% { 
-        transform: scale(1.03); 
-        opacity: 1; 
-        box-shadow: 0 0 15px rgba(254, 44, 85, 0.3); 
-    }
-}
-
-.mini-tiktok:hover {
-    background: #FE2C55; 
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 15px rgba(254, 44, 85, 0.6);
-    text-decoration: none;
-    animation: none; 
-}
-
-.mini-tiktok:hover svg { 
-    fill: #fff; 
-    transform: rotate(10deg); 
-    transition: transform 0.3s ease;
-}
-
-/* --- 10. FOOTER --- */
-footer{margin:40px auto 20px;text-align:center;color:var(--muted); font-size: 0.8rem; border-top: 1px solid var(--divider); padding-top: 20px;}
-.quote{margin:15px auto 0;padding:15px; font-family: "Playfair Display", serif; font-style: italic; color: var(--gold); opacity: 0.8; font-size: 1rem;}
-
-/* --- 11. RESPONSIVE --- */
-@media(max-width:720px){
-    .media-row{grid-template-columns:1fr; gap:12px; padding: 12px;}
-    .media-row img.thumb{width:100%; height: auto; aspect-ratio: 1/1; max-height: 180px;}
-    .section-title{font-size: 1.5rem;}
-}
+.btn{padding:8px 14px;border-radius:20px;border:1px solid rgba(201,164,90,0.3);background:rgba(10,12,18,0.6);color:var(--gold);font-weight:500;font-size:0.8rem;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(5px);transition:all 0.3s ease;}
+.btn:hover{background:var(--gold);color:#000;box-shadow:0 0 15px rgba(201,164,90,0.4);border-color:var(--gold);text-decoration:none;}
+.btn.rumble{border-color:rgba(133,199,66,0.3);color:#b7e0a6;}
+.btn.rumble:hover{background:#85c742;color:#000;}
+.gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
+figure.tile{margin:0;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
+figure.tile:hover{border-color:var(--gold);}
+figure.tile img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover;opacity:0.8;transition:opacity 0.3s,transform 0.5s;}
+figure.tile:hover img{opacity:1;transform:scale(1.1);}
+figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#b0aba3;letter-spacing:0.02em;line-height:1.2;flex-grow:1;display:flex;align-items:center;justify-content:center;min-height:30px;}
+.singles figure.tile figcaption{color:#ffcce5}
+.mini-tiktok{display:flex;align-items:center;justify-content:center;width:100%;margin-top:auto;background:linear-gradient(90deg,#25F4EE 0%,#1a1a1a 30%,#FE2C55 100%);color:#fff;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;padding:4px 0;border-radius:0 0 4px 4px;cursor:pointer;text-decoration:none;z-index:5;animation:tiktok-breathe 3s ease-in-out infinite;transition:all 0.3s ease;}
+.mini-tiktok svg{width:12px;height:12px;fill:#fff;margin-right:4px;}
+@keyframes tiktok-breathe{0%,100%{transform:scale(1);opacity:0.9}50%{transform:scale(1.03);opacity:1;box-shadow:0 0 15px rgba(254,44,85,0.3)}}
+.mini-tiktok:hover{background:#FE2C55;transform:translateY(-2px) scale(1.02);box-shadow:0 4px 15px rgba(254,44,85,0.6);animation:none;}
+footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
+@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}}
 </style>
-
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // DOAR LOGICA PENTRU TIKTOK - FARA FALLBACK DE IMAGINI
-    if (typeof tiktokLinks !== 'undefined') {
-        const tiles = document.querySelectorAll('figure.tile');
-        tiles.forEach(tile => {
-            const caption = tile.querySelector('figcaption');
-            if (caption) {
-                const songTitle = caption.textContent.trim();
-                const link = tiktokLinks[songTitle];
-                if (link && link.length > 0) {
-                    const btn = document.createElement('a');
-                    btn.href = link; btn.target = "_blank"; btn.rel = "noopener"; btn.className = "mini-tiktok";
-                    btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.65-1.58-1.11-.22.8-.24 1.64-.18 2.47.1 2.51-1.28 4.96-3.57 6.38-2.61 1.49-6.01 1.05-8.15-1.15-2.01-2.31-2.11-5.83-.07-8.14 1.72-1.92 4.67-2.36 6.96-1.16v4.22c-1.12-.99-2.91-.98-4.04.05-1.04.99-1.13 2.65-.21 3.73.95 1.05 2.61 1.12 3.65.17.68-.66 1.04-1.6 1.04-2.54V.02h.47z"/></svg>TikTok`;
-                    tile.appendChild(btn);
-                }
-            }
-        });
-    }
-});
+document.addEventListener('DOMContentLoaded',()=>{
+  if(typeof tiktokLinks!=='undefined'){
+    document.querySelectorAll('figure.tile').forEach(tile=>{
+      const cap=tile.querySelector('figcaption');
+      if(cap){const link=tiktokLinks[cap.textContent.trim()];
+        if(link&&link.length>0){const btn=document.createElement('a');
+          btn.href=link;btn.target="_blank";btn.rel="noopener";btn.className="mini-tiktok";
+          btn.innerHTML=`<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.65-1.58-1.11-.22.8-.24 1.64-.18 2.47.1 2.51-1.28 4.96-3.57 6.38-2.61 1.49-6.01 1.05-8.15-1.15-2.01-2.31-2.11-5.83-.07-8.14 1.72-1.92 4.67-2.36 6.96-1.16v4.22c-1.12-.99-2.91-.98-4.04.05-1.04.99-1.13 2.65-.21 3.73.95 1.05 2.61 1.12 3.65.17.68-.66 1.04-1.6 1.04-2.54V.02h.47z"/></svg>TikTok`;
+          tile.appendChild(btn);}}}});}});
 </script>
 </head>
 <body>
-
 <div class="film-grain"></div>
-
-<header class="hero" role="banner">
-</header>
-
-<div style="text-align:center; padding: 12px 0 0 0;">
-  <a id="mailto-link" href="#" style="display:inline-block; opacity:0.75; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
-    <img src="assets/mailto.webp" alt="Contact" width="44" height="44" style="border-radius:50%; vertical-align:middle;">
+<header class="hero" role="banner"></header>
+<div style="text-align:center;padding:12px 0 0 0;">
+  <a id="mailto-link" href="#" style="display:inline-block;opacity:0.75;transition:opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
+    <img src="assets/mailto.webp" alt="Contact" width="44" height="44" style="border-radius:50%;vertical-align:middle;">
   </a>
 </div>
-<script>
-(function(){
-  var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';
-  var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';
-  document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;
-})();
-</script>
-
+<script>(function(){var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;})();</script>
 <main role="main">
 <section aria-label="Books" class="wrapper">
 <h2 class="section-title">Cărțile mele / My Books</h2>
 
 <div class="media-row incurs">
-<img alt="Coperta — Percepția Realității" class="thumb" src="assets/perc.png">
+<img alt="Percepția Realității" class="thumb" src="assets/perc.png">
 <div class="media-content">
 <h3>Percepția Realității</h3>
 <div>O nouă perspectivă asupra realității înconjurătoare și a adevărului personal.</div>
 <div class="en">A new perspective on surrounding reality and personal truth.</div>
-<div class="btns">
-<a class="btn fxbtn" href="https://www.youtube.com/watch?v=iKy2-jD6dFk&list=PLmvmJ6LhMAd8k05-K4qyH67cFSuQn0XA5" rel="noopener" target="_blank">🎬 YouTube Podcast</a>
-</div>
+<div class="btns"><a class="btn fxbtn" href="https://www.youtube.com/watch?v=iKy2-jD6dFk&list=PLmvmJ6LhMAd8k05-K4qyH67cFSuQn0XA5" rel="noopener" target="_blank">🎬 YouTube Podcast</a></div>
 </div>
 </div>
 
 <div class="media-row incurs">
-<img alt="Coperta — Incursiune în imposibil" class="thumb" src="assets/incurs.webp">
+<img alt="Incursiune în imposibil" class="thumb" src="assets/incurs.webp">
 <div class="media-content">
 <h3>Incursiune în imposibil</h3>
 <div>Roman distribuit episodic. O călătorie dincolo de limitele realității.</div>
@@ -375,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div>
 
-<div class="media-row blue-accent">
-<img alt="Coperta — Cine ne mângâie pe creștet" class="thumb" src="assets/cine-ne-mangaie-pe-crestet.webp">
+<div class="media-row incurs">
+<img alt="Cine ne mângâie pe creștet" class="thumb" src="assets/cine-ne-mangaie-pe-crestet.webp">
 <div class="media-content">
 <h3>Cine ne mângâie pe creștet</h3>
 <div>Un roman despre conștiință, libertate și mirajul adevărului.</div>
@@ -390,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="media-row orbita">
-<img alt="Coperta — Orbita Zero" class="thumb" src="assets/orbita-zero.webp">
+<img alt="Orbita Zero" class="thumb" src="assets/orbita-zero.webp">
 <div class="media-content">
 <h3>Orbita Zero</h3>
 <div>Thriller audio‑psihologic despre memorie, conștiință și uitare.</div>
@@ -408,26 +131,68 @@ document.addEventListener('DOMContentLoaded', () => {
 <h2 class="section-title">Muzica mea / My Music</h2>
 
 <div class="media-row singles">
-<img alt="New Singles Collection" class="thumb" src="assets/new.webp"> 
+<img alt="Singles 2026" class="thumb" src="assets/new.webp">
 <div class="media-content">
-    <h3>Singles 2026</h3>
-    <div>Cele mai noi piese, nelansate încă pe albume.</div>
-    <div class="en">Latest tracks, not yet on albums.</div>
-    <div class="btns">
-        <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-        <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
-    </div>
-    <div class="gallery">
-        <figure class="tile"><img alt="SHELBY BLOOD" loading="lazy" src="assets/shelby-blood-romani-kher.webp"><figcaption>SHELBY BLOOD</figcaption></figure>
-        <figure class="tile"><img alt="ARANJUEZ REVISITED" loading="lazy" src="assets/aranjuez-revisited.webp"><figcaption>ARANJUEZ REVISITED</figcaption></figure>
-        <figure class="tile"><img alt="BIRDY NAM NAM" loading="lazy" src="assets/birdy.webp"><figcaption>BIRDY NAM NAM</figcaption></figure>
-        <figure class="tile"><img alt="The 7th Sense of the Samba" loading="lazy" src="assets/samba.webp"><figcaption>The 7th Sense of the Samba</figcaption></figure>
-        <figure class="tile"><img alt="Thunder de Fuego" loading="lazy" src="assets/thunder.webp"><figcaption>Thunder de Fuego</figcaption></figure>
-        <figure class="tile"><img alt="Odessa, passion and tears" loading="lazy" src="assets/odesa.webp"><figcaption>Odessa, passion and tears</figcaption></figure>
-    
-        <figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/the-guardian-of-the-code.webp"><figcaption>The Guardian of the Code</figcaption></figure>
-        <figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
-        </div>
+<h3>Singles 2026</h3>
+<div>Cele mai noi piese, nelansate încă pe albume.</div>
+<div class="en">Latest tracks, not yet on albums.</div>
+<div class="btns">
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+<figure class="tile"><img alt="SHELBY BLOOD" loading="lazy" src="assets/shelby-blood-romani-kher.webp"><figcaption>SHELBY BLOOD</figcaption></figure>
+<figure class="tile"><img alt="ARANJUEZ REVISITED" loading="lazy" src="assets/aranjuez-revisited.webp"><figcaption>ARANJUEZ REVISITED</figcaption></figure>
+<figure class="tile"><img alt="BIRDY NAM NAM" loading="lazy" src="assets/birdy.webp"><figcaption>BIRDY NAM NAM</figcaption></figure>
+<figure class="tile"><img alt="The 7th Sense of the Samba" loading="lazy" src="assets/samba.webp"><figcaption>The 7th Sense of the Samba</figcaption></figure>
+<figure class="tile"><img alt="Thunder de Fuego" loading="lazy" src="assets/thunder.webp"><figcaption>Thunder de Fuego</figcaption></figure>
+<figure class="tile"><img alt="Odessa, passion and tears" loading="lazy" src="assets/odesa.webp"><figcaption>Odessa, passion and tears</figcaption></figure>
+<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/the-guardian-of-the-code.webp"><figcaption>The Guardian of the Code</figcaption></figure>
+<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
+</div>
+</div>
+</div>
+
+<div class="media-row best">
+<img alt="The Best of" class="thumb" src="assets/best.webp">
+<div class="media-content">
+<h3>The Best of — Collection</h3>
+<div>Cele mai apreciate piese, adunate într-o singură colecție.</div>
+<div class="en">The most appreciated tracks, gathered in one collection.</div>
+<div class="btns">
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/the-guardian-of-the-code.webp"><figcaption>The Guardian of the Code</figcaption></figure>
+<figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
+<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
+<figure class="tile"><img alt="Too late for crying" loading="lazy" src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
+<figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
+<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
+</div>
+</div>
+</div>
+
+<div class="media-row dance">
+<img alt="Singles 2025" class="thumb" src="assets/new.webp">
+<div class="media-content">
+<h3>Singles 2025</h3>
+<div>Piese lansate în 2025, nelansate pe albume.</div>
+<div class="en">Tracks released in 2025, not yet on albums.</div>
+<div class="btns">
+<a class="btn ytmusic" href="https://www.youtube.com/watch?v=Ki7reAXFHwg&list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+</div>
+<div class="gallery">
+<figure class="tile"><img alt="Barrio Tango" loading="lazy" src="assets/bario.webp"><figcaption>Barrio Tango</figcaption></figure>
+<figure class="tile"><img alt="Please, love me too" loading="lazy" src="assets/lovemetoo.webp"><figcaption>Please, love me too</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
+<figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
+</div>
 </div>
 </div>
 
@@ -438,15 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
 <div>Un album despre haosul modern și sufletul neînfricat.</div>
 <div class="en">An album about modern chaos and the fearless soul.</div>
 <div class="btns">
-    <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-    <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-    <figure class="tile"><img alt="The World in Chaos" loading="lazy" src="assets/chaos.webp"><figcaption>The World in Chaos</figcaption></figure>
-    <figure class="tile"><img alt="The brave Siberian soul" loading="lazy" src="assets/sib.webp"><figcaption>The brave Siberian soul</figcaption></figure>
-    <figure class="tile"><img alt="Caravan of Disillusionment" loading="lazy" src="assets/caravan.webp"><figcaption>Caravan of Disillusionment</figcaption></figure>
-    <figure class="tile"><img alt="My Geisha" loading="lazy" src="assets/geisha.webp"><figcaption>My Geisha</figcaption></figure>
-    <figure class="tile"><img alt="Perception's Paradox" loading="lazy" src="assets/paradox.webp"><figcaption>Perception's Paradox</figcaption></figure>
+<figure class="tile"><img alt="The World in Chaos" loading="lazy" src="assets/chaos.webp"><figcaption>The World in Chaos</figcaption></figure>
+<figure class="tile"><img alt="The brave Siberian soul" loading="lazy" src="assets/sib.webp"><figcaption>The brave Siberian soul</figcaption></figure>
+<figure class="tile"><img alt="Caravan of Disillusionment" loading="lazy" src="assets/caravan.webp"><figcaption>Caravan of Disillusionment</figcaption></figure>
+<figure class="tile"><img alt="My Geisha" loading="lazy" src="assets/geisha.webp"><figcaption>My Geisha</figcaption></figure>
+<figure class="tile"><img alt="Perception's Paradox" loading="lazy" src="assets/paradox.webp"><figcaption>Perception's Paradox</figcaption></figure>
 </div>
 </div>
 </div>
@@ -458,13 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <div>Un triptic muzical urban: geometrie, emoție și ritm de vals.</div>
 <div class="en">An urban musical triptych: geometry, emotion, and waltz rhythm.</div>
 <div class="btns">
-    <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-    <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-    <figure class="tile"><img alt="Sibiu" loading="lazy" src="assets/sibiu.webp"><figcaption>Sibiu</figcaption></figure>
-    <figure class="tile"><img alt="Sankt Petersburg" loading="lazy" src="assets/sankt.webp"><figcaption>Sankt Petersburg</figcaption></figure>
-    <figure class="tile"><img alt="Paris" loading="lazy" src="assets/paris.webp"><figcaption>Paris</figcaption></figure>
+<figure class="tile"><img alt="Sibiu" loading="lazy" src="assets/sibiu.webp"><figcaption>Sibiu</figcaption></figure>
+<figure class="tile"><img alt="Sankt Petersburg" loading="lazy" src="assets/sankt.webp"><figcaption>Sankt Petersburg</figcaption></figure>
+<figure class="tile"><img alt="Paris" loading="lazy" src="assets/paris.webp"><figcaption>Paris</figcaption></figure>
 </div>
 </div>
 </div>
@@ -476,15 +241,15 @@ document.addEventListener('DOMContentLoaded', () => {
 <div>Soundtrack-ul oficial al romanului audio.</div>
 <div class="en">The official soundtrack of the audio novel.</div>
 <div class="btns">
-    <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-    <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-    <figure class="tile"><img alt="Xorax on the wings of a swan" loading="lazy" src="assets/swan.webp"><figcaption>Xorax on the wings of a swan</figcaption></figure>
-    <figure class="tile"><img alt="NINA" loading="lazy" src="assets/nina.webp"><figcaption>NINA</figcaption></figure>
-    <figure class="tile"><img alt="Incursion into the impossible" loading="lazy" src="assets/incurs.webp"><figcaption>Incursion into the impossible</figcaption></figure>
-    <figure class="tile"><img alt="El Guardián de la Luna" loading="lazy" src="assets/luan.webp"><figcaption>El Guardián de la Luna</figcaption></figure>
-    <figure class="tile"><img alt="Ashes of Heroes" loading="lazy" src="assets/ashes.webp"><figcaption>Ashes of Heroes</figcaption></figure>
+<figure class="tile"><img alt="Xorax on the wings of a swan" loading="lazy" src="assets/swan.webp"><figcaption>Xorax on the wings of a swan</figcaption></figure>
+<figure class="tile"><img alt="NINA" loading="lazy" src="assets/nina.webp"><figcaption>NINA</figcaption></figure>
+<figure class="tile"><img alt="Incursion into the impossible" loading="lazy" src="assets/incurs.webp"><figcaption>Incursion into the impossible</figcaption></figure>
+<figure class="tile"><img alt="El Guardián de la Luna" loading="lazy" src="assets/luan.webp"><figcaption>El Guardián de la Luna</figcaption></figure>
+<figure class="tile"><img alt="Ashes of Heroes" loading="lazy" src="assets/ashes.webp"><figcaption>Ashes of Heroes</figcaption></figure>
 </div>
 </div>
 </div>
@@ -496,88 +261,45 @@ document.addEventListener('DOMContentLoaded', () => {
 <div>O călătorie sonoră prin etapele vieții.</div>
 <div class="en">A sonic journey through the stages of life.</div>
 <div class="btns">
-    <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-    <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-    <figure class="tile"><img alt="Number One" loading="lazy" src="assets/biop.webp"><figcaption>Number One</figcaption></figure>
-    <figure class="tile"><img alt="Look what you've done to me" loading="lazy" src="assets/look.webp"><figcaption>Look what you've done to me</figcaption></figure>
-    <figure class="tile"><img alt="Got my hands on my phone" loading="lazy" src="assets/got.webp"><figcaption>Got my hands on my phone</figcaption></figure>
-    <figure class="tile"><img alt="Daddy's on my side" loading="lazy" src="assets/dady.webp"><figcaption>Daddy's on my side</figcaption></figure>
-    <figure class="tile"><img alt="Don’t be a Blackrock" loading="lazy" src="assets/blackrock.webp"><figcaption>Don’t be a Blackrock</figcaption></figure>
-    <figure class="tile"><img alt="FIVE BEATS FORWARD" loading="lazy" src="assets/five.webp"><figcaption>FIVE BEATS FORWARD</figcaption></figure>
-    <figure class="tile"><img alt="Echoes of the Giants-Tribute to the Titans" loading="lazy" src="assets/echo.webp"><figcaption>Echoes of the Giants-Tribute to the Titans</figcaption></figure>
+<figure class="tile"><img alt="Number One" loading="lazy" src="assets/biop.webp"><figcaption>Number One</figcaption></figure>
+<figure class="tile"><img alt="Look what you've done to me" loading="lazy" src="assets/look.webp"><figcaption>Look what you've done to me</figcaption></figure>
+<figure class="tile"><img alt="Got my hands on my phone" loading="lazy" src="assets/got.webp"><figcaption>Got my hands on my phone</figcaption></figure>
+<figure class="tile"><img alt="Daddy's on my side" loading="lazy" src="assets/dady.webp"><figcaption>Daddy's on my side</figcaption></figure>
+<figure class="tile"><img alt="Don't be a Blackrock" loading="lazy" src="assets/blackrock.webp"><figcaption>Don't be a Blackrock</figcaption></figure>
+<figure class="tile"><img alt="FIVE BEATS FORWARD" loading="lazy" src="assets/five.webp"><figcaption>FIVE BEATS FORWARD</figcaption></figure>
+<figure class="tile"><img alt="Echoes of the Giants-Tribute to the Titans" loading="lazy" src="assets/echo.webp"><figcaption>Echoes of the Giants-Tribute to the Titans</figcaption></figure>
 </div>
-</div>
-</div>
-
-<div class="media-row best">
-<img alt="The Best of — Ilie Lascu" class="thumb" src="assets/best.webp">
-<div class="media-content">
-    <h3>The Best of — Collection</h3>
-    <div>Cele mai apreciate piese, adunate într-o singură colecție.</div>
-    <div class="en">The most appreciated tracks, gathered in one collection.</div>
-    <div class="btns">
-        <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-        <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
-    </div>
-    <div class="gallery">
-        <figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/the-guardian-of-the-code.webp"><figcaption>The Guardian of the Code</figcaption></figure>
-        <figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
-        <figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
-        <figure class="tile"><img alt="Too late for crying" loading="lazy" src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
-        <figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-        <figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
-        <figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
-        <figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
-    </div>
 </div>
 </div>
 
 <div class="media-row dance">
-<img alt="Singles 2025" class="thumb" src="assets/new.webp">
+<img alt="Hai la joc" class="thumb" src="assets/hai.webp">
 <div class="media-content">
-    <h3>Singles 2025</h3>
-    <div>Piese lansate în 2025, nelansate pe albume.</div>
-    <div class="en">Tracks released in 2025, not yet on albums.</div>
-    <div class="btns">
-        <a class="btn ytmusic" href="https://www.youtube.com/watch?v=Ki7reAXFHwg&list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-        <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
-    </div>
-    <div class="gallery">
-        <figure class="tile"><img alt="Barrio Tango" loading="lazy" src="assets/bario.webp"><figcaption>Barrio Tango</figcaption></figure>
-        <figure class="tile"><img alt="Please, love me too" loading="lazy" src="assets/lovemetoo.webp"><figcaption>Please, love me too</figcaption></figure>
-        <figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-        <figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
-        <figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
-    </div>
+<h3>Hai la joc</h3>
+<div>O selecție de piese ritmate pentru petrecere.</div>
+<div class="en">A selection of rhythmic tracks for dancing.</div>
+<div class="btns">
+<a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
+<a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
+<div class="gallery">
+<figure class="tile"><img alt="Clap Your Hands" loading="lazy" src="assets/clap.webp"><figcaption>Clap Your Hands</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
+<figure class="tile"><img alt="Ridică-te grindă-n sus" loading="lazy" src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
+<figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
+<figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
+<figure class="tile"><img alt="Buenos Aires-Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Buenos Aires-Taste of Colour</figcaption></figure>
 </div>
-
-<div class="media-row dance">
-<img alt="Hai la joc — Ilie Lascu" class="thumb" src="assets/hai.webp">
-<div class="media-content">
-    <h3>Hai la joc</h3>
-    <div>O selecție de piese ritmate pentru petrecere.</div>
-    <div class="en">A selection of rhythmic tracks for dancing.</div>
-    <div class="btns">
-        <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
-        <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
-    </div>
-    <div class="gallery">
-        <figure class="tile"><img alt="Clap Your Hands" loading="lazy" src="assets/clap.webp"><figcaption>Clap Your Hands</figcaption></figure>
-        <figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-        <figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
-        <figure class="tile"><img alt="Ridică-te grind-n sus" loading="lazy" src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
-        <figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
-        <figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
-        <figure class="tile"><img alt="Buenos Aires-Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Buenos Aires-Taste of Colour</figcaption></figure>
-    </div>
 </div>
 </div>
 
 <div class="media-row scratches">
-<img alt="Jazz Scratches — Ilie Lascu" class="thumb" src="assets/jazzscralbum.webp">
+<img alt="Jazz Scratches" class="thumb" src="assets/jazzscralbum.webp">
 <div class="media-content">
 <h3>Jazz Scratches</h3>
 <div>Explorare sonoră brută, plină de textură și ritm.</div>
@@ -595,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="media-row hop">
-<img alt="Hop & Jazz — Ilie Lascu" class="thumb" src="assets/hop.webp">
+<img alt="Hop & Jazz" class="thumb" src="assets/hop.webp">
 <div class="media-content">
 <h3>Hop & Jazz</h3>
 <div>Piese de avangardă, jazz, freejazz, hip-hop și altele.</div>
@@ -613,10 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="media-row analog">
-<img alt="Analog Conflict — Ilie Lascu" class="thumb" src="assets/analog.webp">
+<img alt="ANALOG CONFLICT" class="thumb" src="assets/analog.webp">
 <div class="media-content">
 <h3>ANALOG CONFLICT</h3>
-<div>Șapte piese noi: Hermannstadt tanzt mit Bruckenthal, Focul de sub Podul Minciunilor, Symphonia Residualis, Ridică-te grindă-n sus, Țup-Țup-Țup, Rakia i Suze, Frați pe Vecie, RUMBA-ȚUMBA.</div>
+<div>Șapte piese noi: Hermannstadt, Focul, Symphonia, Ridică-te, Țup-Țup-Țup, Rakia, RUMBA-ȚUMBA.</div>
 <div class="en">Seven new tracks exploring history, resonance, and analog tension.</div>
 <div class="btns">
 <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
@@ -635,35 +357,34 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="media-row orbita">
-<img alt="Orbita Zero — Ilie Lascu & Argo-9" class="thumb" src="assets/orbita-zero.webp">
+<img alt="ORBITA ZERO" class="thumb" src="assets/orbita-zero.webp">
 <div class="media-content">
 <h3>ORBITA ZERO — Album</h3>
-<div>Opt piese: Clara’s Song, Taste of Life, Taste of Light, Taste of Truth, Taste of Colour, ARGO‑9’s Dream, <strong>Nodo del Plata</strong>, <strong>Matías Verón</strong>.</div>
+<div>Opt piese: Clara's Song, Taste of Life, Taste of Light, Taste of Truth, Taste of Colour, ARGO‑9's Dream, Nodo del Plata, Matías Verón.</div>
 <div class="en">Eight tracks blending human emotion and digital consciousness.</div>
 <div class="btns">
 <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
-
 <div class="gallery">
-    <figure class="tile"><img alt="Prietenul meu ARGO" loading="lazy" src="assets/argo-prietenul-meu.jpg"><figcaption>Prietenul meu ARGO</figcaption></figure>
-    <figure class="tile"><img alt="Clara's Song" loading="lazy" src="assets/Clara's%20Song.webp"><figcaption>Clara's Song</figcaption></figure>
-    <figure class="tile"><img alt="Taste of Life" loading="lazy" src="assets/Taste%20of%20Life.webp"><figcaption>Taste of Life</figcaption></figure>
-    <figure class="tile"><img alt="Taste of Light" loading="lazy" src="assets/Taste%20of%20Light.webp"><figcaption>Taste of Light</figcaption></figure>
-    <figure class="tile"><img alt="Taste of Truth" loading="lazy" src="assets/Taste%20of%20Truth.webp"><figcaption>Taste of Truth</figcaption></figure>
-    <figure class="tile"><img alt="ARGO-9's Dream" loading="lazy" src="assets/ARGO-9s-Dream.jpg"><figcaption>ARGO-9's Dream</figcaption></figure>
-    <figure class="tile"><img alt="Nodo del Plata" loading="lazy" src="assets/nodo-del-plata.webp"><figcaption>Nodo del Plata</figcaption></figure>
-    <figure class="tile"><img alt="Matías Verón" loading="lazy" src="assets/matias-veron.webp?v=20251108a"><figcaption>Matías Verón</figcaption></figure>
-    <figure class="tile"><img alt="Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Taste of Colour</figcaption></figure>
+<figure class="tile"><img alt="Prietenul meu ARGO" loading="lazy" src="assets/argo-prietenul-meu.jpg"><figcaption>Prietenul meu ARGO</figcaption></figure>
+<figure class="tile"><img alt="Clara's Song" loading="lazy" src="assets/Clara's%20Song.webp"><figcaption>Clara's Song</figcaption></figure>
+<figure class="tile"><img alt="Taste of Life" loading="lazy" src="assets/Taste%20of%20Life.webp"><figcaption>Taste of Life</figcaption></figure>
+<figure class="tile"><img alt="Taste of Light" loading="lazy" src="assets/Taste%20of%20Light.webp"><figcaption>Taste of Light</figcaption></figure>
+<figure class="tile"><img alt="Taste of Truth" loading="lazy" src="assets/Taste%20of%20Truth.webp"><figcaption>Taste of Truth</figcaption></figure>
+<figure class="tile"><img alt="ARGO-9's Dream" loading="lazy" src="assets/ARGO-9s-Dream.jpg"><figcaption>ARGO-9's Dream</figcaption></figure>
+<figure class="tile"><img alt="Nodo del Plata" loading="lazy" src="assets/nodo-del-plata.webp"><figcaption>Nodo del Plata</figcaption></figure>
+<figure class="tile"><img alt="Matías Verón" loading="lazy" src="assets/matias-veron.webp"><figcaption>Matías Verón</figcaption></figure>
+<figure class="tile"><img alt="Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Taste of Colour</figcaption></figure>
 </div>
 </div>
 </div>
 
 <div class="media-row moth">
-<img alt="About the Moth — Ilie Lascu" class="thumb" src="assets/about-the-moth.jpg">
+<img alt="ABOUT THE MOTH" class="thumb" src="assets/about-the-moth.jpg">
 <div class="media-content">
 <h3>ABOUT THE MOTH — Album</h3>
-<div>Șapte piese: About the Moth, Loving my little Moth, Jack, Sadhguru’s Steps, Siberian Wind, Silenus, Amphibian.</div>
+<div>Șapte piese: About the Moth, Loving my little Moth, Jack, Sadhguru's Steps, Siberian Wind, Silenus, Amphibian.</div>
 <div class="en">Seven tracks exploring light, shadow, and rebirth.</div>
 <div class="btns">
 <a class="btn ytmusic" href="https://music.youtube.com/playlist?list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">🎧 YouTube Music</a>
@@ -673,21 +394,18 @@ document.addEventListener('DOMContentLoaded', () => {
 <figure class="tile"><img alt="About the Moth" loading="lazy" src="assets/about-the-moth.jpg"><figcaption>About the Moth</figcaption></figure>
 <figure class="tile"><img alt="Loving my little Moth" loading="lazy" src="assets/loving-my-little-moth.webp"><figcaption>Loving my little Moth</figcaption></figure>
 <figure class="tile"><img alt="Jack" loading="lazy" src="assets/jack.jpg"><figcaption>Jack</figcaption></figure>
-<figure class="tile"><img alt="Sadhguru's Steps" loading="lazy" src="assets/sadhguru-steps.jpg?v=20251102"><figcaption>Sadhguru's Steps</figcaption></figure>
+<figure class="tile"><img alt="Sadhguru's Steps" loading="lazy" src="assets/sadhguru-steps.jpg"><figcaption>Sadhguru's Steps</figcaption></figure>
 <figure class="tile"><img alt="Siberian Wind" loading="lazy" src="assets/siberian-wind.webp"><figcaption>Siberian Wind</figcaption></figure>
-<figure class="tile"><img alt="Silenus" loading="lazy" src="assets/silenus.jpg?v=20251102"><figcaption>Silenus</figcaption></figure>
-<figure class="tile"><img alt="Amphibian" loading="lazy" src="assets/amphibian.jpg?v=20251102"><figcaption>Amphibian</figcaption></figure>
+<figure class="tile"><img alt="Silenus" loading="lazy" src="assets/silenus.jpg"><figcaption>Silenus</figcaption></figure>
+<figure class="tile"><img alt="Amphibian" loading="lazy" src="assets/amphibian.jpg"><figcaption>Amphibian</figcaption></figure>
 </div>
 </div>
 </div>
+
 </section>
 </main>
-
 <footer role="contentinfo">
-<div class="wrapper">
-<p>© 2025 ILIE LASCU – All rights reserved.</p>
-</div>
+<div class="wrapper"><p>© 2026 ILIE LASCU – All rights reserved.</p></div>
 </footer>
-
 </body>
 </html>
