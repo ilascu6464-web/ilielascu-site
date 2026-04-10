@@ -40,6 +40,7 @@ let coverPath = null;
 const coverZone = document.getElementById('coverZone');
 const coverPreview = document.getElementById('coverPreview');
 const coverPlaceholder = document.getElementById('coverPlaceholder');
+const pushBtn = document.getElementById('pushBtn');
 
 coverZone.addEventListener('click', async () => {
   const p = await window.flyAPI.pickCover();
@@ -113,4 +114,31 @@ function setStatus(msg, ok) {
   const s = document.getElementById('status');
   s.textContent = msg;
   s.className = 'status' + (ok === true ? ' ok' : ok === false ? ' err' : '');
+}
+
+pushBtn.addEventListener('click', pushGitHub);
+
+async function pushGitHub() {
+  pushBtn.disabled = true;
+  pushBtn.textContent = '⏳ Push...';
+  setStatus('Se face push pe GitHub...', null);
+  try {
+    const res = await window.flyAPI.pushGitHub();
+    if (res.ok) {
+      setStatus('✅ Push reușit pe GitHub!', true);
+      pushBtn.textContent = '✅ Pushed!';
+      setTimeout(() => {
+        pushBtn.textContent = '🚀 Push GitHub';
+        pushBtn.disabled = false;
+      }, 3000);
+    } else {
+      setStatus('❌ Eroare push: ' + res.error, false);
+      pushBtn.textContent = '🚀 Push GitHub';
+      pushBtn.disabled = false;
+    }
+  } catch (e) {
+    setStatus('❌ Eroare: ' + e.message, false);
+    pushBtn.textContent = '🚀 Push GitHub';
+    pushBtn.disabled = false;
+  }
 }
