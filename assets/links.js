@@ -6,6 +6,7 @@ var tiktokLinks = {
     "Two of Us": "https://www.tiktok.com/@ilascu99/video/7622220066381122838?is_from_webapp=1&sender_device=pc&web_id=7621087633918264854",
     "The Guardian of the Code": "https://www.tiktok.com/@ilascu99/video/7620725908147735810",
     "Crying in the Irish Autumn": "https://www.tiktok.com/@ilascu99/video/7623064976495758614",
+    "Ecou din Diaspora - Echo from the Diaspora": "https://www.tiktok.com/@ilascu99/video/7629988478926720278",
     "SHELBY BLOOD": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
     "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254",
     "BIRDY NAM NAM": "https://www.tiktok.com/@ilascu99/video/7618870262578023702",
