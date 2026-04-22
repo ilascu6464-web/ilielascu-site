@@ -8,6 +8,7 @@ var tiktokLinks = {
     "Crying in the Irish Autumn": "https://www.tiktok.com/@ilascu99/video/7623064976495758614",
     "Ecou din Diaspora - Echo from the Diaspora": "https://www.tiktok.com/@ilascu99/video/7629988478926720278",
     "Romanță AI": "https://www.tiktok.com/@ilascu99/video/7630849165752372503",
+    "EMIGRANTUL": "https://www.tiktok.com/@ilascu99/video/7631463952408415510",
     "SHELBY BLOOD": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
     "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254",
     "BIRDY NAM NAM": "https://www.tiktok.com/@ilascu99/video/7618870262578023702",
