@@ -3,6 +3,7 @@ var tiktokLinks = {
     "Accessing Synthetic Nirvana": "https://www.tiktok.com/@ilascu99/video/7627126757514218774",
     "Conquistadors": "https://www.tiktok.com/@ilascu99/video/7628652326756060438",
     "Waltz of the Catacombs": "https://www.tiktok.com/@ilascu99/video/7629400214993947926",
+    "The Rebels Are Free": "https://www.tiktok.com/@ilascu99/video/7633701284201172246",
     "Two of Us": "https://www.tiktok.com/@ilascu99/video/7622220066381122838?is_from_webapp=1&sender_device=pc&web_id=7621087633918264854",
     "The Guardian of the Code": "https://www.tiktok.com/@ilascu99/video/7620725908147735810",
     "Crying in the Irish Autumn": "https://www.tiktok.com/@ilascu99/video/7623064976495758614",
