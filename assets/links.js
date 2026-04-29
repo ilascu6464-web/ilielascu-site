@@ -12,6 +12,7 @@ var tiktokLinks = {
     "EMIGRANTUL": "https://www.tiktok.com/@ilascu99/video/7631463952408415510",
     "From the Danube to the Sea": "https://www.tiktok.com/@ilascu99/video/7632216067246394646",
     "The Sound of Tumbalalaika": "https://www.tiktok.com/@ilascu99/video/7632991064537812246",
+    "Life Offbeat": "https://www.tiktok.com/@ilascu99/video/7634071134996090134",
     "SHELBY BLOOD": "https://www.tiktok.com/@ilascu99/video/7620011448651091222",
     "ARANJUEZ REVISITED": "https://www.tiktok.com/@ilascu99/video/7619624750825983254",
     "BIRDY NAM NAM": "https://www.tiktok.com/@ilascu99/video/7618870262578023702",
