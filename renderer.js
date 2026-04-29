@@ -72,7 +72,6 @@ document.getElementById('flyBtn').addEventListener('click', async () => {
   const album      = isNewAlbum
     ? document.getElementById('albumName').value.trim()
     : albumSel;
-  const tiktok     = document.getElementById('tiktok').value.trim();
   const ytlink     = document.getElementById('ytlink').value.trim();
   const rumblelink = document.getElementById('rumblelink').value.trim();
 
@@ -87,7 +86,7 @@ document.getElementById('flyBtn').addEventListener('click', async () => {
   setStatus('');
 
   const result = await window.flyAPI.fly({
-    title, album, tiktok, coverPath,
+    title, album, coverPath,
     ytlink, rumblelink, isNewAlbum
   });
 
@@ -98,7 +97,6 @@ document.getElementById('flyBtn').addEventListener('click', async () => {
   // Reset formular dacă a mers
   if (result.ok) {
     document.getElementById('title').value = '';
-    document.getElementById('tiktok').value = '';
     document.getElementById('ytlink').value = '';
     document.getElementById('rumblelink').value = '';
     select.value = '';

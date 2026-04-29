@@ -7,7 +7,7 @@ const { execFileSync, spawnSync } = require('child_process');
 const SITE_DIR = __dirname;
 const ASSETS_DIR = path.join(SITE_DIR, 'assets');
 const INDEX_HTML = path.join(SITE_DIR, 'index.html');
-const LINKS_JS = path.join(SITE_DIR, 'assets', 'links.js');
+const UNIVERSAL_TIKTOK_URL = 'https://www.tiktok.com/@ilascu99';
 
 let win;
 
@@ -43,10 +43,9 @@ ipcMain.handle('pick-cover', async () => {
 // ── IPC: FLY — procesează și publică piesa ─────────────────
 ipcMain.handle('fly', async (event, data) => {
   try {
-    const { title, album, tiktok, coverPath, isNewAlbum, ytlink, rumblelink } = data;
+    const { title, album, coverPath, isNewAlbum, ytlink, rumblelink } = data;
     const safeTitle = String(title || '').trim();
     const safeAlbum = String(album || '').trim();
-    const safeTikTok = String(tiktok || '').trim();
     const safeYtLink = String(ytlink || '').trim();
     const safeRumbleLink = String(rumblelink || '').trim();
 
@@ -69,12 +68,7 @@ ipcMain.handle('fly', async (event, data) => {
     const slug = slugify(safeTitle);
     const assetName = prepareCoverAsset(coverPath, slug);
 
-    // 3. Actualizăm links.js (adăugăm TikTok).
-    if (safeTikTok) {
-      updateTikTokLinks(safeTitle, safeTikTok);
-    }
-
-    // 4. Actualizăm index.html.
+    // 3. Actualizăm index.html.
     updateIndexHTML({
       title: safeTitle,
       album: safeAlbum,
@@ -85,7 +79,7 @@ ipcMain.handle('fly', async (event, data) => {
       isNewAlbum
     });
 
-    // 5. Git add + commit.
+    // 4. Git add + commit.
     git('add', '-A');
 
     if (hasStagedChanges()) {
@@ -106,6 +100,7 @@ function updateIndexHTML({ title, album, assetName, slug, ytlink, rumblelink, is
   const assetPath = `assets/${assetName}`;
   const safeYtLink = escapeHtml(ytlink || '#');
   const safeRumbleLink = escapeHtml(rumblelink || '#');
+  const safeTikTokLink = escapeHtml(UNIVERSAL_TIKTOK_URL);
 
   // Noul tile pentru galerie
   const tile = `
@@ -123,6 +118,7 @@ function updateIndexHTML({ title, album, assetName, slug, ytlink, rumblelink, is
 <div class="btns">
     <a class="btn ytmusic" href="${safeYtLink}" rel="noopener" target="_blank">🎧 YouTube Music</a>
     <a class="btn rumble" href="${safeRumbleLink}" rel="noopener" target="_blank">▶️ Rumble Music</a>
+    <a class="btn tiktok" href="${safeTikTokLink}" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">${tile}
 </div>
@@ -161,7 +157,6 @@ function updateIndexHTML({ title, album, assetName, slug, ytlink, rumblelink, is
     }
   }
 
-  html = refreshLinksScriptCacheBuster(html);
   fs.writeFileSync(INDEX_HTML, html, 'utf8');
 }
 
@@ -206,30 +201,6 @@ function prepareCoverAsset(coverPath, slug) {
   }
 }
 
-function updateTikTokLinks(title, tiktokUrl) {
-  let linksContent = fs.readFileSync(LINKS_JS, 'utf8');
-  const entryLine = `    ${JSON.stringify(title)}: ${JSON.stringify(tiktokUrl)},`;
-  const existingEntryRegex = new RegExp(`^\\s*${escapeRegExp(JSON.stringify(title))}:\\s*.*,$`, 'm');
-
-  if (existingEntryRegex.test(linksContent)) {
-    linksContent = linksContent.replace(existingEntryRegex, entryLine);
-  } else {
-    const marker = '// --- NEW SINGLES ---';
-    if (linksContent.includes(marker)) {
-      linksContent = linksContent.replace(marker, `${marker}\n${entryLine}`);
-    } else {
-      const insertAfter = 'var tiktokLinks = {';
-      if (!linksContent.includes(insertAfter)) {
-        throw new Error('Structura assets/links.js nu este recunoscută.');
-      }
-
-      linksContent = linksContent.replace(insertAfter, `${insertAfter}\n    // --- NEW SINGLES ---\n${entryLine}`);
-    }
-  }
-
-  fs.writeFileSync(LINKS_JS, linksContent, 'utf8');
-}
-
 function git(...args) {
   return execFileSync('git', args, {
     cwd: SITE_DIR,
@@ -243,17 +214,6 @@ function hasStagedChanges() {
   return result.status === 1;
 }
 
-function refreshLinksScriptCacheBuster(html) {
-  const version = Date.now();
-  const scriptPattern = /<script src="assets\/links\.js(?:\?v=\d+)?"><\/script>/;
-
-  if (!scriptPattern.test(html)) {
-    throw new Error('Scriptul assets/links.js nu a fost găsit în index.html.');
-  }
-
-  return html.replace(scriptPattern, `<script src="assets/links.js?v=${version}"></script>`);
-}
-
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -261,8 +221,4 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
-}
-
-function escapeRegExp(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

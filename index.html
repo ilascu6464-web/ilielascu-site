@@ -8,7 +8,6 @@
 <meta content="#0c0f18" name="theme-color">
 <link rel="icon" type="image/webp" href="assets/favicon.webp">
 <link rel="apple-touch-icon" href="assets/favicon.webp">
-<script src="assets/links.js?v=20260410001"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -36,6 +35,8 @@ a:hover{text-decoration:underline;color:#e5c06f;}
 .btn:hover{background:var(--gold);color:#000;box-shadow:0 0 15px rgba(201,164,90,0.4);border-color:var(--gold);text-decoration:none;}
 .btn.rumble{border-color:rgba(133,199,66,0.3);color:#b7e0a6;}
 .btn.rumble:hover{background:#85c742;color:#000;}
+.btn.tiktok{border-color:rgba(254,44,85,0.45);color:#ffd4df;}
+.btn.tiktok:hover{background:#FE2C55;color:#fff;border-color:#FE2C55;}
 .gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
 figure.tile{margin:0;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
 figure.tile:hover{border-color:var(--gold);}
@@ -43,34 +44,32 @@ figure.tile img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit
 figure.tile:hover img{opacity:1;transform:scale(1.1);}
 figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#b0aba3;letter-spacing:0.02em;line-height:1.2;flex-grow:1;display:flex;align-items:center;justify-content:center;min-height:30px;}
 .singles figure.tile figcaption{color:#ffcce5}
-.mini-tiktok{display:flex;align-items:center;justify-content:center;width:100%;margin-top:auto;background:linear-gradient(90deg,#25F4EE 0%,#1a1a1a 30%,#FE2C55 100%);color:#fff;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;padding:4px 0;border-radius:0 0 4px 4px;cursor:pointer;text-decoration:none;z-index:5;animation:tiktok-breathe 3s ease-in-out infinite;transition:all 0.3s ease;}
-.mini-tiktok svg{width:12px;height:12px;fill:#fff;margin-right:4px;}
-@keyframes tiktok-breathe{0%,100%{transform:scale(1);opacity:0.9}50%{transform:scale(1.03);opacity:1;box-shadow:0 0 15px rgba(254,44,85,0.3)}}
-.mini-tiktok:hover{background:#FE2C55;transform:translateY(-2px) scale(1.02);box-shadow:0 4px 15px rgba(254,44,85,0.6);animation:none;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
 @media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    if (typeof tiktokLinks !== 'undefined') {
-        var tiles = document.querySelectorAll('figure.tile');
-        tiles.forEach(function(tile) {
-            var cap = tile.querySelector('figcaption');
-            if (cap) {
-                var songTitle = cap.textContent.trim();
-                var link = tiktokLinks[songTitle];
-                if (link && link.length > 0) {
-                    var btn = document.createElement('a');
-                    btn.href = link;
-                    btn.target = '_blank';
-                    btn.rel = 'noopener';
-                    btn.className = 'mini-tiktok';
-                    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.65-1.58-1.11-.22.8-.24 1.64-.18 2.47.1 2.51-1.28 4.96-3.57 6.38-2.61 1.49-6.01 1.05-8.15-1.15-2.01-2.31-2.11-5.83-.07-8.14 1.72-1.92 4.67-2.36 6.96-1.16v4.22c-1.12-.99-2.91-.98-4.04.05-1.04.99-1.13 2.65-.21 3.73.95 1.05 2.61 1.12 3.65.17.68-.66 1.04-1.6 1.04-2.54V.02h.47z"/></svg>TikTok';
-                    tile.appendChild(btn);
-                }
-            }
-        });
-    }
+    var profileTikTok = 'https://www.tiktok.com/@ilascu99';
+    var rows = document.querySelectorAll('section.wrapper .media-row');
+    rows.forEach(function(row) {
+        var btns = row.querySelector('.btns');
+        if (!btns) return;
+
+        var hasTikTok = !!btns.querySelector('a.btn.tiktok');
+        if (hasTikTok) return;
+
+        var inBooksSection = row.closest('section[aria-label="Books"]') !== null;
+        var hasMusicButtons = !!btns.querySelector('a.ytmusic, a.rumble');
+        if (!inBooksSection && !hasMusicButtons) return;
+
+        var tiktokBtn = document.createElement('a');
+        tiktokBtn.href = profileTikTok;
+        tiktokBtn.target = '_blank';
+        tiktokBtn.rel = 'noopener';
+        tiktokBtn.className = 'btn tiktok';
+        tiktokBtn.textContent = '🎵 TikTok';
+        btns.appendChild(tiktokBtn);
+    });
 });
 </script>
 </head>
