@@ -15,6 +15,7 @@ const ALBUMS = [
   { name: 'Jazz Scratches',               key: 'scratches' },
   { name: 'Hop & Jazz',                   key: 'hop' },
   { name: 'ANALOG CONFLICT',              key: 'analog' },
+  { name: 'Synthetic Nirvana',            key: 'synthetic-nirvana' },
   { name: 'ORBITA ZERO — Album',          key: 'orbita' },
   { name: 'ABOUT THE MOTH — Album',       key: 'moth' },
 ];
