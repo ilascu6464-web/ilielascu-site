@@ -2,6 +2,7 @@
 const ALBUMS = [
   { name: 'Singles 2026',                 key: 'singles2026' },
   { name: 'Singles 2025',                 key: 'singles2025' },
+  { name: "Voices of the World's Children", key: 'voices-world-children' },
   { name: 'The Perception of Reality',    key: 'perc' },
   { name: 'The Wailing Wall Weeps',       key: 'wall' },
   { name: 'Night Flight with Frédéric',   key: 'night' },
