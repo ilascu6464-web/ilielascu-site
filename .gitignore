@@ -1,8 +1,1 @@
-node_modules/
-.DS_Store
-*.log
-FlyDBX.app/
-launch.sh
-INSTRUCTIUNI_ADAUGARE_PIESA.md
-assets/test.webp
-GitHub Token pentru FlyDBX.txt
+Nothing should be ignored since only a README.md file was added, which is a source/config file.
