@@ -2,6 +2,7 @@
 const ALBUMS = [
   { name: 'Singles 2026',                 key: 'singles2026' },
   { name: 'Singles 2025',                 key: 'singles2025' },
+  { name: 'Parallel Worlds',              key: 'parallel-worlds' },
   { name: 'Punjabi Light Rituals',        key: 'punjabi-light-rituals' },
   { name: 'Red Dust Rituals',             key: 'red-dust-rituals' },
   { name: "Voices of the World's Children", key: 'voices-world-children' },
