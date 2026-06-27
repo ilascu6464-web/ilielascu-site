@@ -20,7 +20,7 @@ Trebuie să adaugi o piesă nouă în fișierul:
 Găsește ultimul `<figure class="tile">` din acea secțiune și adaugă după el:
 
 ```html
-<figure class="tile"><img alt="TITLUL PIESEI" loading="lazy" src="assets/numefisier.webp"><figcaption>TITLUL PIESEI</figcaption></figure>
+<figure class="tile"><img alt="TITLUL PIESEI" loading="lazy" src="assets/numefisier.webp?v=YYYYMMDDHHMM"><figcaption>TITLUL PIESEI</figcaption></figure>
 ```
 
 **Modificare 2 — NU adăuga link TikTok per piesă:**
@@ -30,12 +30,14 @@ Site-ul folosește doar link universal de profil TikTok (`https://www.tiktok.com
 **După modificări, rulează în Terminal:**
 ```bash
 cd /Users/ilascu/L_DATA_MAC/PROGRAMARE/FlyDBX
-git add -A
+git add index.html assets/numefisier.webp
 git commit -m "Adaugat: TITLUL PIESEI"
-git push
+git push origin main
 ```
 
 **Reguli importante:**
 - Nu modifica altceva în fișier
 - Nu șterge nicio piesă existentă
 - Validează că HTML-ul rămâne corect după modificare
+- Nu folosi `git add -A`; publică doar fișierele legate de cererea curentă
+- După publicare, verifică live că imaginea răspunde `200 image/webp`, nu `text/html`
