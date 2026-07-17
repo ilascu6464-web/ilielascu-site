@@ -11,19 +11,19 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg-deep:#05070a;--fg:#ece6dd;--gold:#c9a45a;--muted:#8c857b;--divider:rgba(201,164,90,0.15);--maxw:1000px;--color-blue:#00B2FF;--color-analog:#d67f55;--color-hop:#9b59b6;--color-scratch:#ff3f34;--color-viral:#ff0050;--color-best:#ffd700;--color-dance:#00ff9d;--color-rumble:#85c742;--color-incurs:#bf5af2;--color-bio:#48dbfb;--color-bluegeo:#5aa9e6;--color-dys:#e056fd;--color-perc:#ff4757;--color-tib:#e67e22;--color-night:#8c7ae6;--color-wall:#00d2d3;}
+:root{--bg-deep:#0b0c0b;--fg:#e7d6b0;--gold:#c89f55;--muted:#b69b68;--divider:rgba(200,159,85,0.38);--maxw:1000px;--color-blue:#00B2FF;--color-analog:#d67f55;--color-hop:#9b59b6;--color-scratch:#ff3f34;--color-viral:#ff0050;--color-best:#ffd700;--color-dance:#00ff9d;--color-rumble:#85c742;--color-incurs:#bf5af2;--color-bio:#48dbfb;--color-bluegeo:#5aa9e6;--color-dys:#e056fd;--color-perc:#ff4757;--color-tib:#e67e22;--color-night:#8c7ae6;--color-wall:#00d2d3;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;}
-body{margin:0;background:radial-gradient(circle at 50% 0%,#1a1d29 0%,var(--bg-deep) 60%,#000 100%);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.5;min-height:100vh;}
+body{margin:0;background:var(--bg-deep);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.5;min-height:100vh;}
 a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
-a:hover{text-decoration:underline;color:#e5c06f;}
+a:hover{text-decoration:underline;color:#efd49b;}
 .wrapper{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;z-index:2;}
 .film-grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");}
 .hero{position:relative;width:100%;aspect-ratio:1920/426;border-bottom:1px solid var(--divider);background:#000 url('assets/banner.jpg?v=202605120853') center center/cover no-repeat;overflow:hidden;mask-image:linear-gradient(to bottom,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 85%,transparent 100%);}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0)0%,rgba(255,255,255,.08)50%,rgba(255,255,255,0)100%);transform:translateX(-120%) rotate(5deg);animation:shine 8s ease-in-out infinite;pointer-events:none;}
 @keyframes shine{0%,100%{transform:translateX(-120%) rotate(5deg)}50%{transform:translateX(120%) rotate(5deg)}}
 .section-title{margin:40px 0 20px;font-size:clamp(24px,3.5vw,38px);color:var(--fg);font-family:"Playfair Display",Georgia,serif;letter-spacing:-0.02em;font-weight:700;position:relative;display:inline-block;line-height:1.2;}
-.section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:30px;height:2px;background:var(--gold);box-shadow:0 0 10px var(--gold);}
+.section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:30px;height:1px;background:var(--gold);box-shadow:none;}
 .en{color:var(--muted);font-size:0.8rem;margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
 .media-row{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;background:rgba(20,25,35,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.05);border-top:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:16px;margin:16px 0;box-shadow:0 8px 20px rgba(0,0,0,.3);transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
 .media-row:hover{transform:translateY(-5px);background:rgba(30,35,50,0.6);border-color:rgba(201,164,90,0.4);box-shadow:0 15px 40px rgba(0,0,0,0.5);}
@@ -31,21 +31,48 @@ a:hover{text-decoration:underline;color:#e5c06f;}
 .media-row:hover img.thumb{transform:scale(1.05);}
 .media-content h3{margin:0 0 4px;font-size:1.35rem;font-weight:500;letter-spacing:-0.01em;color:#fff;}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-.btn{padding:8px 14px;border-radius:20px;border:1px solid rgba(201,164,90,0.3);background:rgba(10,12,18,0.6);color:var(--gold);font-weight:500;font-size:0.8rem;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(5px);transition:all 0.3s ease;}
-.btn:hover{background:var(--gold);color:#000;box-shadow:0 0 15px rgba(201,164,90,0.4);border-color:var(--gold);text-decoration:none;}
+.btn{padding:8px 14px;border-radius:20px;border:1px solid rgba(200,159,85,0.58);background:rgba(18,15,10,0.7);color:var(--gold);font-weight:500;font-size:0.8rem;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(5px);transition:all 0.3s ease;}
+.btn:hover{background:var(--gold);color:#14110b;box-shadow:none;border-color:var(--gold);text-decoration:none;}
 .btn.rumble{border-color:rgba(133,199,66,0.3);color:#b7e0a6;}
 .btn.rumble:hover{background:#85c742;color:#000;}
 .btn.tiktok{border-color:rgba(254,44,85,0.45);color:#ffd4df;}
 .btn.tiktok:hover{background:#FE2C55;color:#fff;border-color:#FE2C55;}
 .gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
-figure.tile{margin:0;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
+figure.tile{margin:0;background:#12110e;border:1px solid rgba(200,159,85,0.48);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
 figure.tile:hover{border-color:var(--gold);}
 figure.tile img{width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover;opacity:0.8;transition:opacity 0.3s,transform 0.5s;}
 figure.tile:hover img{opacity:1;transform:scale(1.1);}
-figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#b0aba3;letter-spacing:0.02em;line-height:1.2;flex-grow:1;display:flex;align-items:center;justify-content:center;min-height:30px;}
-.singles figure.tile figcaption{color:#ffcce5}
+figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#d5bd87;letter-spacing:0.02em;line-height:1.2;flex-grow:1;display:flex;align-items:center;justify-content:center;min-height:30px;}
+.singles figure.tile figcaption{color:#d5bd87}
+.books-section{max-width:1240px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:22px 14px;align-items:start;}
+.books-section .section-title{grid-column:1/-1;margin-bottom:10px;}
+.books-section .media-row{display:block;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+.books-section .media-row:hover{transform:none;background:none;border-color:transparent;box-shadow:none;}
+.books-section .media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;border-radius:5px;}
+.books-section .media-row:hover img.thumb{transform:none;}
+.books-section .media-content > :not(.btns){display:none;}
+.books-section .btns{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:8px;}
+.books-section .btn{justify-content:center;width:100%;padding:2px 0;border:0;border-bottom:1px solid var(--divider);border-radius:0;background:none;font-size:.72rem;white-space:nowrap;}
+.books-section .btn:hover{background:none;color:#e5c06f;box-shadow:none;}
+.music-section{max-width:1240px;display:flex;flex-direction:column;}
+.music-section .section-title{order:1;}
+.recent-releases{order:2;margin:2px 0 34px;text-align:center;}
+.recent-title{margin:0 0 14px;color:var(--muted);font-family:"Playfair Display",Georgia,serif;font-size:1.35rem;font-weight:400;}
+.music-section .media-row{order:10;display:block;margin:14px 0;padding:18px 0 22px;background:none;border:0;border-bottom:1px solid var(--divider);border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+.music-section .media-row:hover{transform:none;background:none;border-color:var(--divider);box-shadow:none;}
+.music-section .media-row img.thumb{display:none;}
+.music-section .media-content > :not(h3,.btns,.gallery){display:none;}
+.music-section .media-content h3{margin:0;color:#fff;font-family:"Playfair Display",Georgia,serif;font-size:1.7rem;font-weight:400;}
+.music-section .btns{margin-top:8px;}
+.music-section .gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:16px;}
+.music-section figure.tile{width:clamp(82px,9.1vw,110px);flex:0 0 auto;}
+.music-section figure.tile figcaption{font-size:10px;min-height:36px;padding:5px;}
+.music-section .album-latest{order:3;}
+.music-section .album-singles-current{order:4;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
-@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}}
+@media(max-width:900px){.books-section{grid-template-columns:repeat(4,minmax(0,1fr));}.music-section figure.tile{width:clamp(86px,15vw,110px);}}
+@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section figure.tile{width:clamp(84px,27vw,112px);}}
+@media(max-width:420px){.books-section{grid-template-columns:repeat(2,minmax(0,1fr));}.books-section .btn{font-size:.72rem;}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -83,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <script>(function(){var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;})();</script>
 <main role="main">
-<section aria-label="Books" class="wrapper">
+<section aria-label="Books" class="wrapper books-section">
 <h2 class="section-title">Cărțile mele / My Books</h2>
 
 <div class="media-row lumea-perfecta">
@@ -181,8 +208,24 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </section>
 
-<section aria-label="Music" class="wrapper">
+<section aria-label="Music" class="wrapper music-section">
 <h2 class="section-title">Muzica mea / My Music</h2>
+
+<section aria-label="Recent releases" class="recent-releases">
+<h3 class="recent-title">Ultimele lansări / Recent releases</h3>
+<div class="gallery recent-gallery">
+<figure class="tile"><img alt="Imagine the Future" loading="lazy" src="assets/imaginethefuture.webp?v=202607080854"><figcaption>Imagine the Future</figcaption></figure>
+<figure class="tile"><img alt="Le Bal des Mondes" loading="lazy" src="assets/lebaldesmondes.webp?v=202607101036"><figcaption>Le Bal des Mondes</figcaption></figure>
+<figure class="tile"><img alt="Zulu Bap" loading="lazy" src="assets/zulubap.webp?v=202607101047"><figcaption>Zulu Bap</figcaption></figure>
+<figure class="tile"><img alt="La Rue des Étoiles" loading="lazy" src="assets/laruedesetoiles.webp?v=202607120415"><figcaption>La Rue des Étoiles</figcaption></figure>
+<figure class="tile"><img alt="The Museum of Things We Never Said" loading="lazy" src="assets/themuseumofthingsweneversaid.webp?v=202607121039"><figcaption>The Museum of Things We Never Said</figcaption></figure>
+<figure class="tile"><img alt="Vai, Mundo, Vai" loading="lazy" src="assets/vaimundovai.webp?v=202607130524"><figcaption>Vai, Mundo, Vai</figcaption></figure>
+<figure class="tile"><img alt="My Girl Cha Cha" loading="lazy" src="assets/mygirlchacha.webp?v=202607142032"><figcaption>My Girl Cha Cha</figcaption></figure>
+<figure class="tile"><img alt="Don't Touch Me" loading="lazy" src="assets/donttouchme.webp?v=202607150816"><figcaption>Don't Touch Me</figcaption></figure>
+<figure class="tile"><img alt="Fuego en la Calle" loading="lazy" src="assets/fuegoenlacalle.webp?v=202607161600"><figcaption>Fuego en la Calle</figcaption></figure>
+<figure class="tile"><img alt="Streets of Havana" loading="lazy" src="assets/streetsofhavana.webp?v=202607170820"><figcaption>Streets of Havana</figcaption></figure>
+</div>
+</section>
 
 <div class="media-row the-perfect-world">
 <img alt="The Perfect World" class="thumb" src="assets/cover-album-the-perfect-world.webp?v=202606271517">
@@ -205,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
-<div class="media-row tropico-loco">
+<div class="media-row tropico-loco album-latest">
 <img alt="Trópico Loco" class="thumb" src="assets/album-trropico.webp?v=202607020650">
 <div class="media-content">
 <h3>Trópico Loco</h3>
@@ -230,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 
-<div class="media-row singles">
+<div class="media-row singles album-singles-current">
 <img alt="Singles 2026" class="thumb" src="assets/new.webp">
 <div class="media-content">
 <h3>Singles 2026</h3>
