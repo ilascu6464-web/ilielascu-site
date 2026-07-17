@@ -33,7 +33,7 @@ Lucreaza rapid, dar controlat: modifica exact ce a cerut utilizatorul, verifica 
    ```html
    <figure class="tile"><img alt="TITLUL PIESEI" loading="lazy" src="assets/nume.webp?v=YYYYMMDDHHMM"><figcaption>TITLUL PIESEI</figcaption></figure>
    ```
-4. Adauga acelasi tile la finalul galeriei `Recent releases`, cu un link YouTube direct catre piesa respectiva, in formatul `https://www.youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID`, plus linkul TikTok. Nu folosi `index` aici: `VIDEO_ID` pastreaza legatura cu piesa corecta chiar daca ordinea playlistului se schimba. Nu adauga Rumble la lansarile recente. Pastreaza exact 10 piese: cand o piesa noua este adaugata in dreapta, elimina prima piesa din stanga. Ordinea este cronologica de la stanga la dreapta.
+4. Adauga acelasi tile la finalul galeriei `Recent releases`, cu un link YouTube direct catre piesa respectiva, in formatul `https://www.youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID`, plus linkul TikTok direct catre videoclipul piesei cand acesta exista. Nu folosi `index` aici: `VIDEO_ID` pastreaza legatura cu piesa corecta chiar daca ordinea playlistului se schimba. Nu adauga Rumble la lansarile recente. Pastreaza exact 10 piese: cand o piesa noua este adaugata in dreapta, elimina prima piesa din stanga. Ordinea este cronologica de la stanga la dreapta.
 5. Nu adauga link TikTok separat pentru fiecare piesa. Se foloseste linkul universal `https://www.tiktok.com/@ilascu99`.
 
 ## Album nou sau schimbare de ordine
