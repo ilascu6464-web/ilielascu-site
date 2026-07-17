@@ -100,6 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
         tiktokBtn.textContent = '🎵 TikTok';
         btns.appendChild(tiktokBtn);
     });
+
+    var booksSection = document.querySelector('section[aria-label="Books"]');
+    if (booksSection) {
+        Array.from(booksSection.querySelectorAll('.media-row')).reverse().forEach(function(row) {
+            booksSection.appendChild(row);
+        });
+    }
 });
 </script>
 </head>
