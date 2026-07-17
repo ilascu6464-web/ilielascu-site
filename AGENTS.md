@@ -23,7 +23,7 @@ Lucreaza rapid, dar controlat: modifica exact ce a cerut utilizatorul, verifica 
    ```html
    assets/nume.webp?v=YYYYMMDDHHMM
    ```
-7. Fiecare link YouTube Music al unui album trebuie sa se termine cu `&index=1`, pentru a deschide mereu prima piesa din playlist.
+7. Fiecare link YouTube Music al unui album trebuie sa foloseasca formatul `https://www.youtube.com/playlist?list=...&index=1`, fara `watch?v=...`, pentru a deschide mereu prima piesa din playlist.
 
 ## Piesa noua
 
