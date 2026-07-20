@@ -107,6 +107,29 @@ document.addEventListener('DOMContentLoaded', function() {
             booksSection.appendChild(row);
         });
     }
+
+    var deferredImages = Array.from(document.querySelectorAll('img[data-src]'));
+    if ('IntersectionObserver' in window) {
+        var imageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+
+                var image = entry.target;
+                image.src = image.dataset.src;
+                image.removeAttribute('data-src');
+                observer.unobserve(image);
+            });
+        }, { rootMargin: '600px 0px' });
+
+        deferredImages.forEach(function(image) {
+            imageObserver.observe(image);
+        });
+    } else {
+        deferredImages.forEach(function(image) {
+            image.src = image.dataset.src;
+            image.removeAttribute('data-src');
+        });
+    }
 });
 </script>
 </head>
@@ -237,16 +260,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <section aria-label="Recent releases" class="recent-releases">
 <h3 class="recent-title">Ultimele lansări / Recent releases</h3>
 <div class="gallery recent-gallery">
-<figure class="tile"><img alt="The Museum of Things We Never Said" loading="lazy" src="assets/themuseumofthingsweneversaid.webp?v=202607121039"><figcaption>The Museum of Things We Never Said</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=bISozd-qGc4&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7661555930835717399" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Vai, Mundo, Vai" loading="lazy" src="assets/vaimundovai.webp?v=202607130524"><figcaption>Vai, Mundo, Vai</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=ZypEtouCZAE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="My Girl Cha Cha" loading="lazy" src="assets/mygirlchacha.webp?v=202607142032"><figcaption>My Girl Cha Cha</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=TyPiJVc4Rv0&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7662617276721483030" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Don't Touch Me" loading="lazy" src="assets/donttouchme.webp?v=202607150816"><figcaption>Don't Touch Me</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=Sa1oq139LqY&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7663007591366249750" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Fuego en la Calle" loading="lazy" src="assets/fuegoenlacalle.webp?v=202607161600"><figcaption>Fuego en la Calle</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=SLKtCfhzrdE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7663362195845090582" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Streets of Havana" loading="lazy" src="assets/streetsofhavana.webp?v=202607170820"><figcaption>Streets of Havana</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=iD5djiZLvGE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="La Noche Tiene Mango" loading="lazy" src="assets/lanochetienemango.webp?v=202607171714"><figcaption>La Noche Tiene Mango</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=FgNihsrUR_s&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Heat of the Soul" loading="lazy" src="assets/heatofthesoul.webp?v=202607191049"><figcaption>Heat of the Soul</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=K9fRgCHKTVs&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Rumba of the Moon" loading="lazy" src="assets/rumbaofthemoon.webp?v=202607191049"><figcaption>Rumba of the Moon</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=XHeFZf_DgdQ&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Transilvania" loading="lazy" src="assets/transilvania.webp?v=202607200935"><figcaption>Transilvania</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=X2emsIuSyBQ&list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="The Museum of Things We Never Said" loading="lazy" data-src="assets/themuseumofthingsweneversaid.webp?v=202607121039"><figcaption>The Museum of Things We Never Said</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=bISozd-qGc4&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7661555930835717399" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Vai, Mundo, Vai" loading="lazy" data-src="assets/vaimundovai.webp?v=202607130524"><figcaption>Vai, Mundo, Vai</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=ZypEtouCZAE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="My Girl Cha Cha" loading="lazy" data-src="assets/mygirlchacha.webp?v=202607142032"><figcaption>My Girl Cha Cha</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=TyPiJVc4Rv0&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7662617276721483030" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Don't Touch Me" loading="lazy" data-src="assets/donttouchme.webp?v=202607150816"><figcaption>Don't Touch Me</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=Sa1oq139LqY&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7663007591366249750" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Fuego en la Calle" loading="lazy" data-src="assets/fuegoenlacalle.webp?v=202607161600"><figcaption>Fuego en la Calle</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=SLKtCfhzrdE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99/video/7663362195845090582" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Streets of Havana" loading="lazy" data-src="assets/streetsofhavana.webp?v=202607170820"><figcaption>Streets of Havana</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=iD5djiZLvGE&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="La Noche Tiene Mango" loading="lazy" data-src="assets/lanochetienemango.webp?v=202607171714"><figcaption>La Noche Tiene Mango</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=FgNihsrUR_s&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Heat of the Soul" loading="lazy" data-src="assets/heatofthesoul.webp?v=202607191049"><figcaption>Heat of the Soul</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=K9fRgCHKTVs&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Rumba of the Moon" loading="lazy" data-src="assets/rumbaofthemoon.webp?v=202607191049"><figcaption>Rumba of the Moon</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=XHeFZf_DgdQ&list=PLI6HrnkL1XM0" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="Transilvania" loading="lazy" data-src="assets/transilvania.webp?v=202607200935"><figcaption>Transilvania</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=X2emsIuSyBQ&list=PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
 </div>
 </section>
 
@@ -261,12 +284,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn tiktok" href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="We Are Here" loading="lazy" src="assets/wearehere.webp?v=202606271517"><figcaption>We Are Here</figcaption></figure>
-<figure class="tile"><img alt="La petite Patta" loading="lazy" src="assets/lapetitepatta.webp?v=202607080840"><figcaption>La petite Patta</figcaption></figure>
-<figure class="tile"><img alt="The Clockmaker's Carnival" loading="lazy" src="assets/theclockmakerscarnival.webp?v=202607080851"><figcaption>The Clockmaker's Carnival</figcaption></figure>
-<figure class="tile"><img alt="Imagine the Future" loading="lazy" src="assets/imaginethefuture.webp?v=202607080854"><figcaption>Imagine the Future</figcaption></figure>
-<figure class="tile"><img alt="Le Bal des Mondes" loading="lazy" src="assets/lebaldesmondes.webp?v=202607101036"><figcaption>Le Bal des Mondes</figcaption></figure>
-<figure class="tile"><img alt="La Rue des Étoiles" loading="lazy" src="assets/laruedesetoiles.webp?v=202607120415"><figcaption>La Rue des Étoiles</figcaption></figure>
+<figure class="tile"><img alt="We Are Here" loading="lazy" data-src="assets/wearehere.webp?v=202606271517"><figcaption>We Are Here</figcaption></figure>
+<figure class="tile"><img alt="La petite Patta" loading="lazy" data-src="assets/lapetitepatta.webp?v=202607080840"><figcaption>La petite Patta</figcaption></figure>
+<figure class="tile"><img alt="The Clockmaker's Carnival" loading="lazy" data-src="assets/theclockmakerscarnival.webp?v=202607080851"><figcaption>The Clockmaker's Carnival</figcaption></figure>
+<figure class="tile"><img alt="Imagine the Future" loading="lazy" data-src="assets/imaginethefuture.webp?v=202607080854"><figcaption>Imagine the Future</figcaption></figure>
+<figure class="tile"><img alt="Le Bal des Mondes" loading="lazy" data-src="assets/lebaldesmondes.webp?v=202607101036"><figcaption>Le Bal des Mondes</figcaption></figure>
+<figure class="tile"><img alt="La Rue des Étoiles" loading="lazy" data-src="assets/laruedesetoiles.webp?v=202607120415"><figcaption>La Rue des Étoiles</figcaption></figure>
 </div>
 </div>
 </div>
@@ -281,20 +304,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn tiktok" href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Fenomeno" loading="lazy" src="assets/fenomeno.webp?v=202607020650"><figcaption>Fenomeno</figcaption></figure>
-<figure class="tile"><img alt="Trópico Loco Sí" loading="lazy" src="assets/tropicolocosi.webp?v=202607021057"><figcaption>Trópico Loco Sí</figcaption></figure>
-<figure class="tile"><img alt="Two for One" loading="lazy" src="assets/twoforone.webp?v=202607021046"><figcaption>Two for One</figcaption></figure>
-<figure class="tile"><img alt="Bella Serafina" loading="lazy" src="assets/bellaserafina.webp?v=202607051050"><figcaption>Bella Serafina</figcaption></figure>
-<figure class="tile"><img alt="Zulu Bap" loading="lazy" src="assets/zulubap.webp?v=202607101047"><figcaption>Zulu Bap</figcaption></figure>
-<figure class="tile"><img alt="The Museum of Things We Never Said" loading="lazy" src="assets/themuseumofthingsweneversaid.webp?v=202607121039"><figcaption>The Museum of Things We Never Said</figcaption></figure>
-<figure class="tile"><img alt="Vai, Mundo, Vai" loading="lazy" src="assets/vaimundovai.webp?v=202607130524"><figcaption>Vai, Mundo, Vai</figcaption></figure>
-<figure class="tile"><img alt="My Girl Cha Cha" loading="lazy" src="assets/mygirlchacha.webp?v=202607142032"><figcaption>My Girl Cha Cha</figcaption></figure>
-<figure class="tile"><img alt="Don't Touch Me" loading="lazy" src="assets/donttouchme.webp?v=202607150816"><figcaption>Don't Touch Me</figcaption></figure>
-<figure class="tile"><img alt="Fuego en la Calle" loading="lazy" src="assets/fuegoenlacalle.webp?v=202607161600"><figcaption>Fuego en la Calle</figcaption></figure>
-<figure class="tile"><img alt="Streets of Havana" loading="lazy" src="assets/streetsofhavana.webp?v=202607170820"><figcaption>Streets of Havana</figcaption></figure>
-<figure class="tile"><img alt="La Noche Tiene Mango" loading="lazy" src="assets/lanochetienemango.webp?v=202607171714"><figcaption>La Noche Tiene Mango</figcaption></figure>
-<figure class="tile"><img alt="Heat of the Soul" loading="lazy" src="assets/heatofthesoul.webp?v=202607191049"><figcaption>Heat of the Soul</figcaption></figure>
-<figure class="tile"><img alt="Rumba of the Moon" loading="lazy" src="assets/rumbaofthemoon.webp?v=202607191049"><figcaption>Rumba of the Moon</figcaption></figure>
+<figure class="tile"><img alt="Fenomeno" loading="lazy" data-src="assets/fenomeno.webp?v=202607020650"><figcaption>Fenomeno</figcaption></figure>
+<figure class="tile"><img alt="Trópico Loco Sí" loading="lazy" data-src="assets/tropicolocosi.webp?v=202607021057"><figcaption>Trópico Loco Sí</figcaption></figure>
+<figure class="tile"><img alt="Two for One" loading="lazy" data-src="assets/twoforone.webp?v=202607021046"><figcaption>Two for One</figcaption></figure>
+<figure class="tile"><img alt="Bella Serafina" loading="lazy" data-src="assets/bellaserafina.webp?v=202607051050"><figcaption>Bella Serafina</figcaption></figure>
+<figure class="tile"><img alt="Zulu Bap" loading="lazy" data-src="assets/zulubap.webp?v=202607101047"><figcaption>Zulu Bap</figcaption></figure>
+<figure class="tile"><img alt="The Museum of Things We Never Said" loading="lazy" data-src="assets/themuseumofthingsweneversaid.webp?v=202607121039"><figcaption>The Museum of Things We Never Said</figcaption></figure>
+<figure class="tile"><img alt="Vai, Mundo, Vai" loading="lazy" data-src="assets/vaimundovai.webp?v=202607130524"><figcaption>Vai, Mundo, Vai</figcaption></figure>
+<figure class="tile"><img alt="My Girl Cha Cha" loading="lazy" data-src="assets/mygirlchacha.webp?v=202607142032"><figcaption>My Girl Cha Cha</figcaption></figure>
+<figure class="tile"><img alt="Don't Touch Me" loading="lazy" data-src="assets/donttouchme.webp?v=202607150816"><figcaption>Don't Touch Me</figcaption></figure>
+<figure class="tile"><img alt="Fuego en la Calle" loading="lazy" data-src="assets/fuegoenlacalle.webp?v=202607161600"><figcaption>Fuego en la Calle</figcaption></figure>
+<figure class="tile"><img alt="Streets of Havana" loading="lazy" data-src="assets/streetsofhavana.webp?v=202607170820"><figcaption>Streets of Havana</figcaption></figure>
+<figure class="tile"><img alt="La Noche Tiene Mango" loading="lazy" data-src="assets/lanochetienemango.webp?v=202607171714"><figcaption>La Noche Tiene Mango</figcaption></figure>
+<figure class="tile"><img alt="Heat of the Soul" loading="lazy" data-src="assets/heatofthesoul.webp?v=202607191049"><figcaption>Heat of the Soul</figcaption></figure>
+<figure class="tile"><img alt="Rumba of the Moon" loading="lazy" data-src="assets/rumbaofthemoon.webp?v=202607191049"><figcaption>Rumba of the Moon</figcaption></figure>
 </div>
 </div>
 </div>
@@ -309,41 +332,41 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="SHELBY BLOOD" loading="lazy" src="assets/shelby-blood-romani-kher.webp"><figcaption>SHELBY BLOOD</figcaption></figure>
-<figure class="tile"><img alt="ARANJUEZ REVISITED" loading="lazy" src="assets/aranjuez-revisited.webp"><figcaption>ARANJUEZ REVISITED</figcaption></figure>
-<figure class="tile"><img alt="BIRDY NAM NAM" loading="lazy" src="assets/birdy.webp"><figcaption>BIRDY NAM NAM</figcaption></figure>
-<figure class="tile"><img alt="The 7th Sense of the Samba" loading="lazy" src="assets/samba.webp"><figcaption>The 7th Sense of the Samba</figcaption></figure>
-<figure class="tile"><img alt="Thunder de Fuego" loading="lazy" src="assets/thunder.webp"><figcaption>Thunder de Fuego</figcaption></figure>
-<figure class="tile"><img alt="Odessa, passion and tears" loading="lazy" src="assets/odesa.webp"><figcaption>Odessa, passion and tears</figcaption></figure>
-<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/gardian.webp"><figcaption>The Guardian of the Code</figcaption></figure>
-<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
-<figure class="tile"><img alt="Ecou din Diaspora - Echo from the Diaspora" loading="lazy" src="assets/diaspora.webp"><figcaption>Ecou din Diaspora - Echo from the Diaspora</figcaption></figure>
-<figure class="tile"><img alt="Romanță AI" loading="lazy" src="assets/romanta.webp"><figcaption>Romanță AI</figcaption></figure>
-<figure class="tile"><img alt="EMIGRANTUL" loading="lazy" src="assets/emigrantul.webp?v=1"><figcaption>EMIGRANTUL</figcaption></figure>
-<figure class="tile"><img alt="From the Danube to the Sea" loading="lazy" src="assets/danube.webp"><figcaption>From the Danube to the Sea</figcaption></figure>
-<figure class="tile"><img alt="The Sound of Tumbalalaika" loading="lazy" src="assets/balalaika.webp"><figcaption>The Sound of Tumbalalaika</figcaption></figure>
-<figure class="tile"><img alt="Life Offbeat" loading="lazy" src="assets/lifeoffbeat.webp"><figcaption>Life Offbeat</figcaption></figure>
-<figure class="tile"><img alt="Two of Us" loading="lazy" src="assets/twoforus.webp"><figcaption>Two of Us</figcaption></figure>
-<figure class="tile"><img alt="Every Tear Has a Rhythm" loading="lazy" src="assets/everytearhasarhythm.webp"><figcaption>Every Tear Has a Rhythm</figcaption></figure>
-<figure class="tile"><img alt="Maramu’ Răsună-n Lume" loading="lazy" src="assets/maramurasunanlume.webp"><figcaption>Maramu’ Răsună-n Lume</figcaption></figure>
-<figure class="tile"><img alt="The Last Man Laughing" loading="lazy" src="assets/thelastmanlaughing.webp"><figcaption>The Last Man Laughing</figcaption></figure>
-<figure class="tile"><img alt="Just like you" loading="lazy" src="assets/justlikeyou.webp"><figcaption>Just like you</figcaption></figure>
-<figure class="tile"><img alt="The Wizard of the Washboard Hollow" loading="lazy" src="assets/thewizardofthewashboardhollow.webp"><figcaption>The Wizard of the Washboard Hollow</figcaption></figure>
-<figure class="tile"><img alt="Freedom Jazz Dance" loading="lazy" src="assets/freedomjazzdance.webp?v=202606020450"><figcaption>Freedom Jazz Dance</figcaption></figure>
-<figure class="tile"><img alt="Tika Taka Raga" loading="lazy" src="assets/tikatakaraga.webp?v=202606041727"><figcaption>Tika Taka Raga</figcaption></figure>
-<figure class="tile"><img alt="The World Has Gone Completely Crazy" loading="lazy" src="assets/theworldhasgonecompletelycrazy.webp?v=202606051531"><figcaption>The World Has Gone Completely Crazy</figcaption></figure>
-<figure class="tile"><img alt="Living Berlin" loading="lazy" src="assets/livingberlin.webp?v=202606070332"><figcaption>Living Berlin</figcaption></figure>
-<figure class="tile"><img alt="After Living Berlin" loading="lazy" src="assets/afterlivingberlin.webp?v=202606080724"><figcaption>After Living Berlin</figcaption></figure>
-<figure class="tile"><img alt="Nu-i lumina nicari" loading="lazy" src="assets/nuiluminanicari.webp?v=202606150851"><figcaption>Nu-i lumina nicari</figcaption></figure>
-<figure class="tile"><img alt="The Thistle and the Shield" loading="lazy" src="assets/thethistleandtheshield.webp?v=202606161448"><figcaption>The Thistle and the Shield</figcaption></figure>
-<figure class="tile"><img alt="Cry Like Thunder" loading="lazy" src="assets/crylikethunder.webp?v=202606211132"><figcaption>Cry Like Thunder</figcaption></figure>
-<figure class="tile"><img alt="Bla-Bla-Bla" loading="lazy" src="assets/blablabla.webp?v=202606211657"><figcaption>Bla-Bla-Bla</figcaption></figure>
-<figure class="tile"><img alt="Angels and Demons" loading="lazy" src="assets/angelsanddemons.webp?v=202606211657"><figcaption>Angels and Demons</figcaption></figure>
-<figure class="tile"><img alt="Siyavuka" loading="lazy" src="assets/siyavuka.webp?v=202606221746"><figcaption>Siyavuka</figcaption></figure>
-<figure class="tile"><img alt="When the Bagpipe Cries" loading="lazy" src="assets/whenthebagpipecries.webp"><figcaption>When the Bagpipe Cries</figcaption></figure>
-<figure class="tile"><img alt="Swinging Circuits" loading="lazy" src="assets/swingingcircuits.webp"><figcaption>Swinging Circuits</figcaption></figure>
-<figure class="tile"><img alt="The Last Page" loading="lazy" src="assets/thelastpage.webp"><figcaption>The Last Page</figcaption></figure>
-<figure class="tile"><img alt="Transilvania" loading="lazy" src="assets/transilvania.webp?v=202607200935"><figcaption>Transilvania</figcaption></figure>
+<figure class="tile"><img alt="SHELBY BLOOD" loading="lazy" data-src="assets/shelby-blood-romani-kher.webp"><figcaption>SHELBY BLOOD</figcaption></figure>
+<figure class="tile"><img alt="ARANJUEZ REVISITED" loading="lazy" data-src="assets/aranjuez-revisited.webp"><figcaption>ARANJUEZ REVISITED</figcaption></figure>
+<figure class="tile"><img alt="BIRDY NAM NAM" loading="lazy" data-src="assets/birdy.webp"><figcaption>BIRDY NAM NAM</figcaption></figure>
+<figure class="tile"><img alt="The 7th Sense of the Samba" loading="lazy" data-src="assets/samba.webp"><figcaption>The 7th Sense of the Samba</figcaption></figure>
+<figure class="tile"><img alt="Thunder de Fuego" loading="lazy" data-src="assets/thunder.webp"><figcaption>Thunder de Fuego</figcaption></figure>
+<figure class="tile"><img alt="Odessa, passion and tears" loading="lazy" data-src="assets/odesa.webp"><figcaption>Odessa, passion and tears</figcaption></figure>
+<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" data-src="assets/gardian.webp"><figcaption>The Guardian of the Code</figcaption></figure>
+<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" data-src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
+<figure class="tile"><img alt="Ecou din Diaspora - Echo from the Diaspora" loading="lazy" data-src="assets/diaspora.webp"><figcaption>Ecou din Diaspora - Echo from the Diaspora</figcaption></figure>
+<figure class="tile"><img alt="Romanță AI" loading="lazy" data-src="assets/romanta.webp"><figcaption>Romanță AI</figcaption></figure>
+<figure class="tile"><img alt="EMIGRANTUL" loading="lazy" data-src="assets/emigrantul.webp?v=1"><figcaption>EMIGRANTUL</figcaption></figure>
+<figure class="tile"><img alt="From the Danube to the Sea" loading="lazy" data-src="assets/danube.webp"><figcaption>From the Danube to the Sea</figcaption></figure>
+<figure class="tile"><img alt="The Sound of Tumbalalaika" loading="lazy" data-src="assets/balalaika.webp"><figcaption>The Sound of Tumbalalaika</figcaption></figure>
+<figure class="tile"><img alt="Life Offbeat" loading="lazy" data-src="assets/lifeoffbeat.webp"><figcaption>Life Offbeat</figcaption></figure>
+<figure class="tile"><img alt="Two of Us" loading="lazy" data-src="assets/twoforus.webp"><figcaption>Two of Us</figcaption></figure>
+<figure class="tile"><img alt="Every Tear Has a Rhythm" loading="lazy" data-src="assets/everytearhasarhythm.webp"><figcaption>Every Tear Has a Rhythm</figcaption></figure>
+<figure class="tile"><img alt="Maramu’ Răsună-n Lume" loading="lazy" data-src="assets/maramurasunanlume.webp"><figcaption>Maramu’ Răsună-n Lume</figcaption></figure>
+<figure class="tile"><img alt="The Last Man Laughing" loading="lazy" data-src="assets/thelastmanlaughing.webp"><figcaption>The Last Man Laughing</figcaption></figure>
+<figure class="tile"><img alt="Just like you" loading="lazy" data-src="assets/justlikeyou.webp"><figcaption>Just like you</figcaption></figure>
+<figure class="tile"><img alt="The Wizard of the Washboard Hollow" loading="lazy" data-src="assets/thewizardofthewashboardhollow.webp"><figcaption>The Wizard of the Washboard Hollow</figcaption></figure>
+<figure class="tile"><img alt="Freedom Jazz Dance" loading="lazy" data-src="assets/freedomjazzdance.webp?v=202606020450"><figcaption>Freedom Jazz Dance</figcaption></figure>
+<figure class="tile"><img alt="Tika Taka Raga" loading="lazy" data-src="assets/tikatakaraga.webp?v=202606041727"><figcaption>Tika Taka Raga</figcaption></figure>
+<figure class="tile"><img alt="The World Has Gone Completely Crazy" loading="lazy" data-src="assets/theworldhasgonecompletelycrazy.webp?v=202606051531"><figcaption>The World Has Gone Completely Crazy</figcaption></figure>
+<figure class="tile"><img alt="Living Berlin" loading="lazy" data-src="assets/livingberlin.webp?v=202606070332"><figcaption>Living Berlin</figcaption></figure>
+<figure class="tile"><img alt="After Living Berlin" loading="lazy" data-src="assets/afterlivingberlin.webp?v=202606080724"><figcaption>After Living Berlin</figcaption></figure>
+<figure class="tile"><img alt="Nu-i lumina nicari" loading="lazy" data-src="assets/nuiluminanicari.webp?v=202606150851"><figcaption>Nu-i lumina nicari</figcaption></figure>
+<figure class="tile"><img alt="The Thistle and the Shield" loading="lazy" data-src="assets/thethistleandtheshield.webp?v=202606161448"><figcaption>The Thistle and the Shield</figcaption></figure>
+<figure class="tile"><img alt="Cry Like Thunder" loading="lazy" data-src="assets/crylikethunder.webp?v=202606211132"><figcaption>Cry Like Thunder</figcaption></figure>
+<figure class="tile"><img alt="Bla-Bla-Bla" loading="lazy" data-src="assets/blablabla.webp?v=202606211657"><figcaption>Bla-Bla-Bla</figcaption></figure>
+<figure class="tile"><img alt="Angels and Demons" loading="lazy" data-src="assets/angelsanddemons.webp?v=202606211657"><figcaption>Angels and Demons</figcaption></figure>
+<figure class="tile"><img alt="Siyavuka" loading="lazy" data-src="assets/siyavuka.webp?v=202606221746"><figcaption>Siyavuka</figcaption></figure>
+<figure class="tile"><img alt="When the Bagpipe Cries" loading="lazy" data-src="assets/whenthebagpipecries.webp"><figcaption>When the Bagpipe Cries</figcaption></figure>
+<figure class="tile"><img alt="Swinging Circuits" loading="lazy" data-src="assets/swingingcircuits.webp"><figcaption>Swinging Circuits</figcaption></figure>
+<figure class="tile"><img alt="The Last Page" loading="lazy" data-src="assets/thelastpage.webp"><figcaption>The Last Page</figcaption></figure>
+<figure class="tile"><img alt="Transilvania" loading="lazy" data-src="assets/transilvania.webp?v=202607200935"><figcaption>Transilvania</figcaption></figure>
 </div>
 </div>
 </div>
@@ -360,14 +383,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn tiktok" href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="The Light Under the Door" loading="lazy" src="assets/thelightunderthedoor.webp"><figcaption>The Light Under the Door</figcaption></figure>
-<figure class="tile"><img alt="Don’t Think Twice, Think More" loading="lazy" src="assets/dontthinktwicethinkmore.webp"><figcaption>Don’t Think Twice, Think More</figcaption></figure>
-<figure class="tile"><img alt="Reality or Illusion" loading="lazy" src="assets/realityorillusion.webp"><figcaption>Reality or Illusion</figcaption></figure>
-<figure class="tile"><img alt="Me in the Mirror" loading="lazy" src="assets/meinthemirror.webp"><figcaption>Me in the Mirror</figcaption></figure>
-<figure class="tile"><img alt="Mina Nawe" loading="lazy" src="assets/minanawe.webp"><figcaption>Mina Nawe</figcaption></figure>
-<figure class="tile"><img alt="Indaba Yesihlahla Esidala" loading="lazy" src="assets/indabayesihlahlaesidala.webp?v=202606020445"><figcaption>Indaba Yesihlahla Esidala</figcaption></figure>
-<figure class="tile"><img alt="The Night Shift" loading="lazy" src="assets/thenightshift.webp?v=202606040751"><figcaption>The Night Shift</figcaption></figure>
-<figure class="tile"><img alt="My Soul in the Looking Glass" loading="lazy" src="assets/mysoulinthelookingglass.webp?v=202606040818"><figcaption>My Soul in the Looking Glass</figcaption></figure>
+<figure class="tile"><img alt="The Light Under the Door" loading="lazy" data-src="assets/thelightunderthedoor.webp"><figcaption>The Light Under the Door</figcaption></figure>
+<figure class="tile"><img alt="Don’t Think Twice, Think More" loading="lazy" data-src="assets/dontthinktwicethinkmore.webp"><figcaption>Don’t Think Twice, Think More</figcaption></figure>
+<figure class="tile"><img alt="Reality or Illusion" loading="lazy" data-src="assets/realityorillusion.webp"><figcaption>Reality or Illusion</figcaption></figure>
+<figure class="tile"><img alt="Me in the Mirror" loading="lazy" data-src="assets/meinthemirror.webp"><figcaption>Me in the Mirror</figcaption></figure>
+<figure class="tile"><img alt="Mina Nawe" loading="lazy" data-src="assets/minanawe.webp"><figcaption>Mina Nawe</figcaption></figure>
+<figure class="tile"><img alt="Indaba Yesihlahla Esidala" loading="lazy" data-src="assets/indabayesihlahlaesidala.webp?v=202606020445"><figcaption>Indaba Yesihlahla Esidala</figcaption></figure>
+<figure class="tile"><img alt="The Night Shift" loading="lazy" data-src="assets/thenightshift.webp?v=202606040751"><figcaption>The Night Shift</figcaption></figure>
+<figure class="tile"><img alt="My Soul in the Looking Glass" loading="lazy" data-src="assets/mysoulinthelookingglass.webp?v=202606040818"><figcaption>My Soul in the Looking Glass</figcaption></figure>
 </div>
 </div>
 </div>
@@ -383,9 +406,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn tiktok" href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Dum ba-koon" loading="lazy" src="assets/dumbakoon.webp"><figcaption>Dum ba-koon</figcaption></figure>
-<figure class="tile"><img alt="Hoo Hu Kaba Lea" loading="lazy" src="assets/hoohukabalea.webp"><figcaption>Hoo Hu Kaba Lea</figcaption></figure>
-<figure class="tile"><img alt="Tutu Tutula Tu" loading="lazy" src="assets/tutututulatu.webp"><figcaption>Tutu Tutula Tu</figcaption></figure>
+<figure class="tile"><img alt="Dum ba-koon" loading="lazy" data-src="assets/dumbakoon.webp"><figcaption>Dum ba-koon</figcaption></figure>
+<figure class="tile"><img alt="Hoo Hu Kaba Lea" loading="lazy" data-src="assets/hoohukabalea.webp"><figcaption>Hoo Hu Kaba Lea</figcaption></figure>
+<figure class="tile"><img alt="Tutu Tutula Tu" loading="lazy" data-src="assets/tutututulatu.webp"><figcaption>Tutu Tutula Tu</figcaption></figure>
 </div>
 </div>
 </div>
@@ -401,9 +424,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn tiktok" href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">🎵 TikTok</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Conversation with an Old Whale" loading="lazy" src="assets/conversationwithanoldwhale.webp"><figcaption>Conversation with an Old Whale</figcaption></figure>
-<figure class="tile"><img alt="Red Dust Conversation" loading="lazy" src="assets/reddustconversation.webp"><figcaption>Red Dust Conversation</figcaption></figure>
-<figure class="tile"><img alt="Where the Dust Meets the Ocean" loading="lazy" src="assets/wherethedustmeetstheocean.webp"><figcaption>Where the Dust Meets the Ocean</figcaption></figure>
+<figure class="tile"><img alt="Conversation with an Old Whale" loading="lazy" data-src="assets/conversationwithanoldwhale.webp"><figcaption>Conversation with an Old Whale</figcaption></figure>
+<figure class="tile"><img alt="Red Dust Conversation" loading="lazy" data-src="assets/reddustconversation.webp"><figcaption>Red Dust Conversation</figcaption></figure>
+<figure class="tile"><img alt="Where the Dust Meets the Ocean" loading="lazy" data-src="assets/wherethedustmeetstheocean.webp"><figcaption>Where the Dust Meets the Ocean</figcaption></figure>
 </div>
 </div>
 </div>
@@ -418,16 +441,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Letter to a General" loading="lazy" src="assets/lettertoageneral.webp"><figcaption>Letter to a General</figcaption></figure>
-<figure class="tile"><img alt="Break the Line" loading="lazy" src="assets/break-the-line.webp"><figcaption>Break the Line</figcaption></figure>
-<figure class="tile"><img alt="POSITIVE DYSTOPIA" loading="lazy" src="assets/positive-dystopia.webp"><figcaption>POSITIVE DYSTOPIA</figcaption></figure>
-<figure class="tile"><img alt="The Yankee's Donkey" loading="lazy" src="assets/theyankeesdonkey.webp"><figcaption>The Yankee's Donkey</figcaption></figure>
-<figure class="tile"><img alt="Don't Move the Stone" loading="lazy" src="assets/dontmovestone.webp"><figcaption>Don't Move the Stone</figcaption></figure>
-<figure class="tile"><img alt="The Ocean Keeps My Name" loading="lazy" src="assets/theoceankeepsmyname.webp"><figcaption>The Ocean Keeps My Name</figcaption></figure>
-<figure class="tile"><img alt="No One Hears Them Cry" loading="lazy" src="assets/noonehearsthemcry.webp"><figcaption>No One Hears Them Cry</figcaption></figure>
-<figure class="tile"><img alt="Mandarin Light" loading="lazy" src="assets/mandarinlight.webp"><figcaption>Mandarin Light</figcaption></figure>
-<figure class="tile"><img alt="Mothers and Fathers" loading="lazy" src="assets/mothersandfathers.webp?v=202606081202"><figcaption>Mothers and Fathers</figcaption></figure>
-<figure class="tile"><img alt="The Bee's Story" loading="lazy" src="assets/thebeesstory.webp?v=202606091027"><figcaption>The Bee's Story</figcaption></figure>
+<figure class="tile"><img alt="Letter to a General" loading="lazy" data-src="assets/lettertoageneral.webp"><figcaption>Letter to a General</figcaption></figure>
+<figure class="tile"><img alt="Break the Line" loading="lazy" data-src="assets/break-the-line.webp"><figcaption>Break the Line</figcaption></figure>
+<figure class="tile"><img alt="POSITIVE DYSTOPIA" loading="lazy" data-src="assets/positive-dystopia.webp"><figcaption>POSITIVE DYSTOPIA</figcaption></figure>
+<figure class="tile"><img alt="The Yankee's Donkey" loading="lazy" data-src="assets/theyankeesdonkey.webp"><figcaption>The Yankee's Donkey</figcaption></figure>
+<figure class="tile"><img alt="Don't Move the Stone" loading="lazy" data-src="assets/dontmovestone.webp"><figcaption>Don't Move the Stone</figcaption></figure>
+<figure class="tile"><img alt="The Ocean Keeps My Name" loading="lazy" data-src="assets/theoceankeepsmyname.webp"><figcaption>The Ocean Keeps My Name</figcaption></figure>
+<figure class="tile"><img alt="No One Hears Them Cry" loading="lazy" data-src="assets/noonehearsthemcry.webp"><figcaption>No One Hears Them Cry</figcaption></figure>
+<figure class="tile"><img alt="Mandarin Light" loading="lazy" data-src="assets/mandarinlight.webp"><figcaption>Mandarin Light</figcaption></figure>
+<figure class="tile"><img alt="Mothers and Fathers" loading="lazy" data-src="assets/mothersandfathers.webp?v=202606081202"><figcaption>Mothers and Fathers</figcaption></figure>
+<figure class="tile"><img alt="The Bee's Story" loading="lazy" data-src="assets/thebeesstory.webp?v=202606091027"><figcaption>The Bee's Story</figcaption></figure>
 </div>
 </div>
 </div>
@@ -442,14 +465,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/OOfMbmjXqgM?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Accessing Synthetic Nirvana" loading="lazy" src="assets/accessing-synthetic-nirvana.webp"><figcaption>Accessing Synthetic Nirvana</figcaption></figure>
-<figure class="tile"><img alt="Conquistadors" loading="lazy" src="assets/conquistadors.webp"><figcaption>Conquistadors</figcaption></figure>
-<figure class="tile"><img alt="Waltz of the Catacombs" loading="lazy" src="assets/waltzofthecatacombs.webp"><figcaption>Waltz of the Catacombs</figcaption></figure>
-<figure class="tile"><img alt="The Rebels Are Free" loading="lazy" src="assets/rebelsarefree.webp"><figcaption>The Rebels Are Free</figcaption></figure>
-<figure class="tile"><img alt="Break the Line" loading="lazy" src="assets/break-the-line.webp"><figcaption>Break the Line</figcaption></figure>
-<figure class="tile"><img alt="POSITIVE DYSTOPIA" loading="lazy" src="assets/positive-dystopia.webp"><figcaption>POSITIVE DYSTOPIA</figcaption></figure>
-<figure class="tile"><img alt="The Door Inside" loading="lazy" src="assets/the-door-inside.webp"><figcaption>The Door Inside</figcaption></figure>
-<figure class="tile"><img alt="Cantus ad Portam Albam" loading="lazy" src="assets/cantusadportamalbam.webp"><figcaption>Cantus ad Portam Albam</figcaption></figure>
+<figure class="tile"><img alt="Accessing Synthetic Nirvana" loading="lazy" data-src="assets/accessing-synthetic-nirvana.webp"><figcaption>Accessing Synthetic Nirvana</figcaption></figure>
+<figure class="tile"><img alt="Conquistadors" loading="lazy" data-src="assets/conquistadors.webp"><figcaption>Conquistadors</figcaption></figure>
+<figure class="tile"><img alt="Waltz of the Catacombs" loading="lazy" data-src="assets/waltzofthecatacombs.webp"><figcaption>Waltz of the Catacombs</figcaption></figure>
+<figure class="tile"><img alt="The Rebels Are Free" loading="lazy" data-src="assets/rebelsarefree.webp"><figcaption>The Rebels Are Free</figcaption></figure>
+<figure class="tile"><img alt="Break the Line" loading="lazy" data-src="assets/break-the-line.webp"><figcaption>Break the Line</figcaption></figure>
+<figure class="tile"><img alt="POSITIVE DYSTOPIA" loading="lazy" data-src="assets/positive-dystopia.webp"><figcaption>POSITIVE DYSTOPIA</figcaption></figure>
+<figure class="tile"><img alt="The Door Inside" loading="lazy" data-src="assets/the-door-inside.webp"><figcaption>The Door Inside</figcaption></figure>
+<figure class="tile"><img alt="Cantus ad Portam Albam" loading="lazy" data-src="assets/cantusadportamalbam.webp"><figcaption>Cantus ad Portam Albam</figcaption></figure>
 </div>
 </div>
 </div>
@@ -464,11 +487,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Silent Wavelength" loading="lazy" src="assets/silentwavelength.webp"><figcaption>Silent Wavelength</figcaption></figure>
-<figure class="tile"><img alt="Scent of Memory" loading="lazy" src="assets/scent.webp"><figcaption>Scent of Memory</figcaption></figure>
-<figure class="tile"><img alt="Blind Frequency" loading="lazy" src="assets/blindfrequency.webp"><figcaption>Blind Frequency</figcaption></figure>
-<figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
-<figure class="tile"><img alt="MOMENTO GUSTO" loading="lazy" src="assets/momento.webp"><figcaption>MOMENTO GUSTO</figcaption></figure>
+<figure class="tile"><img alt="Silent Wavelength" loading="lazy" data-src="assets/silentwavelength.webp"><figcaption>Silent Wavelength</figcaption></figure>
+<figure class="tile"><img alt="Scent of Memory" loading="lazy" data-src="assets/scent.webp"><figcaption>Scent of Memory</figcaption></figure>
+<figure class="tile"><img alt="Blind Frequency" loading="lazy" data-src="assets/blindfrequency.webp"><figcaption>Blind Frequency</figcaption></figure>
+<figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" data-src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
+<figure class="tile"><img alt="MOMENTO GUSTO" loading="lazy" data-src="assets/momento.webp"><figcaption>MOMENTO GUSTO</figcaption></figure>
 </div>
 </div>
 </div>
@@ -483,14 +506,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" src="assets/gardian.webp"><figcaption>The Guardian of the Code</figcaption></figure>
-<figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
-<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
-<figure class="tile"><img alt="Too late for crying" loading="lazy" src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
-<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-<figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
-<figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
-<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
+<figure class="tile"><img alt="The Guardian of the Code" loading="lazy" data-src="assets/gardian.webp"><figcaption>The Guardian of the Code</figcaption></figure>
+<figure class="tile"><img alt="IL TOCCO CHE RESTA" loading="lazy" data-src="assets/tocco.webp"><figcaption>IL TOCCO CHE RESTA</figcaption></figure>
+<figure class="tile"><img alt="Crying in the Irish Autumn" loading="lazy" data-src="assets/irishautumn.webp"><figcaption>Crying in the Irish Autumn</figcaption></figure>
+<figure class="tile"><img alt="Too late for crying" loading="lazy" data-src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" data-src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" data-src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
+<figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" data-src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
+<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" data-src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
 </div>
 </div>
 </div>
@@ -505,11 +528,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Barrio Tango" loading="lazy" src="assets/bario.webp"><figcaption>Barrio Tango</figcaption></figure>
-<figure class="tile"><img alt="Please, love me too" loading="lazy" src="assets/lovemetoo.webp"><figcaption>Please, love me too</figcaption></figure>
-<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-<figure class="tile"><img alt="One Last Christmas" loading="lazy" src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
-<figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
+<figure class="tile"><img alt="Barrio Tango" loading="lazy" data-src="assets/bario.webp"><figcaption>Barrio Tango</figcaption></figure>
+<figure class="tile"><img alt="Please, love me too" loading="lazy" data-src="assets/lovemetoo.webp"><figcaption>Please, love me too</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" data-src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="One Last Christmas" loading="lazy" data-src="assets/onelast.webp"><figcaption>One Last Christmas</figcaption></figure>
+<figure class="tile"><img alt="The Bread She Never Ate" loading="lazy" data-src="assets/bread.webp"><figcaption>The Bread She Never Ate</figcaption></figure>
 </div>
 </div>
 </div>
@@ -524,11 +547,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="The World in Chaos" loading="lazy" src="assets/chaos.webp"><figcaption>The World in Chaos</figcaption></figure>
-<figure class="tile"><img alt="The brave Siberian soul" loading="lazy" src="assets/sib.webp"><figcaption>The brave Siberian soul</figcaption></figure>
-<figure class="tile"><img alt="Caravan of Disillusionment" loading="lazy" src="assets/caravan.webp"><figcaption>Caravan of Disillusionment</figcaption></figure>
-<figure class="tile"><img alt="My Geisha" loading="lazy" src="assets/geisha.webp"><figcaption>My Geisha</figcaption></figure>
-<figure class="tile"><img alt="Perception's Paradox" loading="lazy" src="assets/paradox.webp"><figcaption>Perception's Paradox</figcaption></figure>
+<figure class="tile"><img alt="The World in Chaos" loading="lazy" data-src="assets/chaos.webp"><figcaption>The World in Chaos</figcaption></figure>
+<figure class="tile"><img alt="The brave Siberian soul" loading="lazy" data-src="assets/sib.webp"><figcaption>The brave Siberian soul</figcaption></figure>
+<figure class="tile"><img alt="Caravan of Disillusionment" loading="lazy" data-src="assets/caravan.webp"><figcaption>Caravan of Disillusionment</figcaption></figure>
+<figure class="tile"><img alt="My Geisha" loading="lazy" data-src="assets/geisha.webp"><figcaption>My Geisha</figcaption></figure>
+<figure class="tile"><img alt="Perception's Paradox" loading="lazy" data-src="assets/paradox.webp"><figcaption>Perception's Paradox</figcaption></figure>
 </div>
 </div>
 </div>
@@ -543,9 +566,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Sibiu" loading="lazy" src="assets/sibiu.webp"><figcaption>Sibiu</figcaption></figure>
-<figure class="tile"><img alt="Sankt Petersburg" loading="lazy" src="assets/sankt.webp"><figcaption>Sankt Petersburg</figcaption></figure>
-<figure class="tile"><img alt="Paris" loading="lazy" src="assets/paris.webp"><figcaption>Paris</figcaption></figure>
+<figure class="tile"><img alt="Sibiu" loading="lazy" data-src="assets/sibiu.webp"><figcaption>Sibiu</figcaption></figure>
+<figure class="tile"><img alt="Sankt Petersburg" loading="lazy" data-src="assets/sankt.webp"><figcaption>Sankt Petersburg</figcaption></figure>
+<figure class="tile"><img alt="Paris" loading="lazy" data-src="assets/paris.webp"><figcaption>Paris</figcaption></figure>
 </div>
 </div>
 </div>
@@ -560,11 +583,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Xorax on the wings of a swan" loading="lazy" src="assets/swan.webp"><figcaption>Xorax on the wings of a swan</figcaption></figure>
-<figure class="tile"><img alt="NINA" loading="lazy" src="assets/nina.webp"><figcaption>NINA</figcaption></figure>
-<figure class="tile"><img alt="Incursion into the impossible" loading="lazy" src="assets/incurs.webp"><figcaption>Incursion into the impossible</figcaption></figure>
-<figure class="tile"><img alt="El Guardián de la Luna" loading="lazy" src="assets/luan.webp"><figcaption>El Guardián de la Luna</figcaption></figure>
-<figure class="tile"><img alt="Ashes of Heroes" loading="lazy" src="assets/ashes.webp"><figcaption>Ashes of Heroes</figcaption></figure>
+<figure class="tile"><img alt="Xorax on the wings of a swan" loading="lazy" data-src="assets/swan.webp"><figcaption>Xorax on the wings of a swan</figcaption></figure>
+<figure class="tile"><img alt="NINA" loading="lazy" data-src="assets/nina.webp"><figcaption>NINA</figcaption></figure>
+<figure class="tile"><img alt="Incursion into the impossible" loading="lazy" data-src="assets/incurs.webp"><figcaption>Incursion into the impossible</figcaption></figure>
+<figure class="tile"><img alt="El Guardián de la Luna" loading="lazy" data-src="assets/luan.webp"><figcaption>El Guardián de la Luna</figcaption></figure>
+<figure class="tile"><img alt="Ashes of Heroes" loading="lazy" data-src="assets/ashes.webp"><figcaption>Ashes of Heroes</figcaption></figure>
 </div>
 </div>
 </div>
@@ -579,13 +602,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Number One" loading="lazy" src="assets/biop.webp"><figcaption>Number One</figcaption></figure>
-<figure class="tile"><img alt="Look what you've done to me" loading="lazy" src="assets/look.webp"><figcaption>Look what you've done to me</figcaption></figure>
-<figure class="tile"><img alt="Got my hands on my phone" loading="lazy" src="assets/got.webp"><figcaption>Got my hands on my phone</figcaption></figure>
-<figure class="tile"><img alt="Daddy's on my side" loading="lazy" src="assets/dady.webp"><figcaption>Daddy's on my side</figcaption></figure>
-<figure class="tile"><img alt="Don't be a Blackrock" loading="lazy" src="assets/blackrock.webp"><figcaption>Don't be a Blackrock</figcaption></figure>
-<figure class="tile"><img alt="FIVE BEATS FORWARD" loading="lazy" src="assets/five.webp"><figcaption>FIVE BEATS FORWARD</figcaption></figure>
-<figure class="tile"><img alt="Echoes of the Giants-Tribute to the Titans" loading="lazy" src="assets/echo.webp"><figcaption>Echoes of the Giants-Tribute to the Titans</figcaption></figure>
+<figure class="tile"><img alt="Number One" loading="lazy" data-src="assets/biop.webp"><figcaption>Number One</figcaption></figure>
+<figure class="tile"><img alt="Look what you've done to me" loading="lazy" data-src="assets/look.webp"><figcaption>Look what you've done to me</figcaption></figure>
+<figure class="tile"><img alt="Got my hands on my phone" loading="lazy" data-src="assets/got.webp"><figcaption>Got my hands on my phone</figcaption></figure>
+<figure class="tile"><img alt="Daddy's on my side" loading="lazy" data-src="assets/dady.webp"><figcaption>Daddy's on my side</figcaption></figure>
+<figure class="tile"><img alt="Don't be a Blackrock" loading="lazy" data-src="assets/blackrock.webp"><figcaption>Don't be a Blackrock</figcaption></figure>
+<figure class="tile"><img alt="FIVE BEATS FORWARD" loading="lazy" data-src="assets/five.webp"><figcaption>FIVE BEATS FORWARD</figcaption></figure>
+<figure class="tile"><img alt="Echoes of the Giants-Tribute to the Titans" loading="lazy" data-src="assets/echo.webp"><figcaption>Echoes of the Giants-Tribute to the Titans</figcaption></figure>
 </div>
 </div>
 </div>
@@ -600,13 +623,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Clap Your Hands" loading="lazy" src="assets/clap.webp"><figcaption>Clap Your Hands</figcaption></figure>
-<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
-<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
-<figure class="tile"><img alt="Ridică-te grindă-n sus" loading="lazy" src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
-<figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
-<figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
-<figure class="tile"><img alt="Buenos Aires-Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Buenos Aires-Taste of Colour</figcaption></figure>
+<figure class="tile"><img alt="Clap Your Hands" loading="lazy" data-src="assets/clap.webp"><figcaption>Clap Your Hands</figcaption></figure>
+<figure class="tile"><img alt="HAI LA JOC DE ANUL NOU" loading="lazy" data-src="assets/hai.webp"><figcaption>HAI LA JOC DE ANUL NOU</figcaption></figure>
+<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" data-src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
+<figure class="tile"><img alt="Ridică-te grindă-n sus" loading="lazy" data-src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
+<figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" data-src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
+<figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" data-src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
+<figure class="tile"><img alt="Buenos Aires-Taste of Colour" loading="lazy" data-src="assets/Taste-of-Colour.jpg"><figcaption>Buenos Aires-Taste of Colour</figcaption></figure>
 </div>
 </div>
 </div>
@@ -621,9 +644,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="The Companion" loading="lazy" src="assets/companion.webp"><figcaption>The Companion</figcaption></figure>
-<figure class="tile"><img alt="Please, like Me" loading="lazy" src="assets/likeme.webp"><figcaption>Please, like Me</figcaption></figure>
-<figure class="tile"><img alt="Jazz Scratches" loading="lazy" src="assets/jazzscra3.webp"><figcaption>Jazz Scratches</figcaption></figure>
+<figure class="tile"><img alt="The Companion" loading="lazy" data-src="assets/companion.webp"><figcaption>The Companion</figcaption></figure>
+<figure class="tile"><img alt="Please, like Me" loading="lazy" data-src="assets/likeme.webp"><figcaption>Please, like Me</figcaption></figure>
+<figure class="tile"><img alt="Jazz Scratches" loading="lazy" data-src="assets/jazzscra3.webp"><figcaption>Jazz Scratches</figcaption></figure>
 </div>
 </div>
 </div>
@@ -638,9 +661,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="YUGOs BRAVEHEARTS" loading="lazy" src="assets/yugo.webp"><figcaption>YUGOs BRAVEHEARTS</figcaption></figure>
-<figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
-<figure class="tile"><img alt="Too late for crying" loading="lazy" src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
+<figure class="tile"><img alt="YUGOs BRAVEHEARTS" loading="lazy" data-src="assets/yugo.webp"><figcaption>YUGOs BRAVEHEARTS</figcaption></figure>
+<figure class="tile"><img alt="Țuică cu Tsatsiki" loading="lazy" data-src="assets/tuica.webp"><figcaption>Țuică cu Tsatsiki</figcaption></figure>
+<figure class="tile"><img alt="Too late for crying" loading="lazy" data-src="assets/tolate.webp"><figcaption>Too late for crying</figcaption></figure>
 </div>
 </div>
 </div>
@@ -655,13 +678,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
-<figure class="tile"><img alt="Focul de sub Podul Minciunilor" loading="lazy" src="assets/focul.webp"><figcaption>Focul de sub Podul Minciunilor</figcaption></figure>
-<figure class="tile"><img alt="Symphonia Residualis" loading="lazy" src="assets/symphonia.webp"><figcaption>Symphonia Residualis</figcaption></figure>
-<figure class="tile"><img alt="Ridică-te grindă-n sus" loading="lazy" src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
-<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
-<figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
-<figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
+<figure class="tile"><img alt="Hermannstadt tanzt mit Bruckenthal" loading="lazy" data-src="assets/bruckenthal.webp"><figcaption>Hermannstadt tanzt mit Bruckenthal</figcaption></figure>
+<figure class="tile"><img alt="Focul de sub Podul Minciunilor" loading="lazy" data-src="assets/focul.webp"><figcaption>Focul de sub Podul Minciunilor</figcaption></figure>
+<figure class="tile"><img alt="Symphonia Residualis" loading="lazy" data-src="assets/symphonia.webp"><figcaption>Symphonia Residualis</figcaption></figure>
+<figure class="tile"><img alt="Ridică-te grindă-n sus" loading="lazy" data-src="assets/ridica.webp"><figcaption>Ridică-te grindă-n sus</figcaption></figure>
+<figure class="tile"><img alt="Țup-Țup-Țup" loading="lazy" data-src="assets/tup.webp"><figcaption>Țup-Țup-Țup</figcaption></figure>
+<figure class="tile"><img alt="Rakia i Suze, Frați pe Vecie" loading="lazy" data-src="assets/rakia.webp"><figcaption>Rakia i Suze, Frați pe Vecie</figcaption></figure>
+<figure class="tile"><img alt="RUMBA-ȚUMBA" loading="lazy" data-src="assets/rumba.webp"><figcaption>RUMBA-ȚUMBA</figcaption></figure>
 </div>
 </div>
 </div>
@@ -676,15 +699,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="Prietenul meu ARGO" loading="lazy" src="assets/argo-prietenul-meu.jpg"><figcaption>Prietenul meu ARGO</figcaption></figure>
-<figure class="tile"><img alt="Clara's Song" loading="lazy" src="assets/Clara's%20Song.webp"><figcaption>Clara's Song</figcaption></figure>
-<figure class="tile"><img alt="Taste of Life" loading="lazy" src="assets/Taste%20of%20Life.webp"><figcaption>Taste of Life</figcaption></figure>
-<figure class="tile"><img alt="Taste of Light" loading="lazy" src="assets/Taste%20of%20Light.webp"><figcaption>Taste of Light</figcaption></figure>
-<figure class="tile"><img alt="Taste of Truth" loading="lazy" src="assets/Taste%20of%20Truth.webp"><figcaption>Taste of Truth</figcaption></figure>
-<figure class="tile"><img alt="ARGO-9's Dream" loading="lazy" src="assets/ARGO-9s-Dream.jpg"><figcaption>ARGO-9's Dream</figcaption></figure>
-<figure class="tile"><img alt="Nodo del Plata" loading="lazy" src="assets/nodo-del-plata.webp"><figcaption>Nodo del Plata</figcaption></figure>
-<figure class="tile"><img alt="Matías Verón" loading="lazy" src="assets/matias-veron.webp"><figcaption>Matías Verón</figcaption></figure>
-<figure class="tile"><img alt="Taste of Colour" loading="lazy" src="assets/Taste-of-Colour.jpg"><figcaption>Taste of Colour</figcaption></figure>
+<figure class="tile"><img alt="Prietenul meu ARGO" loading="lazy" data-src="assets/argo-prietenul-meu.jpg"><figcaption>Prietenul meu ARGO</figcaption></figure>
+<figure class="tile"><img alt="Clara's Song" loading="lazy" data-src="assets/Clara's%20Song.webp"><figcaption>Clara's Song</figcaption></figure>
+<figure class="tile"><img alt="Taste of Life" loading="lazy" data-src="assets/Taste%20of%20Life.webp"><figcaption>Taste of Life</figcaption></figure>
+<figure class="tile"><img alt="Taste of Light" loading="lazy" data-src="assets/Taste%20of%20Light.webp"><figcaption>Taste of Light</figcaption></figure>
+<figure class="tile"><img alt="Taste of Truth" loading="lazy" data-src="assets/Taste%20of%20Truth.webp"><figcaption>Taste of Truth</figcaption></figure>
+<figure class="tile"><img alt="ARGO-9's Dream" loading="lazy" data-src="assets/ARGO-9s-Dream.jpg"><figcaption>ARGO-9's Dream</figcaption></figure>
+<figure class="tile"><img alt="Nodo del Plata" loading="lazy" data-src="assets/nodo-del-plata.webp"><figcaption>Nodo del Plata</figcaption></figure>
+<figure class="tile"><img alt="Matías Verón" loading="lazy" data-src="assets/matias-veron.webp"><figcaption>Matías Verón</figcaption></figure>
+<figure class="tile"><img alt="Taste of Colour" loading="lazy" data-src="assets/Taste-of-Colour.jpg"><figcaption>Taste of Colour</figcaption></figure>
 </div>
 </div>
 </div>
@@ -699,13 +722,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="btn rumble" href="https://rumble.com/playlists/AJGIbGDDh3Q?e9s=src_v1_clr%2Csrc_v1_ucp_pl" rel="noopener" target="_blank">▶️ Rumble Music</a>
 </div>
 <div class="gallery">
-<figure class="tile"><img alt="About the Moth" loading="lazy" src="assets/about-the-moth.jpg"><figcaption>About the Moth</figcaption></figure>
-<figure class="tile"><img alt="Loving my little Moth" loading="lazy" src="assets/loving-my-little-moth.webp"><figcaption>Loving my little Moth</figcaption></figure>
-<figure class="tile"><img alt="Jack" loading="lazy" src="assets/jack.jpg"><figcaption>Jack</figcaption></figure>
-<figure class="tile"><img alt="Sadhguru's Steps" loading="lazy" src="assets/sadhguru-steps.jpg"><figcaption>Sadhguru's Steps</figcaption></figure>
-<figure class="tile"><img alt="Siberian Wind" loading="lazy" src="assets/siberian-wind.webp"><figcaption>Siberian Wind</figcaption></figure>
-<figure class="tile"><img alt="Silenus" loading="lazy" src="assets/silenus.jpg"><figcaption>Silenus</figcaption></figure>
-<figure class="tile"><img alt="Amphibian" loading="lazy" src="assets/amphibian.jpg"><figcaption>Amphibian</figcaption></figure>
+<figure class="tile"><img alt="About the Moth" loading="lazy" data-src="assets/about-the-moth.jpg"><figcaption>About the Moth</figcaption></figure>
+<figure class="tile"><img alt="Loving my little Moth" loading="lazy" data-src="assets/loving-my-little-moth.webp"><figcaption>Loving my little Moth</figcaption></figure>
+<figure class="tile"><img alt="Jack" loading="lazy" data-src="assets/jack.jpg"><figcaption>Jack</figcaption></figure>
+<figure class="tile"><img alt="Sadhguru's Steps" loading="lazy" data-src="assets/sadhguru-steps.jpg"><figcaption>Sadhguru's Steps</figcaption></figure>
+<figure class="tile"><img alt="Siberian Wind" loading="lazy" data-src="assets/siberian-wind.webp"><figcaption>Siberian Wind</figcaption></figure>
+<figure class="tile"><img alt="Silenus" loading="lazy" data-src="assets/silenus.jpg"><figcaption>Silenus</figcaption></figure>
+<figure class="tile"><img alt="Amphibian" loading="lazy" data-src="assets/amphibian.jpg"><figcaption>Amphibian</figcaption></figure>
 </div>
 </div>
 </div>
