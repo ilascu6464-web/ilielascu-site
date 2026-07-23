@@ -1,147 +1,174 @@
-// Lista albumelor existente din site
-const ALBUMS = [
-  { name: 'Singles 2026',                 key: 'singles2026' },
-  { name: 'Singles 2025',                 key: 'singles2025' },
-  { name: 'Parallel Worlds',              key: 'parallel-worlds' },
-  { name: 'Punjabi Light Rituals',        key: 'punjabi-light-rituals' },
-  { name: 'Red Dust Rituals',             key: 'red-dust-rituals' },
-  { name: "Voices of the World's Children", key: 'voices-world-children' },
-  { name: 'The Perception of Reality',    key: 'perc' },
-  { name: 'The Wailing Wall Weeps',       key: 'wall' },
-  { name: 'Night Flight with Frédéric',   key: 'night' },
-  { name: 'Tibethana – The Eternal Breath', key: 'tib' },
-  { name: 'Contemporary dysfunction',     key: 'dys' },
-  { name: 'Blue Geometry Waltz',          key: 'bluegeo' },
-  { name: 'Incursiune în Imposibil',      key: 'incurs' },
-  { name: 'Biography in Sound',           key: 'bio' },
-  { name: 'The Best of — Collection',     key: 'best' },
-  { name: 'Hai la joc',                   key: 'dance' },
-  { name: 'Jazz Scratches',               key: 'scratches' },
-  { name: 'Hop & Jazz',                   key: 'hop' },
-  { name: 'ANALOG CONFLICT',              key: 'analog' },
-  { name: 'Synthetic Nirvana',            key: 'synthetic-nirvana' },
-  { name: 'ORBITA ZERO — Album',          key: 'orbita' },
-  { name: 'ABOUT THE MOTH — Album',       key: 'moth' },
-];
+'use strict';
 
-// Populează select cu albumele existente
-const select = document.getElementById('albumSelect');
-ALBUMS.forEach(a => {
-  const opt = document.createElement('option');
-  opt.value = a.name;
-  opt.textContent = a.name;
-  // Inserăm înainte de opțiunea "Album nou"
-  select.insertBefore(opt, select.lastElementChild);
-});
+const api = window.flyAPI;
+const elements = {
+  album: document.getElementById('album'),
+  albumName: document.getElementById('albumName'),
+  albumNewFields: document.getElementById('albumNewFields'),
+  albumYoutube: document.getElementById('albumYoutube'),
+  coverPlaceholder: document.getElementById('coverPlaceholder'),
+  coverPreview: document.getElementById('coverPreview'),
+  coverZone: document.getElementById('coverZone'),
+  includeRecent: document.getElementById('includeRecent'),
+  publish: document.getElementById('publish'),
+  recentFields: document.getElementById('recentFields'),
+  sitePath: document.getElementById('sitePath'),
+  status: document.getElementById('status'),
+  tiktokUrl: document.getElementById('tiktokUrl'),
+  title: document.getElementById('title'),
+  youtubeUrl: document.getElementById('youtubeUrl')
+};
 
-// Afișează/ascunde câmpurile pentru album nou
-select.addEventListener('change', () => {
-  const isNew = select.value === '__new__';
-  document.getElementById('albumNew').classList.toggle('visible', isNew);
-});
-
-// Cover — click
 let coverPath = null;
-const coverZone = document.getElementById('coverZone');
-const coverPreview = document.getElementById('coverPreview');
-const coverPlaceholder = document.getElementById('coverPlaceholder');
-const pushBtn = document.getElementById('pushBtn');
 
-coverZone.addEventListener('click', async () => {
-  const p = await window.flyAPI.pickCover();
-  if (p) setCover(p);
-});
+initialize();
 
-// Cover — drag & drop
-coverZone.addEventListener('dragover', e => { e.preventDefault(); coverZone.classList.add('drag-over'); });
-coverZone.addEventListener('dragleave', () => coverZone.classList.remove('drag-over'));
-coverZone.addEventListener('drop', e => {
-  e.preventDefault();
-  coverZone.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('image/')) setCover(file.path);
-});
-
-function setCover(p) {
-  coverPath = p;
-  coverPreview.src = 'file://' + p;
-  coverPreview.style.display = 'block';
-  coverPlaceholder.style.display = 'none';
-}
-
-// FLY button
-document.getElementById('flyBtn').addEventListener('click', async () => {
-  const title      = document.getElementById('title').value.trim();
-  const albumSel   = select.value;
-  const isNewAlbum = albumSel === '__new__';
-  const album      = isNewAlbum
-    ? document.getElementById('albumName').value.trim()
-    : albumSel;
-  const ytlink     = document.getElementById('ytlink').value.trim();
-  const rumblelink = document.getElementById('rumblelink').value.trim();
-
-  // Validare
-  if (!title)  return setStatus('❗ Titlul este obligatoriu.', false);
-  if (!album)  return setStatus('❗ Albumul este obligatoriu.', false);
-  if (!coverPath) return setStatus('❗ Cover-ul este obligatoriu.', false);
-
-  const btn = document.getElementById('flyBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Se procesează...';
-  setStatus('');
-
-  const result = await window.flyAPI.fly({
-    title, album, coverPath,
-    ytlink, rumblelink, isNewAlbum
-  });
-
-  btn.disabled = false;
-  btn.textContent = '✈️ FLY';
-  setStatus(result.message, result.ok);
-
-  // Reset formular dacă a mers
-  if (result.ok) {
-    document.getElementById('title').value = '';
-    document.getElementById('ytlink').value = '';
-    document.getElementById('rumblelink').value = '';
-    select.value = '';
-    document.getElementById('albumNew').classList.remove('visible');
-    coverPath = null;
-    coverPreview.src = '';
-    coverPreview.style.display = 'none';
-    coverPlaceholder.style.display = 'flex';
+async function initialize() {
+  if (!api) {
+    setStatus('FlyDBX trebuie deschis ca aplicație macOS.', false);
+    elements.publish.disabled = true;
+    return;
   }
-});
 
-function setStatus(msg, ok) {
-  const s = document.getElementById('status');
-  s.textContent = msg;
-  s.className = 'status' + (ok === true ? ' ok' : ok === false ? ' err' : '');
-}
-
-pushBtn.addEventListener('click', pushGitHub);
-
-async function pushGitHub() {
-  pushBtn.disabled = true;
-  pushBtn.textContent = '⏳ Push...';
-  setStatus('Se face push pe GitHub...', null);
   try {
-    const res = await window.flyAPI.pushGitHub();
-    if (res.ok) {
-      setStatus('✅ Push reușit pe GitHub!', true);
-      pushBtn.textContent = '✅ Pushed!';
-      setTimeout(() => {
-        pushBtn.textContent = '🚀 Push GitHub';
-        pushBtn.disabled = false;
-      }, 3000);
-    } else {
-      setStatus('❌ Eroare push: ' + res.error, false);
-      pushBtn.textContent = '🚀 Push GitHub';
-      pushBtn.disabled = false;
-    }
-  } catch (e) {
-    setStatus('❌ Eroare: ' + e.message, false);
-    pushBtn.textContent = '🚀 Push GitHub';
-    pushBtn.disabled = false;
+    await refreshSiteState();
+    bindInteractions();
+    updateVisibility();
+  } catch (error) {
+    setStatus(error.message, false);
+    elements.publish.disabled = true;
   }
+}
+
+async function refreshSiteState(selectedAlbum = '') {
+  const state = await api.getSiteState();
+  const options = [
+    '<option value="">Alege albumul</option>',
+    ...state.albums.map(album => {
+      const safe = escapeHtml(album);
+      return `<option value="${safe}">${safe}</option>`;
+    }),
+    '<option value="__new__">Album nou</option>'
+  ];
+
+  elements.album.innerHTML = options.join('');
+  elements.album.value = selectedAlbum;
+  elements.sitePath.textContent = state.siteDir;
+}
+
+function bindInteractions() {
+  elements.album.addEventListener('change', updateVisibility);
+  elements.includeRecent.addEventListener('change', updateVisibility);
+  elements.coverZone.addEventListener('click', chooseCover);
+  elements.coverZone.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') chooseCover();
+  });
+  elements.coverZone.addEventListener('dragover', event => {
+    event.preventDefault();
+    elements.coverZone.classList.add('is-dragging');
+  });
+  elements.coverZone.addEventListener('dragleave', () => {
+    elements.coverZone.classList.remove('is-dragging');
+  });
+  elements.coverZone.addEventListener('drop', event => {
+    event.preventDefault();
+    elements.coverZone.classList.remove('is-dragging');
+    const file = event.dataTransfer.files[0];
+    if (!file) return;
+    const selectedPath = api.getPathForFile(file);
+    if (selectedPath) setCover(selectedPath);
+  });
+  elements.publish.addEventListener('click', publish);
+}
+
+function updateVisibility() {
+  const isNewAlbum = elements.album.value === '__new__';
+  elements.albumNewFields.hidden = !isNewAlbum;
+  elements.recentFields.hidden = !elements.includeRecent.checked;
+}
+
+async function chooseCover() {
+  const selected = await api.pickCover();
+  if (selected) setCover(selected);
+}
+
+function setCover(selectedPath) {
+  coverPath = selectedPath;
+  elements.coverPreview.src = `file://${selectedPath}`;
+  elements.coverPreview.hidden = false;
+  elements.coverPlaceholder.hidden = true;
+}
+
+async function publish() {
+  const isNewAlbum = elements.album.value === '__new__';
+  const album = isNewAlbum
+    ? elements.albumName.value.trim()
+    : elements.album.value;
+  const title = elements.title.value.trim();
+
+  if (!title) return setStatus('Completează titlul piesei.', false);
+  if (!album) return setStatus('Alege sau scrie albumul.', false);
+  if (!coverPath) return setStatus('Alege coperta piesei.', false);
+  if (isNewAlbum && !elements.albumYoutube.value.trim()) {
+    return setStatus('Completează linkul YouTube al albumului.', false);
+  }
+  if (elements.includeRecent.checked && !elements.youtubeUrl.value.trim()) {
+    return setStatus('Completează linkul YouTube direct al piesei.', false);
+  }
+
+  elements.publish.disabled = true;
+  elements.publish.textContent = 'Se publică...';
+  setStatus('FlyDBX verifică și publică modificarea.', null);
+
+  try {
+    const result = await api.publishTrack({
+      title,
+      album,
+      coverPath,
+      isNewAlbum,
+      includeRecent: elements.includeRecent.checked,
+      albumYoutubeUrl: elements.albumYoutube.value.trim(),
+      youtubeUrl: elements.youtubeUrl.value.trim(),
+      tiktokUrl: elements.tiktokUrl.value.trim()
+    });
+
+    setStatus(result.message, result.ok);
+    if (result.ok) {
+      await refreshSiteState(album);
+      resetTrackFields();
+    }
+  } catch (error) {
+    setStatus(error.message, false);
+  } finally {
+    elements.publish.disabled = false;
+    elements.publish.textContent = 'Publică';
+  }
+}
+
+function resetTrackFields() {
+  elements.title.value = '';
+  elements.youtubeUrl.value = '';
+  elements.tiktokUrl.value = '';
+  elements.albumYoutube.value = '';
+  elements.albumName.value = '';
+  coverPath = null;
+  elements.coverPreview.src = '';
+  elements.coverPreview.hidden = true;
+  elements.coverPlaceholder.hidden = false;
+}
+
+function setStatus(message, ok) {
+  elements.status.textContent = message || '';
+  elements.status.className = 'status';
+  if (ok === true) elements.status.classList.add('is-success');
+  if (ok === false) elements.status.classList.add('is-error');
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

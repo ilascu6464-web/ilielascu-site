@@ -1,7 +1,10 @@
-const { contextBridge, ipcRenderer } = require('electron');
+'use strict';
+
+const { contextBridge, ipcRenderer, webUtils } = require('electron');
 
 contextBridge.exposeInMainWorld('flyAPI', {
-  pickCover:  ()     => ipcRenderer.invoke('pick-cover'),
-  fly:        (data) => ipcRenderer.invoke('fly', data),
-  pushGitHub: ()     => ipcRenderer.invoke('push-github')
+  getSiteState: () => ipcRenderer.invoke('get-site-state'),
+  getPathForFile: file => webUtils.getPathForFile(file),
+  pickCover: () => ipcRenderer.invoke('pick-cover'),
+  publishTrack: data => ipcRenderer.invoke('publish-track', data)
 });

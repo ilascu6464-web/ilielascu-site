@@ -1,86 +1,87 @@
-# Procedura rapida si sigura pentru ilielascu.de
+# Procedura sigură pentru ilielascu.de
 
-Acest proiect publica site-ul `https://ilielascu.de/`.
-
-## Principiu
-
-Lucreaza rapid, dar controlat: modifica exact ce a cerut utilizatorul, verifica esentialul, publica, apoi verifica live. Nu face verificari lungi sau repetate daca semnalele principale sunt bune.
+Acest proiect publică `https://ilielascu.de/`. Pagina live și `index.html`
+de pe branch-ul `main` sunt sursa de adevăr.
 
 ## Reguli fixe
 
-1. Incepe cu:
+1. Începe cu:
    ```bash
    git status --short --branch
    ```
-2. Nu atinge fisiere nelegate de cererea curenta.
-3. Daca apare `internal/` ca neversionat, lasa-l neatins.
-4. Nu folosi `git add -A`.
-5. Adauga explicit doar fisierele necesare:
-   ```bash
-   git add index.html assets/nume.webp
-   ```
-6. Pentru imagini noi din `assets/`, pune cache-buster in `index.html`:
+2. Nu modifica și nu publica fișiere fără legătură cu cererea curentă.
+3. Nu folosi `git add -A`. Adaugă explicit numai `index.html` și imaginile noi.
+4. Imaginile noi trebuie să fie `.webp`, lowercase și fără spații în nume.
+5. În galerii folosește `data-src` și cache-buster:
    ```html
    assets/nume.webp?v=YYYYMMDDHHMM
    ```
-7. Fiecare link YouTube Music al unui album trebuie sa foloseasca formatul `https://www.youtube.com/playlist?list=...&index=1`, fara `watch?v=...`, pentru a deschide mereu prima piesa din playlist.
+6. Nu adăuga Rumble pentru albume sau piese noi.
+7. Păstrează conținutul și linkurile vechi dacă utilizatorul nu cere schimbarea lor.
 
-## Piesa noua
+## Piesă nouă
 
-1. Confirma ca imaginea `.webp` exista in `assets/`.
-2. Gaseste albumul dupa `<h3>Numele Albumului</h3>`.
-3. Adauga tile-ul in galeria albumului:
+1. Confirmă că imaginea există în `assets/`.
+2. Găsește albumul după `<h3>Numele albumului</h3>`.
+3. Adaugă piesa la finalul galeriei albumului:
    ```html
-   <figure class="tile"><img alt="TITLUL PIESEI" loading="lazy" src="assets/nume.webp?v=YYYYMMDDHHMM"><figcaption>TITLUL PIESEI</figcaption></figure>
+   <figure class="tile"><img alt="TITLU" loading="lazy" data-src="assets/nume.webp?v=YYYYMMDDHHMM"><figcaption>TITLU</figcaption></figure>
    ```
-4. Adauga acelasi tile la finalul galeriei `Recent releases`, cu un link YouTube direct catre piesa respectiva, in formatul `https://www.youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID`, plus linkul TikTok direct catre videoclipul piesei cand acesta exista. Nu folosi `index` aici: `VIDEO_ID` pastreaza legatura cu piesa corecta chiar daca ordinea playlistului se schimba. Nu adauga Rumble la lansarile recente. Pastreaza exact 10 piese: cand o piesa noua este adaugata in dreapta, elimina prima piesa din stanga. Ordinea este cronologica de la stanga la dreapta.
-5. Nu adauga link TikTok separat pentru fiecare piesa. Se foloseste linkul universal `https://www.tiktok.com/@ilascu99`.
+4. Implicit, adaugă piesa și la finalul `Recent releases`, exceptând cazul în
+   care utilizatorul spune explicit să rămână numai în album.
+5. `Recent releases` conține exact 10 piese, în ordine cronologică de la stânga
+   la dreapta. La o piesă nouă elimină prima piesă din stânga.
+6. În `Recent releases`, YouTube trebuie să fie linkul direct:
+   `https://www.youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID`, fără `index`.
+7. Pentru TikTok folosește linkul direct al piesei când este cunoscut; altfel
+   folosește `https://www.tiktok.com/@ilascu99`.
+8. Nu adăuga linkuri individuale sub piesele din galeria albumului.
 
-## Album nou sau schimbare de ordine
+## Album nou
 
-1. Adauga blocul `media-row` in sectiunea `Music`.
-2. Daca utilizatorul cere ordinea albumelor, muta blocurile HTML in ordinea ceruta.
-3. Verifica doar lista de titluri din sectiunea `Music`, nu toata pagina.
+1. Albumul nou primește clasa `album-latest`; elimină această clasă de pe
+   albumul precedent.
+2. `Singles 2026` păstrează clasa `album-singles-current`.
+3. Ordinea vizuală este: albumul cel mai nou, `Singles 2026`, apoi albumele
+   precedente în ordinea apariției.
+4. Linkul YouTube al albumului trebuie normalizat la:
+   `https://www.youtube.com/playlist?list=PLAYLIST_ID&index=1`.
+5. Pentru album nou nu adăuga descriere, copertă separată sau buton Rumble.
+   JavaScript-ul paginii adaugă automat butonul TikTok universal.
 
-## Verificare scurta inainte de publicare
+## Verificare
 
-Verifica:
+Rulează:
 
-- titlul apare o singura data unde trebuie;
-- imaginea exista;
-- linkurile cerute sunt corecte;
-- ordinea albumelor este corecta, daca s-a cerut.
+```bash
+npm test
+npm run audit
+git diff --check
+```
+
+Confirmă că:
+
+- titlul apare o singură dată în album;
+- imaginea există;
+- `Recent releases` are exact 10 piese;
+- există un singur `album-latest`;
+- ordinea albumelor este corectă;
+- linkurile cerute sunt corecte.
 
 ## Publicare
 
 ```bash
 git add index.html assets/nume.webp
-git commit -m "Add TITLUL"
+git commit -m "Add TITLU"
 git push origin main
 ```
 
-Daca `git push` nu gaseste helperul de credentiale pe macOS, foloseste:
+După publicare, verifică imaginea și pagina live cu un query de cache:
 
 ```bash
-PATH="/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core:/Library/Developer/CommandLineTools/usr/libexec/git-core:$PATH" git push origin main
-```
-
-## Verificare live
-
-Pentru imagini noi, verifica intai cu un query de proba:
-
-```bash
-curl -L -s -o /dev/null -w '%{http_code} %{content_type}' 'https://ilielascu.de/assets/nume.webp?v=probeTIMESTAMP'
-```
-
-Este bine cand raspunde `200 image/webp`. Daca raspunde `text/html`, asteapta scurt si reincearca.
-
-Apoi verifica pagina live cu:
-
-```bash
+curl -L -s -o /dev/null -w '%{http_code} %{content_type}' \
+  'https://ilielascu.de/assets/nume.webp?v=probeTIMESTAMP'
 curl -L -s 'https://ilielascu.de/?v=verifyTIMESTAMP'
 ```
 
-Confirma doar lucrurile esentiale: titlu, fisierul `.webp?v=...`, linkuri si ordinea ceruta.
-
-Important: cand trimiti HTML catre Python, foloseste `python3 -c`. Nu folosi combinatia `curl ... | python3 - <<'PY'`, pentru ca HTML-ul poate fi interpretat gresit ca script.
+Imaginea trebuie să răspundă `200 image/webp`.

@@ -1,12 +1,15 @@
 {
   "name": "flydbx",
-  "version": "1.0.0",
-  "description": "FlyDBX — Upload piese noi pe ilielascu.de",
+  "version": "2.0.0",
+  "description": "Publică în siguranță muzică nouă pe ilielascu.de",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "node --test test/*.test.js",
+    "audit": "node scripts/audit_site.js",
+    "build:app": "bash scripts/build_app.sh"
   },
-  "dependencies": {
-    "electron": "^28.0.0"
+  "devDependencies": {
+    "electron": "^43.2.0"
   }
 }

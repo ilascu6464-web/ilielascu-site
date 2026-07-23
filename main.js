@@ -1,224 +1,415 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const path = require('path');
-const fs = require('fs');
+'use strict';
+
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const { execFileSync, spawnSync } = require('child_process');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const {
+  cacheVersion,
+  listAlbums,
+  slugify,
+  updateSiteHtml
+} = require('./site-editor');
 
-// Calea către site (folderul FlyDBX cu index.html și assets)
-const SITE_DIR = __dirname;
-const ASSETS_DIR = path.join(SITE_DIR, 'assets');
-const INDEX_HTML = path.join(SITE_DIR, 'index.html');
-const UNIVERSAL_TIKTOK_URL = 'https://www.tiktok.com/@ilascu99';
+const EXPECTED_BRANCH = 'main';
+const DEFAULT_SITE_DIR = '/Users/ilascu/L_DATA_MAC/PROGRAMARE/FlyDBX';
+const SAFE_WEBP_NAME = /^[a-z0-9][a-z0-9._-]*\.webp$/;
+const GIT_EXECUTABLE = '/usr/bin/git';
+const TOOL_PATH = [
+  '/Applications/Xcode.app/Contents/Developer/usr/libexec/git-core',
+  '/Library/Developer/CommandLineTools/usr/libexec/git-core',
+  '/opt/homebrew/bin',
+  '/usr/local/bin',
+  process.env.PATH
+].filter(Boolean).join(':');
 
-let win;
+let mainWindow;
+let siteDir;
 
-app.whenReady().then(() => {
-  win = new BrowserWindow({
-    width: 600,
-    height: 780,
-    resizable: false,
-    titleBarStyle: 'hiddenInset',
-    backgroundColor: '#0c0f14',
+app.whenReady().then(async () => {
+  siteDir = await resolveSiteDir();
+  mainWindow = createWindow();
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    mainWindow = createWindow();
+  }
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
+
+function createWindow() {
+  const window = new BrowserWindow({
+    width: 720,
+    height: 820,
+    minWidth: 640,
+    minHeight: 720,
+    title: 'FlyDBX',
+    backgroundColor: '#0b0c0b',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      sandbox: true
     }
   });
-  win.loadFile('form.html');
+
+  window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  window.webContents.on('will-navigate', event => event.preventDefault());
+  window.loadFile('form.html');
+  return window;
+}
+
+ipcMain.handle('get-site-state', async () => {
+  const resolved = await ensureSiteDir();
+  const html = fs.readFileSync(path.join(resolved, 'index.html'), 'utf8');
+  return {
+    albums: listAlbums(html),
+    siteDir: resolved
+  };
 });
 
-app.on('window-all-closed', () => app.quit());
-
-// ── IPC: deschide dialog pentru cover ──────────────────────
 ipcMain.handle('pick-cover', async () => {
-  const result = await dialog.showOpenDialog(win, {
-    title: 'Alege cover art',
-    filters: [{ name: 'Imagini', extensions: ['png','jpg','jpeg','webp'] }],
+  const result = await dialog.showOpenDialog(mainWindow, {
+    title: 'Alege coperta piesei',
+    filters: [{ name: 'Imagini', extensions: ['webp', 'png', 'jpg', 'jpeg'] }],
     properties: ['openFile']
   });
-  if (result.canceled) return null;
-  return result.filePaths[0];
+
+  return result.canceled ? null : result.filePaths[0];
 });
 
-// ── IPC: FLY — procesează și publică piesa ─────────────────
-ipcMain.handle('fly', async (event, data) => {
+ipcMain.handle('publish-track', async (_event, payload) => {
+  let originalHtml = null;
+  let assetDestination = null;
+  let assetRelativePath = null;
+  let assetCreatedByApp = false;
+  let committed = false;
+
   try {
-    const { title, album, coverPath, isNewAlbum, ytlink, rumblelink } = data;
-    const safeTitle = String(title || '').trim();
-    const safeAlbum = String(album || '').trim();
-    const safeYtLink = String(ytlink || '').trim();
-    const safeRumbleLink = String(rumblelink || '').trim();
+    const resolved = await ensureSiteDir();
+    const data = normalizePayload(payload);
+    const asset = resolveAssetPlan(resolved, data.coverPath, data.title);
+    const allowedDirtyPath = asset.alreadyInAssets ? asset.relativePath : null;
 
-    if (!safeTitle) {
-      throw new Error('Titlul piesei este obligatoriu.');
-    }
+    assertRepositoryReady(resolved, allowedDirtyPath);
+    syncRepository(resolved);
+    assertRepositoryReady(resolved, allowedDirtyPath);
 
-    if (!safeAlbum) {
-      throw new Error('Albumul este obligatoriu.');
-    }
-
-    if (!coverPath) {
-      throw new Error('Cover-ul este obligatoriu.');
-    }
-
-    // 1. Aducem ultimul conținut înainte de modificări locale.
-    git('pull', '--rebase', '--autostash', 'origin', 'main');
-
-    // 2. Convertim cover-ul și îl copiem în assets/.
-    const slug = slugify(safeTitle);
-    const assetName = prepareCoverAsset(coverPath, slug);
-
-    // 3. Actualizăm index.html.
-    updateIndexHTML({
-      title: safeTitle,
-      album: safeAlbum,
-      assetName,
-      slug,
-      ytlink: safeYtLink,
-      rumblelink: safeRumbleLink,
-      isNewAlbum
+    const indexPath = path.join(resolved, 'index.html');
+    originalHtml = fs.readFileSync(indexPath, 'utf8');
+    const version = cacheVersion();
+    const updatedHtml = updateSiteHtml(originalHtml, {
+      ...data,
+      assetName: asset.assetName,
+      version
     });
 
-    // 4. Git add + commit.
-    git('add', '-A');
-
-    if (hasStagedChanges()) {
-      git('commit', '-m', `FlyDBX Auto: ${safeTitle}`);
+    assetDestination = path.join(resolved, asset.relativePath);
+    assetRelativePath = asset.relativePath;
+    if (!asset.alreadyInAssets && fs.existsSync(assetDestination)) {
+      throw new Error(`Fișierul ${asset.relativePath} există deja.`);
     }
 
-    return { ok: true, message: `✅ "${safeTitle}" adăugat! Poți face push din aplicație.` };
-  } catch (err) {
-    return { ok: false, message: `❌ Eroare: ${err.message}` };
-  }
-});
-
-// ── Funcție: actualizare index.html ───────────────────────
-function updateIndexHTML({ title, album, assetName, slug, ytlink, rumblelink, isNewAlbum }) {
-  let html = fs.readFileSync(INDEX_HTML, 'utf8');
-  const titleHtml = escapeHtml(title);
-  const albumHtml = escapeHtml(album);
-  const assetPath = `assets/${assetName}`;
-  const safeYtLink = escapeHtml(ytlink || '#');
-  const safeRumbleLink = escapeHtml(rumblelink || '#');
-  const safeTikTokLink = escapeHtml(UNIVERSAL_TIKTOK_URL);
-
-  // Noul tile pentru galerie
-  const tile = `
-        <figure class="tile"><img alt="${titleHtml}" loading="lazy" src="${assetPath}"><figcaption>${titleHtml}</figcaption></figure>`;
-
-  if (isNewAlbum) {
-    // Creăm un nou media-row la finalul secțiunii de muzică.
-    const newRow = `
-<div class="media-row ${slug}">
-<img alt="${titleHtml}" class="thumb" src="${assetPath}">
-<div class="media-content">
-<h3>${albumHtml}</h3>
-<div></div>
-<div class="en"></div>
-<div class="btns">
-    <a class="btn ytmusic" href="${safeYtLink}" rel="noopener" target="_blank">🎧 YouTube Music</a>
-    <a class="btn rumble" href="${safeRumbleLink}" rel="noopener" target="_blank">▶️ Rumble Music</a>
-    <a class="btn tiktok" href="${safeTikTokLink}" rel="noopener" target="_blank">🎵 TikTok</a>
-</div>
-<div class="gallery">${tile}
-</div>
-</div>
-</div>
-`;
-    const musicStart = html.indexOf('<section aria-label="Music" class="wrapper">');
-    if (musicStart === -1) {
-      throw new Error('Secțiunea Music nu a fost găsită în index.html.');
+    if (!asset.alreadyInAssets) {
+      createWebpAsset(data.coverPath, assetDestination);
+      assetCreatedByApp = true;
     }
 
-    const musicEnd = html.indexOf('</section>', musicStart);
-    if (musicEnd === -1) {
-      throw new Error('Închiderea secțiunii Music nu a fost găsită în index.html.');
+    writeFileAtomically(indexPath, updatedHtml);
+    stageAndValidate(resolved, asset.relativePath);
+    git(resolved, 'commit', '-m', `Add ${data.title}`);
+    committed = true;
+
+    try {
+      git(resolved, 'push', 'origin', EXPECTED_BRANCH);
+    } catch (error) {
+      return {
+        ok: false,
+        message: `Modificarea este salvată local, dar push-ul a eșuat: ${cleanGitError(error)}`
+      };
     }
 
-    html = html.slice(0, musicEnd) + newRow + html.slice(musicEnd);
-  } else {
-    // Adăugăm tile în galeria albumului existent.
-    const albumMarker = `<h3>${albumHtml}</h3>`;
-    if (html.includes(albumMarker)) {
-      const albumIdx = html.indexOf(albumMarker);
-      const galleryOpen = html.indexOf('<div class="gallery">', albumIdx);
-      if (galleryOpen !== -1) {
-        const galleryClose = html.indexOf('</div>', galleryOpen);
-        if (galleryClose !== -1) {
-          html = html.slice(0, galleryClose) + tile + '\n        ' + html.slice(galleryClose);
-        } else {
-          throw new Error(`Galeria albumului "${album}" nu a putut fi actualizată.`);
-        }
-      } else {
-        throw new Error(`Albumul "${album}" nu are galerie în index.html.`);
-      }
-    } else {
-      throw new Error(`Albumul "${album}" nu există în index.html.`);
-    }
-  }
+    const live = await waitForLive({
+      title: data.title,
+      assetName: asset.assetName,
+      version
+    });
 
-  fs.writeFileSync(INDEX_HTML, html, 'utf8');
-}
-
-ipcMain.handle('push-github', async () => {
-  try {
-    const branch = git('rev-parse', '--abbrev-ref', 'HEAD').trim();
-    git('push', 'origin', branch);
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, error: e.message };
-  }
-});
-
-function slugify(value) {
-  const slug = String(value)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-
-  return slug || `track-${Date.now()}`;
-}
-
-function prepareCoverAsset(coverPath, slug) {
-  const sourceExt = path.extname(coverPath).toLowerCase();
-  const directCopyAllowed = sourceExt === '.webp';
-  const webpName = `${slug}.webp`;
-  const webpDest = path.join(ASSETS_DIR, webpName);
-
-  try {
-    execFileSync('cwebp', ['-q', '85', coverPath, '-o', webpDest], { stdio: 'pipe' });
-    return webpName;
+    return {
+      ok: true,
+      message: live
+        ? `"${data.title}" este publicată și verificată live.`
+        : `"${data.title}" este publicată pe GitHub. Site-ul încă procesează actualizarea.`
+    };
   } catch (error) {
-    if (!directCopyAllowed) {
-      throw new Error('Conversia cover-ului a eșuat. Instalează `cwebp` sau folosește un fișier .webp.');
+    if (!committed && originalHtml !== null) {
+      rollbackUncommittedChanges({
+        originalHtml,
+        siteDir,
+        assetDestination,
+        assetRelativePath,
+        assetCreatedByApp
+      });
     }
 
-    fs.copyFileSync(coverPath, webpDest);
-    return webpName;
+    return { ok: false, message: error.message };
+  }
+});
+
+function normalizePayload(payload) {
+  const data = {
+    title: String(payload?.title || '').trim(),
+    album: String(payload?.album || '').trim(),
+    coverPath: String(payload?.coverPath || '').trim(),
+    isNewAlbum: Boolean(payload?.isNewAlbum),
+    includeRecent: Boolean(payload?.includeRecent),
+    albumYoutubeUrl: String(payload?.albumYoutubeUrl || '').trim(),
+    youtubeUrl: String(payload?.youtubeUrl || '').trim(),
+    tiktokUrl: String(payload?.tiktokUrl || '').trim()
+  };
+
+  if (!data.title) throw new Error('Titlul piesei este obligatoriu.');
+  if (!data.album) throw new Error('Albumul este obligatoriu.');
+  if (!data.coverPath || !fs.existsSync(data.coverPath)) {
+    throw new Error('Coperta selectată nu există.');
+  }
+  if (data.isNewAlbum && !data.albumYoutubeUrl) {
+    throw new Error('Linkul YouTube al albumului nou este obligatoriu.');
+  }
+  if (data.includeRecent && !data.youtubeUrl) {
+    throw new Error('Linkul YouTube direct este obligatoriu pentru Ultimele lansări.');
+  }
+
+  return data;
+}
+
+function resolveAssetPlan(resolvedSiteDir, coverPath, title) {
+  const source = path.resolve(coverPath);
+  const assetsDir = path.join(resolvedSiteDir, 'assets');
+  const sourceDirectory = path.dirname(source);
+  const sourceExtension = path.extname(source).toLowerCase();
+  const alreadyInAssets = sourceDirectory === assetsDir;
+
+  let assetName;
+  if (alreadyInAssets) {
+    assetName = path.basename(source);
+    if (!SAFE_WEBP_NAME.test(assetName)) {
+      throw new Error('În assets, coperta trebuie să fie .webp, lowercase și fără spații.');
+    }
+  } else if (sourceExtension === '.webp' && SAFE_WEBP_NAME.test(path.basename(source))) {
+    assetName = path.basename(source);
+  } else {
+    assetName = `${slugify(title)}.webp`;
+  }
+
+  return {
+    assetName,
+    alreadyInAssets,
+    relativePath: path.posix.join('assets', assetName)
+  };
+}
+
+function assertRepositoryReady(resolvedSiteDir, allowedDirtyPath) {
+  const branch = git(resolvedSiteDir, 'rev-parse', '--abbrev-ref', 'HEAD').trim();
+  if (branch !== EXPECTED_BRANCH) {
+    throw new Error(`FlyDBX publică doar din branch-ul ${EXPECTED_BRANCH}.`);
+  }
+
+  const status = git(
+    resolvedSiteDir,
+    'status',
+    '--porcelain',
+    '-z',
+    '--untracked-files=all'
+  );
+  const entries = status.split('\0').filter(Boolean);
+  const unexpected = entries.filter(entry => {
+    const code = entry.slice(0, 2);
+    const file = entry.slice(3);
+    return !(allowedDirtyPath && code === '??' && file === allowedDirtyPath);
+  });
+
+  if (unexpected.length) {
+    throw new Error('Folderul are modificări nepublicate. Rezolvă-le înainte de a folosi FlyDBX.');
   }
 }
 
-function git(...args) {
-  return execFileSync('git', args, {
-    cwd: SITE_DIR,
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe']
+function syncRepository(resolvedSiteDir) {
+  git(resolvedSiteDir, 'pull', '--ff-only', 'origin', EXPECTED_BRANCH);
+}
+
+function createWebpAsset(sourcePath, destinationPath) {
+  const temporaryDir = fs.mkdtempSync(path.join(os.tmpdir(), 'flydbx-cover-'));
+  const temporaryAsset = path.join(temporaryDir, path.basename(destinationPath));
+
+  try {
+    if (path.extname(sourcePath).toLowerCase() === '.webp') {
+      fs.copyFileSync(sourcePath, temporaryAsset);
+    } else {
+      const cwebp = findExecutable([
+        '/opt/homebrew/bin/cwebp',
+        '/usr/local/bin/cwebp'
+      ]);
+      if (!cwebp) {
+        throw new Error('Conversia în WebP necesită cwebp instalat.');
+      }
+
+      try {
+        execFileSync(
+          cwebp,
+          ['-quiet', '-q', '88', sourcePath, '-o', temporaryAsset],
+          { env: { ...process.env, PATH: TOOL_PATH }, stdio: 'pipe' }
+        );
+      } catch {
+        throw new Error('Conversia în WebP a eșuat. Verifică imaginea selectată.');
+      }
+    }
+
+    fs.copyFileSync(temporaryAsset, destinationPath);
+  } finally {
+    fs.rmSync(temporaryDir, { recursive: true, force: true });
+  }
+}
+
+function writeFileAtomically(destination, content) {
+  const temporary = `${destination}.flydbx-tmp`;
+  fs.writeFileSync(temporary, content, 'utf8');
+  fs.renameSync(temporary, destination);
+}
+
+function stageAndValidate(resolvedSiteDir, assetRelativePath) {
+  git(resolvedSiteDir, 'add', '--', 'index.html', assetRelativePath);
+  git(resolvedSiteDir, 'diff', '--cached', '--check');
+
+  const staged = git(
+    resolvedSiteDir,
+    'diff',
+    '--cached',
+    '--name-only'
+  ).trim().split('\n').filter(Boolean).sort();
+  const expected = ['index.html', assetRelativePath].sort();
+
+  if (JSON.stringify(staged) !== JSON.stringify(expected)) {
+    throw new Error('Verificarea fișierelor pregătite pentru publicare a eșuat.');
+  }
+}
+
+function rollbackUncommittedChanges({
+  originalHtml,
+  siteDir: resolvedSiteDir,
+  assetDestination,
+  assetRelativePath,
+  assetCreatedByApp
+}) {
+  try {
+    fs.writeFileSync(path.join(resolvedSiteDir, 'index.html'), originalHtml, 'utf8');
+    if (assetCreatedByApp && assetDestination && fs.existsSync(assetDestination)) {
+      fs.unlinkSync(assetDestination);
+    }
+    const stagedPaths = ['index.html', assetRelativePath].filter(Boolean);
+    spawnSync(
+      GIT_EXECUTABLE,
+      ['restore', '--staged', '--', ...stagedPaths],
+      {
+        cwd: resolvedSiteDir,
+        env: { ...process.env, PATH: TOOL_PATH },
+        stdio: 'ignore'
+      }
+    );
+  } catch {
+    // Keep the original error; the repository remains recoverable through Git.
+  }
+}
+
+async function waitForLive({ title, assetName, version }) {
+  const expectedAsset = `assets/${assetName}?v=${version}`;
+
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    try {
+      const stamp = Date.now();
+      const pageResponse = await fetch(`https://ilielascu.de/?v=flydbx-${stamp}`);
+      const page = await pageResponse.text();
+      const assetResponse = await fetch(
+        `https://ilielascu.de/assets/${encodeURIComponent(assetName)}?v=flydbx-${stamp}`
+      );
+
+      if (
+        pageResponse.ok &&
+        page.includes(title) &&
+        page.includes(expectedAsset) &&
+        assetResponse.ok &&
+        (assetResponse.headers.get('content-type') || '').startsWith('image/webp')
+      ) {
+        return true;
+      }
+    } catch {
+      // Deployment may still be propagating.
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 3000));
+  }
+
+  return false;
+}
+
+async function resolveSiteDir() {
+  const candidates = [
+    process.env.FLYDBX_SITE_DIR,
+    app.isPackaged ? path.resolve(app.getAppPath(), '../../../..') : __dirname,
+    DEFAULT_SITE_DIR
+  ].filter(Boolean);
+
+  const match = candidates.find(isValidSiteDir);
+  if (match) return path.resolve(match);
+
+  const result = await dialog.showOpenDialog({
+    title: 'Alege folderul FlyDBX',
+    properties: ['openDirectory']
   });
+
+  if (result.canceled || !isValidSiteDir(result.filePaths[0])) {
+    throw new Error('Folderul FlyDBX nu a fost găsit.');
+  }
+
+  return path.resolve(result.filePaths[0]);
 }
 
-function hasStagedChanges() {
-  const result = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: SITE_DIR });
-  return result.status === 1;
+async function ensureSiteDir() {
+  if (siteDir && isValidSiteDir(siteDir)) return siteDir;
+  siteDir = await resolveSiteDir();
+  return siteDir;
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+function isValidSiteDir(candidate) {
+  if (!candidate) return false;
+  return fs.existsSync(path.join(candidate, 'index.html')) &&
+    fs.existsSync(path.join(candidate, 'assets')) &&
+    fs.existsSync(path.join(candidate, '.git'));
+}
+
+function git(resolvedSiteDir, ...args) {
+  try {
+    return execFileSync(GIT_EXECUTABLE, args, {
+      cwd: resolvedSiteDir,
+      encoding: 'utf8',
+      env: { ...process.env, PATH: TOOL_PATH },
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+  } catch (error) {
+    throw new Error(cleanGitError(error));
+  }
+}
+
+function cleanGitError(error) {
+  const stderr = String(error?.stderr || '').trim();
+  return stderr || error?.message || 'Comanda Git a eșuat.';
+}
+
+function findExecutable(candidates) {
+  return candidates.find(candidate => fs.existsSync(candidate)) || null;
 }
