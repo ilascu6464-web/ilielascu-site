@@ -21,9 +21,10 @@ a:hover{text-decoration:underline;color:#efd49b;}
 .film-grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");}
 .hero{position:relative;width:100%;aspect-ratio:1920/426;border-bottom:1px solid var(--divider);background:#000 url('assets/banner.webp?v=202607190600') center center/cover no-repeat;overflow:hidden;mask-image:linear-gradient(to bottom,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 85%,transparent 100%);}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0)0%,rgba(255,255,255,.08)50%,rgba(255,255,255,0)100%);transform:translateX(-120%) rotate(5deg);animation:shine 8s ease-in-out infinite;pointer-events:none;}
-.brand-intro{display:flex;justify-content:center;align-items:center;padding:18px 20px 8px;background:#050505;border-bottom:1px solid rgba(200,159,85,.18);}
+.brand-intro{position:relative;display:flex;justify-content:center;align-items:center;padding:18px 20px 8px;background:#050505;border-bottom:1px solid rgba(200,159,85,.18);}
 .brand-intro video{display:block;width:clamp(156px,25.2vw,276px);aspect-ratio:1/1;object-fit:contain;}
 .contact-row{display:flex;justify-content:flex-end;max-width:var(--maxw);margin:0 auto;padding:14px 20px 0;}
+.brand-intro .contact-row{position:absolute;right:clamp(14px,8vw,140px);top:50%;transform:translateY(-50%);margin:0;padding:0;}
 .contact-row a{display:inline-flex;align-items:center;gap:9px;padding:7px 12px 7px 7px;border:1px solid rgba(200,159,85,.34);border-radius:999px;background:rgba(20,25,35,.72);color:var(--gold);opacity:.9;transition:opacity .3s,background .3s,border-color .3s;}
 .contact-row a:hover{opacity:1;background:rgba(55,44,24,.72);border-color:var(--gold);text-decoration:none;}
 .contact-row img{border-radius:50%;vertical-align:middle;}
@@ -80,7 +81,7 @@ figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#d5bd87
 .music-section .album-singles-current{order:4;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
 @media(max-width:900px){.books-section{grid-template-columns:repeat(4,minmax(0,1fr));}.music-section figure.tile{width:clamp(86px,15vw,110px);}}
-@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section figure.tile{width:clamp(84px,27vw,112px);}}
+@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section figure.tile{width:clamp(84px,27vw,112px);}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}}
 @media(max-width:420px){.books-section{grid-template-columns:repeat(2,minmax(0,1fr));}.books-section .btn{font-size:.72rem;}}
 </style>
 <script>
@@ -142,16 +143,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
 <div class="film-grain"></div>
 <header class="hero" role="banner"></header>
-<div class="contact-row">
-  <a id="mailto-link" href="#" aria-label="Contact prin e-mail">
-    <img src="assets/mailto.webp" alt="" width="44" height="44">
-    <span>Contact</span>
-  </a>
-</div>
 <section class="brand-intro" aria-label="iLasRoom AI Creative Studio">
   <video autoplay loop muted playsinline preload="metadata" aria-label="iLasRoom AI Creative Studio animated logo">
     <source src="assets/ilasroom-ai-creative-studio.mp4?v=202608031410" type="video/mp4">
   </video>
+  <div class="contact-row">
+    <a id="mailto-link" href="#" aria-label="Contact prin e-mail">
+      <img src="assets/mailto.webp" alt="" width="44" height="44">
+      <span>Contact</span>
+    </a>
+  </div>
 </section>
 <main role="main">
 <section aria-label="Books" class="wrapper books-section">
