@@ -21,6 +21,11 @@ a:hover{text-decoration:underline;color:#efd49b;}
 .film-grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");}
 .hero{position:relative;width:100%;aspect-ratio:1920/426;border-bottom:1px solid var(--divider);background:#000 url('assets/banner.webp?v=202607190600') center center/cover no-repeat;overflow:hidden;mask-image:linear-gradient(to bottom,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 85%,transparent 100%);}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0)0%,rgba(255,255,255,.08)50%,rgba(255,255,255,0)100%);transform:translateX(-120%) rotate(5deg);animation:shine 8s ease-in-out infinite;pointer-events:none;}
+.brand-intro{display:flex;justify-content:center;align-items:center;padding:18px 20px 8px;background:#050505;border-bottom:1px solid rgba(200,159,85,.18);}
+.brand-intro video{display:block;width:clamp(260px,42vw,460px);aspect-ratio:1/1;object-fit:contain;}
+.contact-row{display:flex;justify-content:flex-end;padding:14px 0 0;}
+.contact-row a{display:inline-block;opacity:.75;transition:opacity .3s;}
+.contact-row a:hover{opacity:1;text-decoration:none;}
 @keyframes shine{0%,100%{transform:translateX(-120%) rotate(5deg)}50%{transform:translateX(120%) rotate(5deg)}}
 .section-title{margin:40px 0 20px;font-size:clamp(24px,3.5vw,38px);color:var(--fg);font-family:"Playfair Display",Georgia,serif;letter-spacing:-0.02em;font-weight:700;position:relative;display:inline-block;line-height:1.2;}
 .section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:30px;height:1px;background:var(--gold);box-shadow:none;}
@@ -136,12 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
 <div class="film-grain"></div>
 <header class="hero" role="banner"></header>
-<div style="text-align:center;padding:12px 0 0 0;">
-  <a id="mailto-link" href="#" style="display:inline-block;opacity:0.75;transition:opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
-    <img src="assets/mailto.webp" alt="Contact" width="44" height="44" style="border-radius:50%;vertical-align:middle;">
-  </a>
-</div>
-<script>(function(){var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;})();</script>
+<section class="brand-intro" aria-label="iLasRoom AI Creative Studio">
+  <video autoplay loop muted playsinline preload="metadata" aria-label="iLasRoom AI Creative Studio animated logo">
+    <source src="assets/ilasroom-ai-creative-studio.mp4?v=202608031410" type="video/mp4">
+  </video>
+</section>
 <main role="main">
 <section aria-label="Books" class="wrapper books-section">
 <h2 class="section-title">Cărțile mele / My Books</h2>
@@ -476,6 +480,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
+<div class="contact-row">
+  <a id="mailto-link" href="#">
+    <img src="assets/mailto.webp" alt="Contact" width="44" height="44" style="border-radius:50%;vertical-align:middle;">
+  </a>
+</div>
+<script>(function(){var u='\x69\x6c\x2d\x63\x72\x65\x61\x74\x6f\x72';var d='\x6d\x61\x67\x65\x6e\x74\x61\x2e\x64\x65';document.getElementById('mailto-link').href='mai'+'lto:'+u+'@'+d;})();</script>
 
 <div class="media-row singles">
 <div class="media-content">
