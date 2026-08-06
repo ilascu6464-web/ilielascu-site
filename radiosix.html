@@ -71,7 +71,7 @@
             pointer-events: none;
         }
 
-        /* Compact Player Card (Layout matching the user screenshot) */
+        /* Compact Player Card */
         .player-card {
             position: relative;
             z-index: 10;
@@ -85,10 +85,10 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
-        /* Song Metadata block (Subtle grey container matching screenshot) */
+        /* Song Metadata block */
         .song-info {
             width: 100%;
             display: flex;
@@ -132,7 +132,7 @@
         }
 
         .station-badge {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -175,14 +175,123 @@
             margin-top: 3px;
         }
 
-        /* Controls Block (Centered below info block) */
+        /* Play Mode Tabs Bar */
+        .tabs-nav {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-grow: 1;
+            text-align: center;
+            outline: none;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            color: var(--neon-green);
+            background: rgba(57, 255, 20, 0.06);
+            box-shadow: inset 0 0 0 1px rgba(57, 255, 20, 0.15);
+        }
+
+        /* Album selector area (collapsible) */
+        .albums-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            padding: 0;
+        }
+
+        .albums-container.active {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 4px 0;
+        }
+
+        /* Custom scrollbar for albums list */
+        .albums-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .albums-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .album-select-btn {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            outline: none;
+        }
+
+        .album-select-btn::after {
+            content: '▶';
+            font-size: 9px;
+            opacity: 0.5;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .album-select-btn:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .album-select-btn.active {
+            background: rgba(57, 255, 20, 0.06);
+            border-color: rgba(57, 255, 20, 0.4);
+            color: var(--neon-green);
+        }
+
+        .album-select-btn.active::after {
+            color: var(--neon-green);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Controls Block */
         .controls {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 24px;
-            padding: 8px 0;
+            padding: 4px 0;
+            position: relative;
         }
 
         .control-btn {
@@ -210,9 +319,10 @@
             transform: scale(0.92);
         }
 
+        /* Play button */
         .btn-play-pause {
-            width: 64px;
-            height: 64px;
+            width: 60px;
+            height: 60px;
             background: #1c1c22;
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 50%;
@@ -225,11 +335,26 @@
         }
 
         .btn-next {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
         }
 
-        /* Volume Slider (Bottom of the card) */
+        /* Loop Button styling */
+        .btn-loop {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .btn-loop svg {
+            fill: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-loop.active svg {
+            fill: var(--neon-green);
+            filter: drop-shadow(0 0 8px var(--neon-glow));
+        }
+
+        /* Volume Slider */
         .volume-container {
             width: 100%;
             display: flex;
@@ -358,21 +483,42 @@
             </div>
         </div>
 
+        <!-- Play Mode Tabs -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" id="tab-all">ALL</button>
+            <button class="tab-btn" id="tab-recents">RECENTS</button>
+            <button class="tab-btn" id="tab-albums">ALBUME</button>
+        </div>
+
+        <!-- Albums list collapsible container -->
+        <div class="albums-container" id="albums-container">
+            <button class="album-select-btn" data-playlist="PLZAWstSOFR4Q">Analog Dysfunctions</button>
+            <button class="album-select-btn" data-playlist="PLQiiezDTDfPQ">One Finger</button>
+            <button class="album-select-btn" data-playlist="PLmvmJ6LhMAd9pnoM5clw7CjlXM-ifzzIb">Singles & Releases</button>
+        </div>
+
         <!-- Controls -->
         <div class="controls">
+            <!-- Loop Button -->
+            <button class="control-btn btn-loop" id="btn-loop" title="Repetă piesa curentă (Loop)">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
+                </svg>
+            </button>
+
             <!-- Play/Pause Button -->
             <button class="control-btn btn-play-pause" id="btn-play" title="Redare / Pauză">
-                <svg id="play-icon" viewBox="0 0 24 24" width="24" height="24">
+                <svg id="play-icon" viewBox="0 0 24 24" width="22" height="22">
                     <path d="M8 5v14l11-7z"/>
                 </svg>
-                <svg id="pause-icon" viewBox="0 0 24 24" width="24" height="24" style="display: none;">
+                <svg id="pause-icon" viewBox="0 0 24 24" width="22" height="22" style="display: none;">
                     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                 </svg>
             </button>
 
             <!-- Next Track Button -->
-            <button class="control-btn btn-next" id="btn-next" title="Următoarea piesă aleatorie">
-                <svg viewBox="0 0 24 24" width="26" height="26">
+            <button class="control-btn btn-next" id="btn-next" title="Următoarea piesă">
+                <svg viewBox="0 0 24 24" width="24" height="24">
                     <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                 </svg>
             </button>
@@ -449,6 +595,12 @@
         let player;
         let currentSongIndex = -1;
         let isPlaying = false;
+        
+        // Mode & State variables
+        let playMode = 'ALL'; // 'ALL', 'RECENTS', 'ALBUMS'
+        let currentSequentialIndex = -1; // Used for RECENTS sequential playback
+        let activePlaylistId = null; // Used for ALBUMS mode
+        let isLooping = false; // Toggled by loop button
 
         // Load YouTube Player API asynchronously
         const tag = document.createElement('script');
@@ -461,9 +613,17 @@
         const songCover = document.getElementById('song-cover');
         const btnPlay = document.getElementById('btn-play');
         const btnNext = document.getElementById('btn-next');
+        const btnLoop = document.getElementById('btn-loop');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         const volumeSlider = document.getElementById('volume');
+        
+        // Tabs Elements
+        const tabAll = document.getElementById('tab-all');
+        const tabRecents = document.getElementById('tab-recents');
+        const tabAlbums = document.getElementById('tab-albums');
+        const albumsContainer = document.getElementById('albums-container');
+        const albumButtons = document.querySelectorAll('.album-select-btn');
 
         // Create player after API loads
         function onYouTubeIframeAPIReady() {
@@ -496,12 +656,17 @@
             // Sync initial volume
             player.setVolume(volumeSlider.value);
 
-            // Select a random song and attempt to play automatically (allowed since opened via user click)
+            // Start playing in ALL mode (shuffled) automatically on open
             selectSong(getRandomIndex(), true);
         }
 
         function onPlayerStateChange(event) {
-            // YT.PlayerState: ENDED (0), PLAYING (1), PAUSED (2), BUFFERING (3), CUED (5)
+            // Update metadata regularly during play transitions
+            if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
+                setTimeout(updateMetadata, 300);
+            }
+            
+            // Sync state flags
             if (event.data === YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 playIcon.style.display = 'none';
@@ -513,9 +678,15 @@
                     pauseIcon.style.display = 'none';
                 }
                 
-                // If song ended naturally, play the next one automatically
+                // If song ended naturally
                 if (event.data === YT.PlayerState.ENDED) {
-                    selectSong(getRandomIndex(), true);
+                    if (isLooping) {
+                        // Replay the current video
+                        player.playVideo();
+                    } else {
+                        // Auto-advance based on active mode
+                        playNextSong();
+                    }
                 }
             }
         }
@@ -523,17 +694,19 @@
         function onPlayerError(event) {
             console.error("YouTube Player Error: ", event.data);
             
-            // Stop playing states on error and display message
             isPlaying = false;
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
             
-            const currentSong = songsList[currentSongIndex];
-            songTitle.textContent = "Eroare la: " + (currentSong ? currentSong.title : "piesă");
-            
-            // CRITICAL: We do NOT skip to next song automatically on error to break infinite loops!
+            if (playMode === 'ALBUMS') {
+                songTitle.textContent = "Eroare la redare playlist";
+            } else {
+                const currentSong = songsList[currentSongIndex];
+                songTitle.textContent = "Eroare la: " + (currentSong ? currentSong.title : "piesă");
+            }
         }
 
+        // Returns a random index (excluding the current one)
         function getRandomIndex() {
             if (songsList.length <= 1) return 0;
             let idx;
@@ -543,21 +716,53 @@
             return idx;
         }
 
+        // Updates Title and Cover Art dynamically
+        function updateMetadata() {
+            if (!player) return;
+            
+            if (playMode === 'ALBUMS') {
+                // Read directly from YouTube active stream metadata
+                const videoData = player.getVideoData();
+                if (videoData && videoData.title) {
+                    let rawTitle = videoData.title;
+                    let cleanTitle = rawTitle.replace(/^Ilie Lascu\s*-\s*/i, '')
+                                            .replace(/\s*\(Official.*?\)/i, '')
+                                            .replace(/\s*\(Audio.*?\)/i, '')
+                                            .trim();
+                    songTitle.textContent = cleanTitle;
+                    
+                    const videoId = videoData.video_id;
+                    const matchingSong = songsList.find(s => s.youtube_id === videoId);
+                    
+                    if (matchingSong) {
+                        songCover.src = matchingSong.cover;
+                    } else {
+                        songCover.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    }
+                    songCover.classList.add('loaded');
+                }
+            } else {
+                // Read from our static songsList catalog
+                const song = songsList[currentSongIndex];
+                if (song) {
+                    songTitle.textContent = song.title;
+                    songCover.classList.remove('loaded');
+                    songCover.src = song.cover;
+                    songCover.onload = () => {
+                        songCover.classList.add('loaded');
+                    };
+                }
+            }
+        }
+
+        // Sets the next active song index/playlist based on the mode and triggers play
         function selectSong(index, shouldPlay) {
             if (index < 0 || index >= songsList.length) return;
             currentSongIndex = index;
-            const song = songsList[currentSongIndex];
             
-            // Update UI metadata
-            songTitle.textContent = song.title;
-            songCover.classList.remove('loaded');
-            songCover.src = song.cover;
-            
-            songCover.onload = () => {
-                songCover.classList.add('loaded');
-            };
+            updateMetadata();
 
-            // Cue (prepare without starting) or Load (prepare and play)
+            const song = songsList[currentSongIndex];
             if (shouldPlay) {
                 player.loadVideoById(song.youtube_id);
             } else {
@@ -565,7 +770,81 @@
             }
         }
 
-        // Controls Action Bindings
+        // Handles the "Next" logic for different play modes
+        function playNextSong() {
+            if (playMode === 'ALL') {
+                selectSong(getRandomIndex(), true);
+            } else if (playMode === 'RECENTS') {
+                // RECENTS plays sequentially: newest to oldest (Latino -> Midnight -> Museum -> ...)
+                // Latino is at index 9 (last element), Rumba of the Moon is at index 0 (first element)
+                if (currentSequentialIndex === -1) {
+                    currentSequentialIndex = songsList.length - 1; // Start at the newest
+                } else {
+                    // Step backward through the array
+                    currentSequentialIndex = (currentSequentialIndex - 1 + songsList.length) % songsList.length;
+                }
+                selectSong(currentSequentialIndex, true);
+            } else if (playMode === 'ALBUMS') {
+                // YouTube handles playlist progress, but we force play next video
+                player.nextVideo();
+            }
+        }
+
+        // Mode Navigation Tab Handlers
+        function resetTabs() {
+            tabAll.classList.remove('active');
+            tabRecents.classList.remove('active');
+            tabAlbums.classList.remove('active');
+            albumsContainer.classList.remove('active');
+            
+            albumButtons.forEach(btn => btn.classList.remove('active'));
+        }
+
+        tabAll.addEventListener('click', () => {
+            if (playMode === 'ALL') return;
+            resetTabs();
+            tabAll.classList.add('active');
+            
+            playMode = 'ALL';
+            playNextSong(); // Starts a new random song
+        });
+
+        tabRecents.addEventListener('click', () => {
+            if (playMode === 'RECENTS') return;
+            resetTabs();
+            tabRecents.classList.add('active');
+            
+            playMode = 'RECENTS';
+            currentSequentialIndex = songsList.length - 1; // Focus Latino first
+            selectSong(currentSequentialIndex, true);
+        });
+
+        tabAlbums.addEventListener('click', () => {
+            resetTabs();
+            tabAlbums.classList.add('active');
+            albumsContainer.classList.add('active');
+        });
+
+        // Album list clicks
+        albumButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                albumButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                playMode = 'ALBUMS';
+                activePlaylistId = button.getAttribute('data-playlist');
+                
+                // Load and play the entire YouTube playlist
+                player.loadPlaylist({
+                    list: activePlaylistId,
+                    index: 0,
+                    startSeconds: 0,
+                    suggestedQuality: 'default'
+                });
+            });
+        });
+
+        // Playback Control Actions
         btnPlay.addEventListener('click', () => {
             if (!player) return;
             const state = player.getPlayerState();
@@ -577,24 +856,25 @@
         });
 
         btnNext.addEventListener('click', () => {
-            // User manually clicked Next, so we should autoplay
-            selectSong(getRandomIndex(), true);
+            playNextSong();
         });
 
+        // Loop Toggle
+        btnLoop.addEventListener('click', () => {
+            isLooping = !isLooping;
+            if (isLooping) {
+                btnLoop.classList.add('active');
+            } else {
+                btnLoop.classList.remove('active');
+            }
+        });
+
+        // Volume Bar
         volumeSlider.addEventListener('input', (e) => {
             if (player) {
                 player.setVolume(e.target.value);
             }
         });
-
-        // Register Service Worker for PWA compliance (Chrome installable App)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registered successfully!', reg))
-                    .catch(err => console.error('Service Worker registration failed:', err));
-            });
-        }
     </script>
 </body>
 </html>
