@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadioSIX - Ilie Lascu Music</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-green: #39ff14;
+            --neon-glow: rgba(57, 255, 20, 0.3);
+            --bg-dark: #09090b;
+            --card-bg: #121214;
+            --meta-bg: #18181c;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Ambient subtle green glow in the background */
+        .ambient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .glow-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Compact Player Card (Layout matching the user screenshot) */
+        .player-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 480px;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Song Metadata block (Subtle grey container matching screenshot) */
+        .song-info {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: var(--meta-bg);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 16px;
+            border-radius: 20px;
+            text-align: left;
+        }
+
+        .cover-art-container {
+            width: 72px;
+            height: 72px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .cover-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cover-art.loaded {
+            opacity: 1;
+        }
+
+        .meta-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .station-badge {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--neon-green);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .station-badge::before {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green);
+            animation: pulseRadio 1s infinite alternate;
+        }
+
+        @keyframes pulseRadio {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .song-title {
+            font-size: 19px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-main);
+            letter-spacing: -0.2px;
+        }
+
+        .song-artist {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* Controls Block (Centered below info block) */
+        .controls {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 8px 0;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn svg {
+            fill: #ffffff;
+            transition: fill 0.2s ease, filter 0.2s ease;
+        }
+
+        .control-btn:hover svg {
+            fill: var(--neon-green);
+            filter: drop-shadow(0 0 6px var(--neon-glow));
+        }
+
+        .control-btn:active {
+            transform: scale(0.92);
+        }
+
+        .btn-play-pause {
+            width: 64px;
+            height: 64px;
+            background: #1c1c22;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-play-pause:hover {
+            background: #24242a;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            width: 44px;
+            height: 44px;
+        }
+
+        /* Volume Slider (Bottom of the card) */
+        .volume-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 4px 0 4px;
+        }
+
+        .volume-icon {
+            opacity: 0.5;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .volume-slider:hover::-webkit-slider-thumb {
+            background: var(--neon-green);
+            transform: scale(1.2);
+        }
+
+        /* Hidden YouTube Frame */
+        #yt-player-wrapper {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Loading Screen overlay */
+        .loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            border-radius: 28px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: opacity 0.4s ease, pointer-events 0.4s ease;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(57, 255, 20, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--neon-green);
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        .loaded .loader-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Soft green ambient light -->
+    <div class="ambient-bg">
+        <div class="glow-blob"></div>
+    </div>
+
+    <!-- Hidden native YouTube player container -->
+    <div id="yt-player-wrapper">
+        <div id="yt-player"></div>
+    </div>
+
+    <!-- Compact RadioSIX Player -->
+    <div class="player-card" id="player-container">
+        
+        <!-- Loading Overlay -->
+        <div class="loader-overlay" id="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">SE ÎNCARCĂ RADIOSIX...</div>
+        </div>
+
+        <!-- Song Metadata block -->
+        <div class="song-info">
+            <div class="cover-art-container">
+                <img class="cover-art" id="song-cover" src="" alt="Album Cover">
+            </div>
+            <div class="meta-details">
+                <div class="station-badge">RADIOSIX LIVE</div>
+                <div class="song-title" id="song-title">Se conectează...</div>
+                <div class="song-artist">Ilie Lascu</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <!-- Play/Pause Button -->
+            <button class="control-btn btn-play-pause" id="btn-play" title="Redare / Pauză">
+                <svg id="play-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="pause-icon" viewBox="0 0 24 24" width="24" height="24" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+            </button>
+
+            <!-- Next Track Button -->
+            <button class="control-btn btn-next" id="btn-next" title="Următoarea piesă aleatorie">
+                <svg viewBox="0 0 24 24" width="26" height="26">
+                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Volume Bar -->
+        <div class="volume-container">
+            <div class="volume-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text-muted)">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </div>
+            <input class="volume-slider" type="range" id="volume" min="0" max="100" value="80">
+        </div>
+
+    </div>
+
+    <!-- YouTube IFrame Player API -->
+    <script>
+        // List of songs extracted dynamically from index.html
+        const songsList = [
+          {
+            "title": "Rumba of the Moon",
+            "youtube_id": "XHeFZf_DgdQ",
+            "cover": "assets/rumbaofthemoon.webp"
+          },
+          {
+            "title": "Transilvania",
+            "youtube_id": "X2emsIuSyBQ",
+            "cover": "assets/transilvania.webp"
+          },
+          {
+            "title": "Black Clouds",
+            "youtube_id": "zrKf36tDMS4",
+            "cover": "assets/blackclouds.webp"
+          },
+          {
+            "title": "We Don't Ask",
+            "youtube_id": "JYxfT5Ums3o",
+            "cover": "assets/wedontask.webp"
+          },
+          {
+            "title": "Where Is Eva?",
+            "youtube_id": "HuIzTbNoe18",
+            "cover": "assets/whereiseva.webp"
+          },
+          {
+            "title": "Pedro",
+            "youtube_id": "j86TgYHB9Os",
+            "cover": "assets/pedro.webp"
+          },
+          {
+            "title": "The Caspian Response",
+            "youtube_id": "seUt7yYsjbA",
+            "cover": "assets/thecaspianresponse.webp"
+          },
+          {
+            "title": "Museum ohne Morgen",
+            "youtube_id": "Z8PGQtAVyVs",
+            "cover": "assets/museumohnemorgen.webp"
+          },
+          {
+            "title": "No More Midnight",
+            "youtube_id": "t-CGRuizfYA",
+            "cover": "assets/no_more_midnight.webp"
+          },
+          {
+            "title": "The Synthesis of a Latino",
+            "youtube_id": "2R9f6qs6K-E",
+            "cover": "assets/thesynthesisofalatino.webp"
+          }
+        ];
+
+        let player;
+        let currentSongIndex = -1;
+        let isPlaying = false;
+
+        // Load YouTube Player API asynchronously
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Elements
+        const songTitle = document.getElementById('song-title');
+        const songCover = document.getElementById('song-cover');
+        const btnPlay = document.getElementById('btn-play');
+        const btnNext = document.getElementById('btn-next');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const volumeSlider = document.getElementById('volume');
+
+        // Create player after API loads
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '200',
+                width: '200',
+                videoId: '',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'modestbranding': 1,
+                    'iv_load_policy': 3
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Remove loading screen
+            document.body.classList.add('loaded');
+            
+            // Sync initial volume
+            player.setVolume(volumeSlider.value);
+
+            // Select a random song but DO NOT play automatically (prevents autoplay blocks)
+            selectSong(getRandomIndex(), false);
+        }
+
+        function onPlayerStateChange(event) {
+            // YT.PlayerState: ENDED (0), PLAYING (1), PAUSED (2), BUFFERING (3), CUED (5)
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.CUED) {
+                if (event.data === YT.PlayerState.PAUSED) {
+                    isPlaying = false;
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                }
+                
+                // If song ended naturally, play the next one automatically
+                if (event.data === YT.PlayerState.ENDED) {
+                    selectSong(getRandomIndex(), true);
+                }
+            }
+        }
+
+        function onPlayerError(event) {
+            console.error("YouTube Player Error: ", event.data);
+            
+            // Stop playing states on error and display message
+            isPlaying = false;
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            
+            const currentSong = songsList[currentSongIndex];
+            songTitle.textContent = "Eroare la: " + (currentSong ? currentSong.title : "piesă");
+            
+            // CRITICAL: We do NOT skip to next song automatically on error to break infinite loops!
+        }
+
+        function getRandomIndex() {
+            if (songsList.length <= 1) return 0;
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * songsList.length);
+            } while (idx === currentSongIndex);
+            return idx;
+        }
+
+        function selectSong(index, shouldPlay) {
+            if (index < 0 || index >= songsList.length) return;
+            currentSongIndex = index;
+            const song = songsList[currentSongIndex];
+            
+            // Update UI metadata
+            songTitle.textContent = song.title;
+            songCover.classList.remove('loaded');
+            songCover.src = song.cover;
+            
+            songCover.onload = () => {
+                songCover.classList.add('loaded');
+            };
+
+            // Cue (prepare without starting) or Load (prepare and play)
+            if (shouldPlay) {
+                player.loadVideoById(song.youtube_id);
+            } else {
+                player.cueVideoById(song.youtube_id);
+            }
+        }
+
+        // Controls Action Bindings
+        btnPlay.addEventListener('click', () => {
+            if (!player) return;
+            const state = player.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        });
+
+        btnNext.addEventListener('click', () => {
+            // User manually clicked Next, so we should autoplay
+            selectSong(getRandomIndex(), true);
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            if (player) {
+                player.setVolume(e.target.value);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Rumba of the Moon",
+    "youtube_id": "XHeFZf_DgdQ",
+    "cover": "assets/rumbaofthemoon.webp"
+  },
+  {
+    "title": "Transilvania",
+    "youtube_id": "X2emsIuSyBQ",
+    "cover": "assets/transilvania.webp"
+  },
+  {
+    "title": "Black Clouds",
+    "youtube_id": "zrKf36tDMS4",
+    "cover": "assets/blackclouds.webp"
+  },
+  {
+    "title": "We Don't Ask",
+    "youtube_id": "JYxfT5Ums3o",
+    "cover": "assets/wedontask.webp"
+  },
+  {
+    "title": "Where Is Eva?",
+    "youtube_id": "HuIzTbNoe18",
+    "cover": "assets/whereiseva.webp"
+  },
+  {
+    "title": "Pedro",
+    "youtube_id": "j86TgYHB9Os",
+    "cover": "assets/pedro.webp"
+  },
+  {
+    "title": "The Caspian Response",
+    "youtube_id": "seUt7yYsjbA",
+    "cover": "assets/thecaspianresponse.webp"
+  },
+  {
+    "title": "Museum ohne Morgen",
+    "youtube_id": "Z8PGQtAVyVs",
+    "cover": "assets/museumohnemorgen.webp"
+  },
+  {
+    "title": "No More Midnight",
+    "youtube_id": "t-CGRuizfYA",
+    "cover": "assets/no_more_midnight.webp"
+  },
+  {
+    "title": "The Synthesis of a Latino",
+    "youtube_id": "2R9f6qs6K-E",
+    "cover": "assets/thesynthesisofalatino.webp"
+  }
+]
