@@ -1623,6 +1623,12 @@
         navFavorites.addEventListener('click', () => {
             showScreen('screen-favorites', navFavorites);
             renderFavorites();
+            if (playMode !== 'FAVORITES') {
+                playMode = 'FAVORITES';
+                if (favoriteIds.length > 0) {
+                    playFavoriteIndex(0);
+                }
+            }
         });
 
         // --- CONTROLS BINDINGS ---
