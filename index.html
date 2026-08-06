@@ -44,6 +44,9 @@ a:hover{text-decoration:underline;color:#efd49b;}
 .btn.rumble:hover{background:#85c742;color:#000;}
 .btn.tiktok{border-color:rgba(254,44,85,0.45);color:#ffd4df;}
 .btn.tiktok:hover{background:#FE2C55;color:#fff;border-color:#FE2C55;}
+.btn.radiosix{border-color:rgba(57,255,20,0.48);color:#d9ffd9;}
+.btn.radiosix:hover{background:#39ff14;color:#000;border-color:#39ff14;box-shadow:0 0 12px rgba(57,255,20,0.4);text-decoration:none;}
+.btn.radiosix img{border-radius:4px;vertical-align:middle;filter:brightness(1.2);}
 .gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
 figure.tile{margin:0;background:#12110e;border:1px solid rgba(200,159,85,0.48);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
 figure.tile:hover{border-color:var(--gold);}
@@ -268,6 +271,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section aria-label="Music" class="wrapper music-section">
 <h2 class="section-title">Muzica mea / My Music</h2>
+<div class="radiosix-row" style="margin: 15px 0 25px; display: flex; gap: 10px; position: relative; z-index: 5;">
+  <a class="btn radiosix" href="radiosix.html" target="_blank">
+    <img src="assets/radiosix_logo.png" alt="" width="20" height="20">
+    <span>Ascultă RadioSIX Live</span>
+  </a>
+</div>
 
 <section aria-label="Recent releases" class="recent-releases">
 <h3 class="recent-title">Ultimele lansări / Recent releases</h3>
