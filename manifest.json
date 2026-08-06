@@ -1,0 +1,19 @@
+{
+  "name": "RadioSIX",
+  "short_name": "RadioSIX",
+  "description": "Radio live pentru muzica lui Ilie Lascu",
+  "start_url": "radiosix.html",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#39ff14",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/radiosix_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
