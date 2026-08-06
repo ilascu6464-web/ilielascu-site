@@ -10,7 +10,7 @@
   "scope": "/",
   "icons": [
     {
-      "src": "assets/radiosix_logo.png",
+      "src": "assets/radiosix_app_icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
