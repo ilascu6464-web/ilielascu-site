@@ -489,8 +489,8 @@
             // Sync initial volume
             player.setVolume(volumeSlider.value);
 
-            // Select a random song but DO NOT play automatically (prevents autoplay blocks)
-            selectSong(getRandomIndex(), false);
+            // Select a random song and attempt to play automatically (allowed since opened via user click)
+            selectSong(getRandomIndex(), true);
         }
 
         function onPlayerStateChange(event) {
