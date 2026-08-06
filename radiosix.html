@@ -1050,7 +1050,9 @@
                 isPlaying = true;
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
-            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.CUED) {
+            } else if (event.data === YT.PlayerState.CUED) {
+                player.playVideo();
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
                 if (event.data === YT.PlayerState.PAUSED) {
                     isPlaying = false;
                     playIcon.style.display = 'block';
@@ -1062,10 +1064,7 @@
                     if (isLooping) {
                         player.playVideo();
                     } else {
-                        // YouTube auto-advances playlist in Album mode
-                        if (playMode !== 'ALBUMS') {
-                            playNextSong();
-                        }
+                        playNextSong();
                     }
                 }
             }
@@ -1140,7 +1139,9 @@
             albumPlayIndex = trackIdx;
             activePlaylistId = album.album_title; // Use album title as identifier
             
-            const songTitleStr = albumTracks[albumPlayIndex];
+            const trackObj = albumTracks[albumPlayIndex];
+            const songTitleStr = trackObj.title;
+            const youtubeId = trackObj.youtube_id;
             
             // Re-render to show active song in expanded sublist
             renderAlbumsGrid();
@@ -1149,12 +1150,9 @@
                 player.stopVideo();
             }
             
-            // Try to find if this song is in our main 10 songs list (with hardcoded youtube_id)
-            const matchingSong = songsList.find(s => s.title.toLowerCase() === songTitleStr.toLowerCase());
-            
             if (player) {
-                if (matchingSong) {
-                    player.loadVideoById(matchingSong.youtube_id);
+                if (youtubeId) {
+                    player.loadVideoById(youtubeId);
                 } else {
                     // Search YouTube dynamically for the track name and play the first result
                     player.loadPlaylist({
@@ -1272,7 +1270,7 @@
             
             if (playMode === 'ALBUMS') {
                 if (albumTracks && albumTracks[albumPlayIndex]) {
-                    songTitle.textContent = albumTracks[albumPlayIndex];
+                    songTitle.textContent = albumTracks[albumPlayIndex].title;
                 }
                 
                 const videoData = player.getVideoData();
@@ -1484,7 +1482,7 @@
                 sublist.style.gap = '4px';
                 sublist.style.padding = '4px 0 8px 40px';
                 
-                album.tracks.forEach((trackName, trackIdx) => {
+                album.tracks.forEach((trackObj, trackIdx) => {
                     const isPlayingTrack = (isActiveAlbum && albumPlayIndex === trackIdx);
                     
                     const trackRow = document.createElement('div');
@@ -1494,7 +1492,7 @@
                     trackRow.innerHTML = `
                         <div class="track-left">
                             <span class="track-num" style="width: 16px; font-size: 11px;">${trackIdx + 1}</span>
-                            <span class="track-name" style="font-size: 13px; font-weight: 400;">${trackName}</span>
+                            <span class="track-name" style="font-size: 13px; font-weight: 400;">${trackObj.title}</span>
                         </div>
                         <div class="track-playing-indicator" style="font-size: 11px; display: ${isPlayingTrack ? 'flex' : 'none'};">
                             <span>Redă</span>

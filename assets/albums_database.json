@@ -3,304 +3,174 @@
     "album_title": "Analog Conflict",
     "tracks_count": 7,
     "tracks": [
-      "Focul de sub Podul Minciunilor",
-      "Hermannstadt tanzt mit Bruckenthal",
-      "RUMBA-ȚUMBA",
-      "Ridică-te grindă-n sus",
-      "Symphonia Residualis",
-      "Țup-Țup-Țup",
-      "🇷🇸Rakia i Suze, Frați pe Vecie 🇲🇩"
+      {
+        "title": "Focul de sub Podul Minciunilor",
+        "youtube_id": "FvVk-hzYvP0"
+      },
+      {
+        "title": "Hermannstadt tanzt mit Bruckenthal",
+        "youtube_id": "bIMwJyGc4a8"
+      },
+      {
+        "title": "RUMBA-ȚUMBA",
+        "youtube_id": "xPoAEWfXkNk"
+      },
+      {
+        "title": "Ridică-te grindă-n sus",
+        "youtube_id": "15P2I49WVFk"
+      },
+      {
+        "title": "Symphonia Residualis",
+        "youtube_id": "KnlBiPaKrIw"
+      },
+      {
+        "title": "Țup-Țup-Țup",
+        "youtube_id": "ZLYrGPlz_Fs"
+      },
+      {
+        "title": "🇷🇸Rakia i Suze, Frați pe Vecie 🇲🇩",
+        "youtube_id": ""
+      }
     ]
   },
   {
     "album_title": "Analog Dysfunctions",
     "tracks_count": 5,
     "tracks": [
-      "A Soul Painted in Bits",
-      "Binary Panic",
-      "Europe Divided Between One and Zero",
-      "The Synthesis of a Latino",
-      "Too Much Analog"
+      {
+        "title": "A Soul Painted in Bits",
+        "youtube_id": "EUoHEXB9spk"
+      },
+      {
+        "title": "Binary Panic",
+        "youtube_id": "drtKhB0Z22s"
+      },
+      {
+        "title": "Europe Divided Between One and Zero",
+        "youtube_id": "vjDQ2RdkC2M"
+      },
+      {
+        "title": "The Synthesis of a Latino",
+        "youtube_id": "2R9f6qs6K-E"
+      },
+      {
+        "title": "Too Much Analog",
+        "youtube_id": "2R9f6qs6K-E"
+      }
     ]
   },
   {
     "album_title": "Biography in Sound",
     "tracks_count": 6,
     "tracks": [
-      "Daddy's on my side",
-      "Don’t be a Blackrock",
-      "FIVE BEATS FORWARD",
-      "Got my hands on my phone",
-      "Look what you've done to me",
-      "Number One"
+      {
+        "title": "Daddy's on my side",
+        "youtube_id": "B155OFuLhv4"
+      },
+      {
+        "title": "Don’t be a Blackrock",
+        "youtube_id": "i_5B73_PJKw"
+      },
+      {
+        "title": "FIVE BEATS FORWARD",
+        "youtube_id": "tFMvm3HUgqs"
+      },
+      {
+        "title": "Got my hands on my phone",
+        "youtube_id": "Rvg_tVggdtw"
+      },
+      {
+        "title": "Look what you've done to me",
+        "youtube_id": "M9ChEu8urSU"
+      },
+      {
+        "title": "Number One",
+        "youtube_id": "iFMkjh6cLLY"
+      }
     ]
   },
   {
     "album_title": "Blue Geometry Waltz",
     "tracks_count": 3,
     "tracks": [
-      "Paris",
-      "Sankt Petersburg",
-      "Sibiu"
+      {
+        "title": "Paris",
+        "youtube_id": "XnjgGBoZr9E"
+      },
+      {
+        "title": "Sankt Petersburg",
+        "youtube_id": "-E9dEaLvDYE"
+      },
+      {
+        "title": "Sibiu",
+        "youtube_id": "0pwYLE1VmgA"
+      }
     ]
   },
   {
     "album_title": "Contemporary dysfunction",
     "tracks_count": 5,
     "tracks": [
-      "Caravan of Disillusionment",
-      "My Geisha",
-      "Perception’s Paradox",
-      "The World in Chaos",
-      "The brave Siberian soul"
+      {
+        "title": "Caravan of Disillusionment",
+        "youtube_id": "Yy5ENdnZ4sk"
+      },
+      {
+        "title": "My Geisha",
+        "youtube_id": "fee592PN-Ho"
+      },
+      {
+        "title": "Perception’s Paradox",
+        "youtube_id": "5Uf_Nb_AhKQ"
+      },
+      {
+        "title": "The World in Chaos",
+        "youtube_id": "2R9f6qs6K-E"
+      },
+      {
+        "title": "The brave Siberian soul",
+        "youtube_id": "Xc9XrC5KKGY"
+      }
     ]
   },
   {
     "album_title": "Hop&Jazz",
     "tracks_count": 2,
     "tracks": [
-      "Too late for crying",
-      "🇲🇩 Țuică cu Tsatsiki 🇬🇷"
+      {
+        "title": "Too late for crying",
+        "youtube_id": "ouK-fx_6EV8"
+      },
+      {
+        "title": "🇲🇩 Țuică cu Tsatsiki 🇬🇷",
+        "youtube_id": ""
+      }
     ]
   },
   {
     "album_title": "Incursiune în Imposibil",
     "tracks_count": 5,
     "tracks": [
-      "Ashes of Heroes",
-      "El Guardián de la Luna",
-      "Incursiune în Imposibil",
-      "Nina",
-      "Xorax swim on the wings of a swan"
-    ]
-  },
-  {
-    "album_title": "Jazz Scratches",
-    "tracks_count": 3,
-    "tracks": [
-      "Jazz Scratches",
-      "Please, Like Me",
-      "The Companion"
-    ]
-  },
-  {
-    "album_title": "Night Flight with Frédéric",
-    "tracks_count": 4,
-    "tracks": [
-      "Between Light and Silence",
-      "Gentle Landing",
-      "Moonlit Departure",
-      "Suspended in Blue"
-    ]
-  },
-  {
-    "album_title": "ORBITA ZERO ￼",
-    "tracks_count": 9,
-    "tracks": [
-      "Clara's Song",
-      "Matías Verón",
-      "Nodo del Plata",
-      "Taste of Colour",
-      "Taste of Life",
-      "Taste of Light",
-      "Taste of Truth",
-      "🇲🇩   ARGO-9's Dream  🔊",
-      "🇲🇩  I Dance with Clara  🔊"
-    ]
-  },
-  {
-    "album_title": "One Finger",
-    "tracks_count": 6,
-    "tracks": [
-      "Black Clouds",
-      "One Finger Points to the Sky",
-      "Pedro",
-      "The Ring",
-      "We Don't Ask",
-      "Where Is Eva"
-    ]
-  },
-  {
-    "album_title": "Parallel Worlds",
-    "tracks_count": 8,
-    "tracks": [
-      "Don’t Think Twice, Think More",
-      "Indaba Yesihlahla Esidala",
-      "Me in the Mirror",
-      "Mina Nawe",
-      "My Soul in the Looking Glass",
-      "Reality or Illusion",
-      "The Light Under the Door",
-      "The Night Shift"
-    ]
-  },
-  {
-    "album_title": "Punjabi Light Rituals",
-    "tracks_count": 3,
-    "tracks": [
-      "Dum ba-koon",
-      "Hoo Hu Kaba Lea",
-      "Tutu Tutula Tu"
-    ]
-  },
-  {
-    "album_title": "Red Dust Rituals",
-    "tracks_count": 3,
-    "tracks": [
-      "Conversation with an Old Whale",
-      "Red Dust Conversation",
-      "Where the Dust Meets the Ocean"
-    ]
-  },
-  {
-    "album_title": "Singles 2025",
-    "tracks_count": 6,
-    "tracks": [
-      "Barrio Tango",
-      "Clap Your Hands",
-      "HAI LA JOC DE ANUL NOU",
-      "One Last Christmas",
-      "Please, love me too",
-      "The Bread She Never Ate"
-    ]
-  },
-  {
-    "album_title": "Singles 2026",
-    "tracks_count": 41,
-    "tracks": [
-      "ARANJUEZ REVISITED",
-      "After Living Berlin",
-      "Angels and Demons",
-      "BIRDY NAM NAM",
-      "Bla-Bla-Bla",
-      "Chiaroscuro Lovers",
-      "Conversation with an Old Whale",
-      "Cry Like Thunder",
-      "Don't Let Them",
-      "Don't Move the Stone",
-      "EMIGRANTUL",
-      "Echo from the Diaspora",
-      "Every Tear Has a Rhythm",
-      "Freedom Jazz Dance",
-      "From the Danube to the Sea",
-      "He Never Raises His Voice",
-      "Hristos a înviat - 2",
-      "Life Offbeat",
-      "Living Berlin",
-      "Maramu’ Răsună-n Lume",
-      "Mimi's Song",
-      "Museum ohne Morgen",
-      "No More Midnight",
-      "Nu-i lumina nicari",
-      "Odessa, passion and tears",
-      "Romanță AI",
-      "SHELBY BLOOD",
-      "Siyavuka",
-      "The 7th Sense of the Samba",
-      "The Caspian Response",
-      "The Guardian of the Code",
-      "The Last Page",
-      "The Sound of Tumbalalaika",
-      "The Thistle and the Shield",
-      "The Wizard of the Washboard Hollow",
-      "The World Has Gone Completely Crazy",
-      "Thunder de Fuego",
-      "Tika Taka Raga",
-      "Transilvania",
-      "Two of Us",
-      "When the Bagpipe Cries"
-    ]
-  },
-  {
-    "album_title": "Synthetic Nirvana",
-    "tracks_count": 9,
-    "tracks": [
-      "Accessing Synthetic Nirvana",
-      "Break the Line",
-      "Cantus ad Portam Albam",
-      "Conquistadors",
-      "Do Not Open the White Gate",
-      "Life Offbeat",
-      "POSITIVE DYSTOPIA",
-      "The Door Inside",
-      "The Rebels Are Free"
-    ]
-  },
-  {
-    "album_title": "The Perception of Reality",
-    "tracks_count": 5,
-    "tracks": [
-      "Blind Frequency",
-      "IL TOCCO CHE RESTA",
-      "MOMENTO GUSTO",
-      "Scent of Memory",
-      "Silent Wavelength"
-    ]
-  },
-  {
-    "album_title": "The Perfect World",
-    "tracks_count": 6,
-    "tracks": [
-      "Imagine the Future",
-      "La Rue des Étoiles",
-      "La petite Patta",
-      "Le Bal des Mondes",
-      "The Clockmaker's Carnival",
-      "We Are Here"
-    ]
-  },
-  {
-    "album_title": "The Wailing Wall Weeps",
-    "tracks_count": 4,
-    "tracks": [
-      "Even the Wailing Wall Weeps",
-      "The Whispers of Samiotissa",
-      "When Joy Awakens",
-      "When Zorba Breaks Free"
-    ]
-  },
-  {
-    "album_title": "Tibethana – The Eternal Breath",
-    "tracks_count": 3,
-    "tracks": [
-      "1-Tibethana - The First Breath",
-      "2-Tibethana - The Second Breath",
-      "3-Tibethana - The Third Breath"
-    ]
-  },
-  {
-    "album_title": "Trópico Loco",
-    "tracks_count": 14,
-    "tracks": [
-      "Bella Serafina",
-      "Don't Touch Me",
-      "Fenomeno",
-      "Fuego en la Calle",
-      "Heat of the Soul",
-      "La Noche Tiene Mango",
-      "My Girl Cha Cha",
-      "Rumba of the Moon",
-      "Streets of Havana",
-      "The Museum of Things We Never Said",
-      "Trópico Loco Sí",
-      "Two for One",
-      "Vai, Mundo, Vai",
-      "Zulu Bap"
-    ]
-  },
-  {
-    "album_title": "Voices of the World's Children",
-    "tracks_count": 9,
-    "tracks": [
-      "Don't Move the Stone",
-      "Letter to a General",
-      "Mandarin Light",
-      "Mothers and Fathers",
-      "No One Hears Them Cry",
-      "The Bee's Story",
-      "The Ocean Keeps My Name",
-      "The Yankee’s Donkey",
-      "Voices of the World's Children"
+      {
+        "title": "Ashes of Heroes",
+        "youtube_id": "l9rQ9zTfLVc"
+      },
+      {
+        "title": "El Guardián de la Luna",
+        "youtube_id": "20dkoCS4DnU"
+      },
+      {
+        "title": "Incursiune în Imposibil",
+        "youtube_id": "zb9QcL_nt2I"
+      },
+      {
+        "title": "Nina",
+        "youtube_id": "nCw0vr3SIVg"
+      },
+      {
+        "title": "Xorax swim on the wings of a swan",
+        "youtube_id": "iFlOC8ODjYQ"
+      }
     ]
   }
 ]
