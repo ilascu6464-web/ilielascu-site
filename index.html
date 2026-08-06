@@ -44,9 +44,10 @@ a:hover{text-decoration:underline;color:#efd49b;}
 .btn.rumble:hover{background:#85c742;color:#000;}
 .btn.tiktok{border-color:rgba(254,44,85,0.45);color:#ffd4df;}
 .btn.tiktok:hover{background:#FE2C55;color:#fff;border-color:#FE2C55;}
-.btn.radiosix{border-color:rgba(57,255,20,0.48);color:#d9ffd9;}
-.btn.radiosix:hover{background:#39ff14;color:#000;border-color:#39ff14;box-shadow:0 0 12px rgba(57,255,20,0.4);text-decoration:none;}
-.btn.radiosix img{border-radius:4px;vertical-align:middle;filter:brightness(1.2);}
+.brand-intro .radiosix-row{position:absolute;left:clamp(14px,8vw,140px);top:50%;transform:translateY(-50%);margin:0;padding:0;display:flex;}
+.brand-intro .radiosix-row a{display:inline-flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border:1px solid rgba(57,255,20,0.45);border-radius:999px;background:rgba(10,18,10,0.72);color:#e2ffd9;font-weight:600;font-size:0.95rem;text-shadow:0 0 4px rgba(57,255,20,0.3);opacity:.9;transition:opacity .3s,background .3s,border-color .3s,box-shadow .3s;}
+.brand-intro .radiosix-row a:hover{opacity:1;background:rgba(20,45,20,0.85);border-color:#39ff14;box-shadow:0 0 15px rgba(57, 255, 20, 0.4);text-decoration:none;}
+.brand-intro .radiosix-row img{width:48px;height:48px;border-radius:50%;object-fit:cover;vertical-align:middle;box-shadow:0 0 8px rgba(57,255,20,0.3);}
 .gallery{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
 figure.tile{margin:0;background:#12110e;border:1px solid rgba(200,159,85,0.48);border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;transition:border-color 0.3s;}
 figure.tile:hover{border-color:var(--gold);}
@@ -84,7 +85,7 @@ figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#d5bd87
 .music-section .album-singles-current{order:4;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
 @media(max-width:900px){.books-section{grid-template-columns:repeat(4,minmax(0,1fr));}.music-section figure.tile{width:clamp(86px,15vw,110px);}}
-@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section figure.tile{width:clamp(84px,27vw,112px);}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}}
+@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section figure.tile{width:clamp(84px,27vw,112px);}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}.brand-intro .radiosix-row{position:static;transform:none;padding-top:12px;order:2;}}
 @media(max-width:420px){.books-section{grid-template-columns:repeat(2,minmax(0,1fr));}.books-section .btn{font-size:.72rem;}}
 </style>
 <script>
@@ -147,6 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="film-grain"></div>
 <header class="hero" role="banner"></header>
 <section class="brand-intro" aria-label="iLasRoom AI Creative Studio">
+  <div class="radiosix-row">
+    <a href="radiosix.html" target="_blank" aria-label="RadioSIX Live Player">
+      <img src="assets/radiosix_logo.png" alt="RadioSIX Icon">
+      <span>RadioSIX</span>
+    </a>
+  </div>
   <video autoplay loop muted playsinline preload="metadata" aria-label="iLasRoom AI Creative Studio animated logo">
     <source src="assets/ilasroom-ai-creative-studio.mp4?v=202608031410" type="video/mp4">
   </video>
@@ -271,12 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section aria-label="Music" class="wrapper music-section">
 <h2 class="section-title">Muzica mea / My Music</h2>
-<div class="radiosix-row" style="margin: 15px 0 25px; display: flex; gap: 10px; position: relative; z-index: 5;">
-  <a class="btn radiosix" href="radiosix.html" target="_blank">
-    <img src="assets/radiosix_logo.png" alt="" width="20" height="20">
-    <span>Ascultă RadioSIX Live</span>
-  </a>
-</div>
 
 <section aria-label="Recent releases" class="recent-releases">
 <h3 class="recent-title">Ultimele lansări / Recent releases</h3>
