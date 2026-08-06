@@ -1142,13 +1142,7 @@
             if (player && typeof player.stopVideo === 'function') {
                 player.stopVideo();
             }
-            player.loadPlaylist({
-                list: activePlaylistId,
-                listType: 'playlist',
-                index: 0,
-                startSeconds: 0,
-                suggestedQuality: 'default'
-            });
+            player.loadPlaylist(activePlaylistId, 0, 0);
         }
 
         // --- FAVORITES PLAYING LOGIC ---
@@ -1572,6 +1566,13 @@
                 player.setVolume(e.target.value);
             }
         });
+
+        // Periodically sync metadata if playing (checks every 1000ms)
+        setInterval(() => {
+            if (isPlaying) {
+                updateMetadata();
+            }
+        }, 1000);
     </script>
 </body>
 </html>
