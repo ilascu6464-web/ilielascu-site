@@ -468,94 +468,34 @@
             display: flex;
         }
 
-        /* Albums Grid Layout */
+        /* Albums List Layout */
         .albums-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
             width: 100%;
         }
 
         .album-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 12px 16px;
             cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            position: relative;
+            transition: all 0.2s ease;
         }
 
         .album-card:hover {
             background: rgba(255, 255, 255, 0.03);
             border-color: rgba(255, 255, 255, 0.06);
-            transform: translateY(-4px);
         }
 
         .album-card.active {
-            background: rgba(57, 255, 20, 0.03);
-            border-color: rgba(57, 255, 20, 0.3);
-        }
-
-        .album-cover-placeholder {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #18181c 0%, #070709 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .album-cover-placeholder::before {
-            content: '💿';
-            font-size: 40px;
-            opacity: 0.6;
-        }
-
-        .album-play-icon {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--neon-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 12px var(--neon-glow);
-        }
-
-        .album-card:hover .album-play-icon {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .album-card.active .album-play-icon {
-            opacity: 1;
-            transform: translateY(0);
-            background: #111;
-            border: 1px solid var(--neon-green);
-        }
-
-        .album-card.active .album-play-icon::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: var(--neon-green);
-            box-shadow: 0 0 8px var(--neon-green);
+            background: rgba(57, 255, 20, 0.04);
+            border-color: rgba(57, 255, 20, 0.25);
         }
 
         .album-info {
@@ -565,8 +505,8 @@
         }
 
         .album-title {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             color: var(--text-main);
             white-space: nowrap;
             overflow: hidden;
@@ -575,12 +515,17 @@
 
         .album-card.active .album-title {
             color: var(--neon-green);
+            font-weight: 600;
         }
 
         .album-tracks-count {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
+        }
+
+        .album-card.active .track-playing-indicator {
+            display: flex;
         }
 
         /* Hidden YouTube Frame Wrapper */
@@ -692,16 +637,6 @@
 
             .screen-title {
                 font-size: 18px;
-            }
-
-            .albums-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 10px;
-            }
-
-            .album-card {
-                padding: 10px;
-                border-radius: 12px;
             }
 
             .album-title {
@@ -1267,19 +1202,27 @@
             });
         }
 
-        // Render Grid of Albums
+        // Render List of Albums
         function renderAlbumsGrid() {
             albumsGrid.innerHTML = '';
-            albumsList.forEach((album) => {
+            albumsList.forEach((album, idx) => {
+                const isActive = (playMode === 'ALBUMS' && activePlaylistId === album.playlist_id);
                 const card = document.createElement('div');
-                card.className = `album-card ${playMode === 'ALBUMS' && activePlaylistId === album.playlist_id ? 'active' : ''}`;
+                card.className = `album-card ${isActive ? 'active' : ''}`;
                 card.innerHTML = `
-                    <div class="album-cover-placeholder">
-                        <div class="album-play-icon"></div>
+                    <div class="track-left">
+                        <span class="track-num">${idx + 1}</span>
+                        <span style="font-size: 20px; width: 32px; text-align: center; display: inline-block;">💿</span>
+                        <div class="track-details">
+                            <span class="album-title">${album.title}</span>
+                            <span class="album-tracks-count">${album.tracks_count} piese</span>
+                        </div>
                     </div>
-                    <div class="album-info">
-                        <span class="album-title">${album.title}</span>
-                        <span class="album-tracks-count">${album.tracks_count} piese</span>
+                    <div class="track-playing-indicator">
+                        <span>Redă</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--neon-green)">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
                     </div>
                 `;
                 card.addEventListener('click', () => {
