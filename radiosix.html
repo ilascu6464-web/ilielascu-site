@@ -1238,6 +1238,7 @@
             renderQueue();
             renderRecents();
             renderFavorites();
+            renderAlbumsGrid();
             
             // Update active state in bottom bar
             updateMetadata();
@@ -1484,22 +1485,42 @@
                 
                 album.tracks.forEach((trackObj, trackIdx) => {
                     const isPlayingTrack = (isActiveAlbum && albumPlayIndex === trackIdx);
+                    const trackId = trackObj.youtube_id;
+                    const isFav = trackId ? favoriteIds.includes(trackId) : false;
                     
                     const trackRow = document.createElement('div');
                     trackRow.className = `track-item ${isPlayingTrack ? 'active' : ''}`;
                     trackRow.style.padding = '8px 12px';
                     trackRow.style.borderRadius = '8px';
+                    
+                    let favButtonHtml = '';
+                    if (trackId) {
+                        favButtonHtml = `
+                            <button class="fav-toggle-btn" data-video-id="${trackId}" style="color: ${isFav ? 'var(--neon-green)' : 'var(--text-muted)'}; background: none; border: none; cursor: pointer; padding: 6px; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease;">
+                                ${isFav ? '❤️' : '🤍'}
+                            </button>
+                        `;
+                    }
+                    
                     trackRow.innerHTML = `
                         <div class="track-left">
                             <span class="track-num" style="width: 16px; font-size: 11px;">${trackIdx + 1}</span>
                             <span class="track-name" style="font-size: 13px; font-weight: 400;">${trackObj.title}</span>
                         </div>
-                        <div class="track-playing-indicator" style="font-size: 11px; display: ${isPlayingTrack ? 'flex' : 'none'};">
-                            <span>Redă</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div class="track-playing-indicator" style="font-size: 11px; display: ${isPlayingTrack ? 'flex' : 'none'}; margin-right: 8px;">
+                                <span>Redă</span>
+                            </div>
+                            ${favButtonHtml}
                         </div>
                     `;
                     
                     trackRow.addEventListener('click', (e) => {
+                        if (e.target.closest('.fav-toggle-btn')) {
+                            e.stopPropagation();
+                            toggleFavorite(trackId);
+                            return;
+                        }
                         e.stopPropagation(); // Avoid triggering header click
                         playAlbumIndex(albumIdx, trackIdx);
                     });
