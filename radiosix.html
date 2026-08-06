@@ -1098,6 +1098,9 @@
             });
             
             const song = currentQueue[queueIndex];
+            if (player && typeof player.stopVideo === 'function') {
+                player.stopVideo();
+            }
             player.loadVideoById(song.youtube_id);
             updateMetadata();
         }
@@ -1117,6 +1120,9 @@
             });
             
             const song = songsList[currentSequentialIndex];
+            if (player && typeof player.stopVideo === 'function') {
+                player.stopVideo();
+            }
             player.loadVideoById(song.youtube_id);
             updateMetadata();
         }
@@ -1133,6 +1139,9 @@
                 element.classList.add('active');
             }
             
+            if (player && typeof player.stopVideo === 'function') {
+                player.stopVideo();
+            }
             player.loadPlaylist({
                 list: activePlaylistId,
                 index: 0,
@@ -1157,6 +1166,9 @@
                 }
             });
             
+            if (player && typeof player.stopVideo === 'function') {
+                player.stopVideo();
+            }
             player.loadVideoById(videoId);
             updateMetadata();
         }
