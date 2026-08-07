@@ -1111,31 +1111,48 @@
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-            currentQueue = shuffled.slice(0, 10);
+            currentQueue = shuffled;
             queueIndex = 0;
         }
 
         function updateQueueAfterLoad() {
             if (fullLibraryList.length === 0) return;
             
-            let currentPlayingSong = null;
-            if (playMode === 'ALL' && currentQueue.length > 0) {
-                currentPlayingSong = currentQueue[queueIndex];
+            const today = new Date().toISOString().split('T')[0];
+            const savedDate = localStorage.getItem('radiosix_last_date');
+            const savedQueue = JSON.parse(localStorage.getItem('radiosix_queue'));
+            const savedIndex = parseInt(localStorage.getItem('radiosix_queue_index') || '0', 10);
+            
+            if (savedDate === today && savedQueue && savedQueue.length > songsList.length) {
+                currentQueue = savedQueue;
+                queueIndex = savedIndex;
+            } else {
+                let currentPlayingSong = null;
+                if (playMode === 'ALL' && currentQueue.length > 0) {
+                    currentPlayingSong = currentQueue[queueIndex];
+                }
+                
+                const shuffled = [...fullLibraryList];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                
+                let newQueue = shuffled;
+                if (currentPlayingSong) {
+                    const existingIdx = newQueue.findIndex(s => s.youtube_id === currentPlayingSong.youtube_id);
+                    if (existingIdx > -1) {
+                        newQueue.splice(existingIdx, 1);
+                    }
+                    newQueue.splice(queueIndex, 0, currentPlayingSong);
+                }
+                
+                currentQueue = newQueue;
+                
+                localStorage.setItem('radiosix_last_date', today);
+                localStorage.setItem('radiosix_queue', JSON.stringify(currentQueue));
+                localStorage.setItem('radiosix_queue_index', queueIndex.toString());
             }
-            
-            const shuffled = [...fullLibraryList];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            
-            let newQueue = shuffled.slice(0, 10);
-            
-            if (currentPlayingSong) {
-                newQueue[queueIndex] = currentPlayingSong;
-            }
-            
-            currentQueue = newQueue;
             renderQueue();
         }
 
@@ -1144,6 +1161,8 @@
             queueIndex = index;
             playMode = 'ALL';
             
+            localStorage.setItem('radiosix_queue_index', queueIndex.toString());
+            
             document.querySelectorAll('#queue-tracklist .track-item').forEach((item, idx) => {
                 if (idx === queueIndex) {
                     item.classList.add('active');
@@ -1151,6 +1170,11 @@
                     item.classList.remove('active');
                 }
             });
+            
+            const activeItem = document.querySelector(`#queue-tracklist .track-item[data-idx="${index}"]`);
+            if (activeItem) {
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
             
             const song = currentQueue[queueIndex];
             if (player && typeof player.stopVideo === 'function') {
@@ -1245,31 +1269,9 @@
         function playNextSong() {
             if (playMode === 'ALL') {
                 if (currentQueue.length > 0) {
-                    // Remove the song that just finished playing
-                    currentQueue.splice(queueIndex, 1);
-                    
-                    // Add a new random song from fullLibraryList not currently in queue
-                    const pool = fullLibraryList.length > 0 ? fullLibraryList : songsList;
-                    let nextSongObj = null;
-                    let attempts = 0;
-                    while (attempts < 50) {
-                        const candidate = pool[Math.floor(Math.random() * pool.length)];
-                        if (!currentQueue.some(s => s.youtube_id === candidate.youtube_id)) {
-                            nextSongObj = candidate;
-                            break;
-                        }
-                        attempts++;
-                    }
-                    if (!nextSongObj) {
-                        nextSongObj = pool[Math.floor(Math.random() * pool.length)];
-                    }
-                    currentQueue.push(nextSongObj);
+                    queueIndex = (queueIndex + 1) % currentQueue.length;
+                    localStorage.setItem('radiosix_queue_index', queueIndex.toString());
                 }
-                
-                if (queueIndex >= currentQueue.length) {
-                    queueIndex = 0;
-                }
-                
                 renderQueue();
                 playQueueIndex(queueIndex);
             } else if (playMode === 'RECENTS') {
@@ -1433,6 +1435,7 @@
                 const item = document.createElement('div');
                 item.className = `track-item ${idx === queueIndex && playMode === 'ALL' ? 'active' : ''}`;
                 item.setAttribute('data-youtube-id', song.youtube_id);
+                item.setAttribute('data-idx', idx);
                 item.innerHTML = `
                     <div class="track-left">
                         <span class="track-num">${idx + 1}</span>
