@@ -11,10 +11,16 @@ const {
 
 const projectDir = path.resolve(__dirname, '..');
 const assetsDir = path.join(projectDir, 'assets');
-const html = fs.readFileSync(path.join(projectDir, 'index.html'), 'utf8');
+const htmlSources = [
+  'index.html',
+  'radiosix.html',
+  'manifest.json',
+  'sw.js'
+].map(name => fs.readFileSync(path.join(projectDir, name), 'utf8'));
+const html = htmlSources[0];
 const errors = [];
 
-const assetReferences = collectAssetReferences(html);
+const assetReferences = new Set(htmlSources.flatMap(source => [...collectAssetReferences(source)]));
 const assetFiles = fs.readdirSync(assetsDir)
   .filter(name => fs.statSync(path.join(assetsDir, name)).isFile())
   .sort();
@@ -80,8 +86,8 @@ if (errors.length) {
 function collectAssetReferences(source) {
   const references = new Set();
 
-  for (const match of source.matchAll(/(?:src|data-src|href)="([^"]+)"/g)) {
-    const value = match[1];
+  for (const match of source.matchAll(/(?:src|data-src|href)=(?:"([^"]+)"|'([^']+)')/g)) {
+    const value = match[1] || match[2];
     const marker = value.startsWith('assets/')
       ? 'assets/'
       : value.includes('/assets/') ? '/assets/' : null;
@@ -96,6 +102,11 @@ function collectAssetReferences(source) {
 
   for (const match of source.matchAll(/url\(['"]?(assets\/[^)'"]+)/g)) {
     references.add(safeDecode(match[1].slice('assets/'.length).split('?')[0]));
+  }
+
+  for (const match of source.matchAll(/(["'])assets\/([\s\S]*?)\1/g)) {
+    const asset = match[2].split('?')[0];
+    if (!asset.includes('${')) references.add(safeDecode(asset));
   }
 
   return references;

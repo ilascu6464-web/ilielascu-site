@@ -1,8 +1,10 @@
-const CACHE_NAME = 'radiosix-v1';
+const CACHE_NAME = 'radiosix-v2';
 const ASSETS = [
   'radiosix.html',
+  'manifest.json',
   'assets/radiosix_logo.png',
   'assets/radiosix_app_icon.png',
+  'assets/albums_database.json',
   'assets/songs_list.json'
 ];
 
