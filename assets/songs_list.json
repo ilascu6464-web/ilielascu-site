@@ -1,15 +1,5 @@
 [
   {
-    "title": "Rumba of the Moon",
-    "youtube_id": "XHeFZf_DgdQ",
-    "cover": "assets/rumbaofthemoon.webp"
-  },
-  {
-    "title": "Transilvania",
-    "youtube_id": "X2emsIuSyBQ",
-    "cover": "assets/transilvania.webp"
-  },
-  {
     "title": "Black Clouds",
     "youtube_id": "zrKf36tDMS4",
     "cover": "assets/blackclouds.webp"
@@ -48,5 +38,15 @@
     "title": "The Synthesis of a Latino",
     "youtube_id": "2R9f6qs6K-E",
     "cover": "assets/thesynthesisofalatino.webp"
+  },
+  {
+    "title": "Too Much Analog",
+    "youtube_id": "k-H4mYikhT4",
+    "cover": "assets/toomuchanalog.webp"
+  },
+  {
+    "title": "Drag Me",
+    "youtube_id": "9hZEszABdto",
+    "cover": "assets/dragme.webp"
   }
 ]
