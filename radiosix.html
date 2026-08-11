@@ -1205,32 +1205,16 @@
         function unmutePlayerIfNeeded() {
             isInitialLoad = false;
             if (player && typeof player.unMute === 'function') {
-                if (typeof player.isMuted === 'function' && player.isMuted()) {
-                    player.unMute();
-                    player.setVolume(volumeSlider.value);
-                    
-                    // Safari/Chrome audio context refresh: pause and play to force sound initialization
-                    const state = player.getPlayerState();
-                    if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) {
-                        player.pauseVideo();
-                        setTimeout(() => {
-                            if (player && typeof player.playVideo === 'function') {
-                                player.playVideo();
-                            }
-                        }, 80);
-                    }
-                }
+                player.unMute();
+                player.setVolume(volumeSlider.value);
             }
         }
 
         function onPlayerReady(event) {
             document.body.classList.add('loaded');
             
-            // Mute player initially to allow browser autoplay policy bypass
+            // Set initial volume, do NOT mute by default
             isInitialLoad = true;
-            if (player && typeof player.mute === 'function') {
-                player.mute();
-            }
             player.setVolume(volumeSlider.value);
 
             // Initialize Lists
@@ -1240,24 +1224,23 @@
             renderAlbumsGrid();
             renderFavorites();
 
-            // Start playing the first item in the ALL queue automatically (muted)
+            // Try to start playing automatically (unmuted)
             playQueueIndex(0);
 
-            // Unmute and force play on user interaction (retries if clicked while buffering)
-            const unmuteOnInteraction = () => {
-                unmutePlayerIfNeeded();
-                const state = player.getPlayerState();
-                if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
-                    player.playVideo();
+            // Fallback: if browser blocked unmuted autoplay, start play on first click/tap anywhere
+            const playOnInteraction = () => {
+                isInitialLoad = false;
+                if (player && typeof player.getPlayerState === 'function') {
+                    const state = player.getPlayerState();
+                    if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
+                        player.playVideo();
+                    }
                 }
-                // Only remove listener if player has successfully unmuted
-                if (player && typeof player.isMuted === 'function' && !player.isMuted()) {
-                    document.removeEventListener('click', unmuteOnInteraction);
-                    document.removeEventListener('touchstart', unmuteOnInteraction);
-                }
+                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('touchstart', playOnInteraction);
             };
-            document.addEventListener('click', unmuteOnInteraction);
-            document.addEventListener('touchstart', unmuteOnInteraction);
+            document.addEventListener('click', playOnInteraction);
+            document.addEventListener('touchstart', playOnInteraction);
         }
 
         function onPlayerStateChange(event) {
