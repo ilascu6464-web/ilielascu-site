@@ -1207,6 +1207,20 @@
 
             // Start playing the first item in the ALL queue automatically
             playQueueIndex(0);
+
+            // Autoplay policy fallback: try to play when user clicks anywhere if blocked
+            const playOnInteraction = () => {
+                if (player && typeof player.getPlayerState === 'function') {
+                    const state = player.getPlayerState();
+                    if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
+                        player.playVideo();
+                    }
+                }
+                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('touchstart', playOnInteraction);
+            };
+            document.addEventListener('click', playOnInteraction);
+            document.addEventListener('touchstart', playOnInteraction);
         }
 
         function onPlayerStateChange(event) {
@@ -1910,23 +1924,7 @@
             }
         }, 1000);
 
-        // Autoplay policy fallback: try to play when user clicks anywhere if not already playing
-        let hasInteracted = false;
-        function handleFirstInteraction() {
-            if (hasInteracted) return;
-            hasInteracted = true;
-            if (player && typeof player.getPlayerState === 'function') {
-                const state = player.getPlayerState();
-                if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
-                    player.playVideo();
-                }
-            }
-            // Remove listeners
-            document.removeEventListener('click', handleFirstInteraction);
-            document.removeEventListener('touchstart', handleFirstInteraction);
-        }
-        document.addEventListener('click', handleFirstInteraction);
-        document.addEventListener('touchstart', handleFirstInteraction);
+
 
         // Load YouTube Player API asynchronously
         const tag = document.createElement('script');
