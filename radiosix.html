@@ -138,6 +138,37 @@
             100% { opacity: 1; transform: scale(1.2); }
         }
 
+        /* Language Selector Flags */
+        .lang-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 8px 0;
+            margin-top: -8px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .flag-btn {
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            filter: grayscale(60%);
+            user-select: none;
+        }
+
+        .flag-btn:hover {
+            transform: scale(1.25);
+            filter: grayscale(0%);
+        }
+
+        .flag-btn.active {
+            filter: grayscale(0%);
+            transform: scale(1.15);
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 1px;
+        }
+
         /* Vertical Navigation Menu */
         .sidebar-menu {
             display: flex;
@@ -720,6 +751,18 @@
                     <span class="brand-dot"></span>
                     <span>RadioSIX</span>
                 </div>
+
+                <!-- Language Selector Flags -->
+                <div class="lang-selector">
+                    <span class="flag-btn" data-lang="ro" title="Română">🇷🇴</span>
+                    <span class="flag-btn" data-lang="en" title="English">🇬🇧</span>
+                    <span class="flag-btn" data-lang="de" title="Deutsch">🇩🇪</span>
+                    <span class="flag-btn" data-lang="fr" title="Français">🇫🇷</span>
+                    <span class="flag-btn" data-lang="it" title="Italiano">🇮🇹</span>
+                    <span class="flag-btn" data-lang="es" title="Español">🇪🇸</span>
+                    <span class="flag-btn" data-lang="ru" title="Русский">🇷🇺</span>
+                    <span class="flag-btn" data-lang="ar" title="العربية">🇸🇦</span>
+                </div>
                 
                 <!-- Vertical Menu Navigation -->
                 <nav class="sidebar-menu">
@@ -738,14 +781,14 @@
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm3.3 14.3L11 12.8V7h1.5v4.9l3.8 2.25-.81 1.15z"/>
                         </svg>
-                        <span>RECENTS</span>
+                        <span data-i18n="recents">RECENTS</span>
                     </button>
                     
                     <button class="nav-btn" id="nav-albums">
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M12 2C6.48 2 2 6.48 2 12s6.48 10 10 10 10-6.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/>
                         </svg>
-                        <span>ALBUMS</span>
+                        <span data-i18n="albums">ALBUMS</span>
                     </button>
 
                     <!-- Add FAVORITES button -->
@@ -753,7 +796,7 @@
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
-                        <span>FAVORITES</span>
+                        <span data-i18n="favorites">FAVORITES</span>
                     </button>
                 </nav>
             </aside>
@@ -765,7 +808,7 @@
                 <section class="content-screen active" id="screen-all">
                     <div class="screen-title-area">
                         <h2 class="screen-title">RadioSIX LIVE</h2>
-                        <span class="screen-subtitle">În fiecare zi o nouă listă completă de piese.</span>
+                        <span class="screen-subtitle" data-i18n="subtitle_all">În fiecare zi o nouă listă completă de piese.</span>
                     </div>
                     <div style="margin-top: 18px;">
                         <div class="track-list" id="queue-tracklist">
@@ -777,8 +820,8 @@
                 <!-- RECENTS SEQUENTIAL SCREEN -->
                 <section class="content-screen" id="screen-recents">
                     <div class="screen-title-area">
-                        <h2 class="screen-title">RECENTS</h2>
-                        <span class="screen-subtitle">Lansări recente în ordine cronologică (de la cea mai nouă la cea mai veche)</span>
+                        <h2 class="screen-title" data-i18n="recents">RECENTS</h2>
+                        <span class="screen-subtitle" data-i18n="subtitle_recents">Lansări recente în ordine cronologică (de la cea mai nouă la cea mai veche)</span>
                     </div>
                     <div style="margin-top: 18px;">
                         <div class="track-list" id="recents-tracklist">
@@ -790,8 +833,8 @@
                 <!-- ALBUMS LIST SCREEN -->
                 <section class="content-screen" id="screen-albums">
                     <div class="screen-title-area">
-                        <h2 class="screen-title">ALBUMS</h2>
-                        <span class="screen-subtitle">Alege un album pentru redare integrală</span>
+                        <h2 class="screen-title" data-i18n="albums">ALBUMS</h2>
+                        <span class="screen-subtitle" data-i18n="subtitle_albums">Alege un album pentru redare integrală</span>
                     </div>
                     <div style="margin-top: 18px;">
                         <div class="albums-grid" id="albums-grid">
@@ -803,8 +846,8 @@
                 <!-- FAVORITES SCREEN -->
                 <section class="content-screen" id="screen-favorites">
                     <div class="screen-title-area">
-                        <h2 class="screen-title">FAVORITES</h2>
-                        <span class="screen-subtitle">Playlist-ul tău personal cu piese adăugate la favorite</span>
+                        <h2 class="screen-title" data-i18n="favorites">FAVORITES</h2>
+                        <span class="screen-subtitle" data-i18n="subtitle_favorites">Playlist-ul tău personal cu piese adăugate la favorite</span>
                     </div>
                     <div style="margin-top: 18px;">
                         <div class="track-list" id="favorites-tracklist">
@@ -977,6 +1020,99 @@
                 console.error("Eroare la incarcarea bazei de date de albume:", err);
             });
 
+        const translations = {
+            ro: {
+                recents: "RECENȚI",
+                albums: "ALBUME",
+                favorites: "FAVORITE",
+                subtitle_all: "În fiecare zi o nouă listă completă de piese.",
+                subtitle_recents: "Lansări recente în ordine cronologică (de la cea mai nouă la cea mai veche)",
+                subtitle_albums: "Alege un album pentru redare integrală",
+                subtitle_favorites: "Playlist-ul tău personal cu piese adăugate la favorite"
+            },
+            en: {
+                recents: "RECENTS",
+                albums: "ALBUMS",
+                favorites: "FAVORITES",
+                subtitle_all: "Every day a new complete list of tracks.",
+                subtitle_recents: "Recent releases in chronological order (newest to oldest)",
+                subtitle_albums: "Choose an album for full playback",
+                subtitle_favorites: "Your personal playlist with tracks added to favorites"
+            },
+            de: {
+                recents: "NEUHEITEN",
+                albums: "ALBEN",
+                favorites: "FAVORITEN",
+                subtitle_all: "Jeden Tag eine neue vollständige Trackliste.",
+                subtitle_recents: "Kürzliche Veröffentlichungen in chronologischer Reihenfolge (von neu nach alt)",
+                subtitle_albums: "Wählen Sie ein Album für die vollständige Wiedergabe",
+                subtitle_favorites: "Ihre persönliche Playlist mit zu Favoriten hinzugefügten Tracks"
+            },
+            fr: {
+                recents: "RÉCENTS",
+                albums: "ALBUMS",
+                favorites: "FAVORIS",
+                subtitle_all: "Chaque jour une nouvelle liste complète de morceaux.",
+                subtitle_recents: "Sorties récentes par ordre chronologique (du plus récent au plus ancien)",
+                subtitle_albums: "Choisissez un album pour une lecture complète",
+                subtitle_favorites: "Votre playlist personnelle avec les morceaux ajoutés aux favoris"
+            },
+            it: {
+                recents: "RECENTI",
+                albums: "ALBUM",
+                favorites: "PREFERITI",
+                subtitle_all: "Ogni giorno una nuova lista completa di brani.",
+                subtitle_recents: "Uscite recenti in ordine cronologico (dalla più recente alla più vecchia)",
+                subtitle_albums: "Scegli un album per la riproduzione completa",
+                subtitle_favorites: "La tua playlist personale con i brani aggiunti ai preferiti"
+            },
+            es: {
+                recents: "RECIENTES",
+                albums: "ÁLBUMES",
+                favorites: "FAVORITOS",
+                subtitle_all: "Cada día una nueva lista completa de pistas.",
+                subtitle_recents: "Lanzamientos recientes en orden cronológico (del más nuevo al más antiguo)",
+                subtitle_albums: "Elige un álbum para reproducción completa",
+                subtitle_favorites: "Tu lista de reproducción personal con pistas añadidas a favoritos"
+            },
+            ru: {
+                recents: "НЕДАВНИЕ",
+                albums: "АЛЬБОМЫ",
+                favorites: "ИЗБРАННОЕ",
+                subtitle_all: "Каждый день новый полный список треков.",
+                subtitle_recents: "Недавние релизы в хронологическом порядке (от новых к старым)",
+                subtitle_albums: "Выберите альбом для полного воспроизведения",
+                subtitle_favorites: "Ваш личный плейлист с треками, добавленными в избранное"
+            },
+            ar: {
+                recents: "الأحدث",
+                albums: "الألبومات",
+                favorites: "المفضلة",
+                subtitle_all: "كل يوم قائمة كاملة جديدة من الأغاني.",
+                subtitle_recents: "الإصدارات الأخيرة بالترتيب الزمني (من الأحدث إلى الأقدم)",
+                subtitle_albums: "اختر ألبومًا للتشغيل الكامل",
+                subtitle_favorites: "قائمتك الشخصية مع الأغاني المضافة إلى المفضلة"
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('radiosix_lang', lang);
+            document.querySelectorAll('.flag-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            const dict = translations[lang] || translations['ro'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.textContent = dict[key];
+                }
+            });
+        }
+
         let player;
         let isPlaying = false;
         
@@ -1026,6 +1162,15 @@
         const recentsTracklist = document.getElementById('recents-tracklist');
         const albumsGrid = document.getElementById('albums-grid');
         const favoritesTracklist = document.getElementById('favorites-tracklist');
+
+        // Initialize Language and Click Listeners
+        setLanguage(localStorage.getItem('radiosix_lang') || 'ro');
+        document.querySelectorAll('.flag-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
 
         // Create player after API loads
         function onYouTubeIframeAPIReady() {
