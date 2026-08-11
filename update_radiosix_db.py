@@ -30,6 +30,7 @@ VERIFIED_YOUTUBE_IDS = {
 
 UNMAPPED_TITLES = {
     "the world in chaos",
+    "mimi's song",
 }
 
 
