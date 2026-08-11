@@ -1227,13 +1227,13 @@
             // Try to start playing automatically (unmuted)
             playQueueIndex(0);
 
-            // Fallback: if browser blocked unmuted autoplay, start play on first click/tap anywhere
+            // Fallback: if browser blocked unmuted autoplay, play the second track on first click/tap
             const playOnInteraction = () => {
                 isInitialLoad = false;
                 if (player && typeof player.getPlayerState === 'function') {
                     const state = player.getPlayerState();
                     if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
-                        player.playVideo();
+                        playQueueIndex(1);
                     }
                 }
                 document.removeEventListener('click', playOnInteraction);
