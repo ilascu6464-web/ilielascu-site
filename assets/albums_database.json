@@ -401,7 +401,7 @@
   },
   {
     "album_title": "Singles 2026",
-    "tracks_count": 41,
+    "tracks_count": 42,
     "tracks": [
       {
         "title": "ARANJUEZ REVISITED",
@@ -454,6 +454,10 @@
       {
         "title": "Every Tear Has a Rhythm",
         "youtube_id": "2nhRFehE49s"
+      },
+      {
+        "title": "Fire Beneath the Andes",
+        "youtube_id": "e_LX8wahdS4"
       },
       {
         "title": "Freedom Jazz Dance",

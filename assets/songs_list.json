@@ -1,15 +1,5 @@
 [
   {
-    "title": "Black Clouds",
-    "youtube_id": "zrKf36tDMS4",
-    "cover": "assets/blackclouds.webp"
-  },
-  {
-    "title": "We Don't Ask",
-    "youtube_id": "JYxfT5Ums3o",
-    "cover": "assets/wedontask.webp"
-  },
-  {
     "title": "Where Is Eva?",
     "youtube_id": "HuIzTbNoe18",
     "cover": "assets/whereiseva.webp"
@@ -48,5 +38,15 @@
     "title": "Drag Me",
     "youtube_id": "9hZEszABdto",
     "cover": "assets/dragme.webp"
+  },
+  {
+    "title": "Drag & Drop",
+    "youtube_id": "2PpbGFgWet0",
+    "cover": "assets/dragdrop.webp"
+  },
+  {
+    "title": "Fire Beneath the Andes",
+    "youtube_id": "e_LX8wahdS4",
+    "cover": "assets/firebeneaththeandes.webp"
   }
 ]

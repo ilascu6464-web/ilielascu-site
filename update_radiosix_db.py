@@ -23,6 +23,7 @@ VERIFIED_YOUTUBE_IDS = {
     "the synthesis of a latino": "2R9f6qs6K-E",
     "too much analog": "k-H4mYikhT4",
     "drag me": "9hZEszABdto",
+    "fire beneath the andes": "e_LX8wahdS4",
     "🇷🇸rakia i suze, frați pe vecie 🇲🇩": "J7ti6CGpEbU",
     "🇲🇩 argo-9's dream 🔊": "6et89lTob94",
 }
