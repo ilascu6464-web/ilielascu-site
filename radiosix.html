@@ -720,9 +720,117 @@
                 display: none; /* Hide volume bar on mobile */
             }
         }
+
+        /* Welcome Start Screen Overlay */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 12, 11, 0.90);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0, 255, 100, 0.25);
+            object-fit: cover;
+            animation: float-logo 4s ease-in-out infinite;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+            margin: 0;
+        }
+
+        .welcome-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .welcome-btn {
+            margin-top: 10px;
+            padding: 16px 36px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 30px;
+            border: 2px solid var(--neon-green);
+            background: rgba(0, 255, 100, 0.04);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 100, 0.15);
+            animation: pulse-neon 2s infinite;
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-2px);
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 25px rgba(0, 255, 100, 0.45);
+            animation: none;
+        }
+
+        @keyframes float-logo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 15px rgba(0, 255, 100, 0.15); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 100, 0.4); }
+            100% { box-shadow: 0 0 15px rgba(0, 255, 100, 0.15); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Welcome Overlay (Start Screen) -->
+    <div class="welcome-overlay" id="welcome-screen">
+        <div class="welcome-card">
+            <img src="assets/logo_radiosix_square.png" alt="RadioSIX Logo" class="welcome-logo">
+            <h1 class="welcome-title">RadioSIX LIVE</h1>
+            <p class="welcome-subtitle">24/7 Shuffled Original Electronic Music</p>
+            <button class="welcome-btn" id="btn-welcome-start" data-i18n="welcome_btn">PORNEȘTE RADIO</button>
+        </div>
+    </div>
 
     <!-- Soft green ambient light -->
     <div class="ambient-bg">
@@ -1033,7 +1141,8 @@
                 subtitle_all: "În fiecare zi o nouă listă completă de piese.",
                 subtitle_recents: "Lansări recente în ordine cronologică (de la cea mai nouă la cea mai veche)",
                 subtitle_albums: "Alege un album pentru redare integrală",
-                subtitle_favorites: "Playlist-ul tău personal cu piese adăugate la favorite"
+                subtitle_favorites: "Playlist-ul tău personal cu piese adăugate la favorite",
+                welcome_btn: "PORNEȘTE RADIO"
             },
             en: {
                 recents: "RECENTS",
@@ -1042,7 +1151,8 @@
                 subtitle_all: "Every day a new complete list of tracks.",
                 subtitle_recents: "Recent releases in chronological order (newest to oldest)",
                 subtitle_albums: "Choose an album for full playback",
-                subtitle_favorites: "Your personal playlist with tracks added to favorites"
+                subtitle_favorites: "Your personal playlist with tracks added to favorites",
+                welcome_btn: "START RADIO"
             },
             de: {
                 recents: "NEUHEITEN",
@@ -1051,7 +1161,8 @@
                 subtitle_all: "Jeden Tag eine neue vollständige Trackliste.",
                 subtitle_recents: "Kürzliche Veröffentlichungen in chronologischer Reihenfolge (von neu nach alt)",
                 subtitle_albums: "Wählen Sie ein Album für die vollständige Wiedergabe",
-                subtitle_favorites: "Ihre persönliche Playlist mit zu Favoriten hinzugefügten Tracks"
+                subtitle_favorites: "Ihre persönliche Playlist mit zu Favoriten hinzugefügten Tracks",
+                welcome_btn: "RADIO STARTEN"
             },
             fr: {
                 recents: "RÉCENTS",
@@ -1060,16 +1171,18 @@
                 subtitle_all: "Chaque jour une nouvelle liste complète de morceaux.",
                 subtitle_recents: "Sorties récentes par ordre chronologique (du plus récent au plus ancien)",
                 subtitle_albums: "Choisissez un album pour une lecture complète",
-                subtitle_favorites: "Votre playlist personnelle avec les morceaux ajoutés aux favoris"
+                subtitle_favorites: "Votre playlist personnelle avec les morceaux ajoutés aux favoris",
+                welcome_btn: "LANCER LA RADIO"
             },
             it: {
                 recents: "RECENTI",
                 albums: "ALBUM",
                 favorites: "PREFERITI",
-                subtitle_all: "Ogni giorno una nuova lista completa di brani.",
+                subtitle_all: "Ogni giorno una noua lista completa di brani.",
                 subtitle_recents: "Uscite recenti in ordine cronologico (dalla più recente alla più vecchia)",
                 subtitle_albums: "Scegli un album per la riproduzione completa",
-                subtitle_favorites: "La tua playlist personale con i brani aggiunti ai preferiti"
+                subtitle_favorites: "La tua playlist personale cu i brani aggiunti ai preferiti",
+                welcome_btn: "AVVIA LA RADIO"
             },
             es: {
                 recents: "RECIENTES",
@@ -1078,7 +1191,8 @@
                 subtitle_all: "Cada día una nueva lista completa de pistas.",
                 subtitle_recents: "Lanzamientos recientes en orden cronológico (del más nuevo al más antiguo)",
                 subtitle_albums: "Elige un álbum para reproducción completa",
-                subtitle_favorites: "Tu lista de reproducción personal con pistas añadidas a favoritos"
+                subtitle_favorites: "Tu lista de reproducción personal con pistas añadidas a favoritos",
+                welcome_btn: "INICIAR RADIO"
             },
             ru: {
                 recents: "НЕДАВНИЕ",
@@ -1087,7 +1201,8 @@
                 subtitle_all: "Каждый день новый полный список треков.",
                 subtitle_recents: "Недавние релизы в хронологическом порядке (от новых к старым)",
                 subtitle_albums: "Выберите альбом для полного воспроизведения",
-                subtitle_favorites: "Ваш личный плейлист с треками, добавленными в избранное"
+                subtitle_favorites: "Ваш личный плейлист с треками, добавленными в избранное",
+                welcome_btn: "ЗАПУСТИТЬ РАДИО"
             },
             ar: {
                 recents: "الأحدث",
@@ -1096,7 +1211,8 @@
                 subtitle_all: "كل يوم قائمة كاملة جديدة من الأغاني.",
                 subtitle_recents: "الإصدارات الأخيرة بالترتيب الزمني (من الأحدث إلى الأقدم)",
                 subtitle_albums: "اختر ألبومًا للتشغيل الكامل",
-                subtitle_favorites: "قائمتك الشخصية مع الأغاني المضافة إلى المفضلة"
+                subtitle_favorites: "قائمتك الشخصية مع الأغاني المضافة إلى المفضلة",
+                welcome_btn: "تشغيل الراديو"
             }
         };
 
@@ -1224,23 +1340,18 @@
             renderAlbumsGrid();
             renderFavorites();
 
-            // Try to start playing automatically (unmuted)
-            playQueueIndex(0);
-
-            // Fallback: if browser blocked unmuted autoplay, play the second track on first click/tap
-            const playOnInteraction = () => {
-                isInitialLoad = false;
-                if (player && typeof player.getPlayerState === 'function') {
-                    const state = player.getPlayerState();
-                    if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
-                        playQueueIndex(1);
+            // Bind welcome screen button click to start play unmuted inside user gesture!
+            const btnWelcomeStart = document.getElementById('btn-welcome-start');
+            if (btnWelcomeStart) {
+                btnWelcomeStart.addEventListener('click', () => {
+                    const welcomeScreen = document.getElementById('welcome-screen');
+                    if (welcomeScreen) {
+                        welcomeScreen.classList.add('hidden');
                     }
-                }
-                document.removeEventListener('click', playOnInteraction);
-                document.removeEventListener('touchstart', playOnInteraction);
-            };
-            document.addEventListener('click', playOnInteraction);
-            document.addEventListener('touchstart', playOnInteraction);
+                    isInitialLoad = false;
+                    playQueueIndex(0);
+                });
+            }
         }
 
         function onPlayerStateChange(event) {
