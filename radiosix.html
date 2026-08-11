@@ -1202,6 +1202,11 @@
 
         function onPlayerReady(event) {
             document.body.classList.add('loaded');
+            
+            // Mute player initially to allow browser autoplay policy bypass
+            if (player && typeof player.mute === 'function') {
+                player.mute();
+            }
             player.setVolume(volumeSlider.value);
 
             // Initialize Lists
@@ -1211,22 +1216,24 @@
             renderAlbumsGrid();
             renderFavorites();
 
-            // Start playing the first item in the ALL queue automatically
+            // Start playing the first item in the ALL queue automatically (muted)
             playQueueIndex(0);
 
-            // Autoplay policy fallback: try to play when user clicks anywhere if blocked
-            const playOnInteraction = () => {
-                if (player && typeof player.getPlayerState === 'function') {
+            // Unmute and force play on first user interaction
+            const unmuteOnInteraction = () => {
+                if (player && typeof player.unMute === 'function') {
+                    player.unMute();
+                    player.setVolume(volumeSlider.value);
                     const state = player.getPlayerState();
                     if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
                         player.playVideo();
                     }
                 }
-                document.removeEventListener('click', playOnInteraction);
-                document.removeEventListener('touchstart', playOnInteraction);
+                document.removeEventListener('click', unmuteOnInteraction, { capture: true });
+                document.removeEventListener('touchstart', unmuteOnInteraction, { capture: true });
             };
-            document.addEventListener('click', playOnInteraction);
-            document.addEventListener('touchstart', playOnInteraction);
+            document.addEventListener('click', unmuteOnInteraction, { capture: true, once: true });
+            document.addEventListener('touchstart', unmuteOnInteraction, { capture: true, once: true });
         }
 
         function onPlayerStateChange(event) {
