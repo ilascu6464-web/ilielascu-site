@@ -1230,18 +1230,21 @@
             // Start playing the first item in the ALL queue automatically (muted)
             playQueueIndex(0);
 
-            // Unmute and force play on first user interaction
+            // Unmute and force play on user interaction (retries if clicked while buffering)
             const unmuteOnInteraction = () => {
                 unmutePlayerIfNeeded();
                 const state = player.getPlayerState();
                 if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
                     player.playVideo();
                 }
-                document.removeEventListener('click', unmuteOnInteraction);
-                document.removeEventListener('touchstart', unmuteOnInteraction);
+                // Only remove listener if player has successfully unmuted
+                if (player && typeof player.isMuted === 'function' && !player.isMuted()) {
+                    document.removeEventListener('click', unmuteOnInteraction);
+                    document.removeEventListener('touchstart', unmuteOnInteraction);
+                }
             };
-            document.addEventListener('click', unmuteOnInteraction, { once: true });
-            document.addEventListener('touchstart', unmuteOnInteraction, { once: true });
+            document.addEventListener('click', unmuteOnInteraction);
+            document.addEventListener('touchstart', unmuteOnInteraction);
         }
 
         function onPlayerStateChange(event) {
