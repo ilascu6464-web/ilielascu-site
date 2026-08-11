@@ -1205,8 +1205,21 @@
         function unmutePlayerIfNeeded() {
             isInitialLoad = false;
             if (player && typeof player.unMute === 'function') {
-                player.unMute();
-                player.setVolume(volumeSlider.value);
+                if (typeof player.isMuted === 'function' && player.isMuted()) {
+                    player.unMute();
+                    player.setVolume(volumeSlider.value);
+                    
+                    // Safari/Chrome audio context refresh: pause and play to force sound initialization
+                    const state = player.getPlayerState();
+                    if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) {
+                        player.pauseVideo();
+                        setTimeout(() => {
+                            if (player && typeof player.playVideo === 'function') {
+                                player.playVideo();
+                            }
+                        }, 80);
+                    }
+                }
             }
         }
 
