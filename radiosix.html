@@ -1132,12 +1132,6 @@
         let favoriteIds = JSON.parse(localStorage.getItem('radiosix_favorites')) || [];
         let favPlayIndex = 0; // Pointer for FAV playlist playback
 
-        // Load YouTube Player API asynchronously
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
         // Elements
         const songTitle = document.getElementById('song-title');
         const songCover = document.getElementById('song-cover');
@@ -1915,6 +1909,30 @@
                 updateMetadata();
             }
         }, 1000);
+
+        // Autoplay policy fallback: try to play when user clicks anywhere if not already playing
+        let hasInteracted = false;
+        function handleFirstInteraction() {
+            if (hasInteracted) return;
+            hasInteracted = true;
+            if (player && typeof player.getPlayerState === 'function') {
+                const state = player.getPlayerState();
+                if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
+                    player.playVideo();
+                }
+            }
+            // Remove listeners
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('touchstart', handleFirstInteraction);
+        }
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('touchstart', handleFirstInteraction);
+
+        // Load YouTube Player API asynchronously
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
     <script>
         if ('serviceWorker' in navigator) {
