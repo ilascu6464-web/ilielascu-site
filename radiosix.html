@@ -2068,6 +2068,40 @@
 
     </script>
     <script>
+        // RadioSIX analytics is deliberately disabled until the private
+        // Cloudflare Worker is deployed and its endpoint is configured.
+        (() => {
+            const endpoint = 'https://radiosix-analytics.bzrmmsrmft.workers.dev';
+            const storageKey = 'radiosix_analytics_session';
+            const createSessionId = () => {
+                if (window.crypto?.randomUUID) return window.crypto.randomUUID().replaceAll('-', '');
+                return `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
+            };
+            const sessionId = localStorage.getItem(storageKey) || createSessionId();
+            localStorage.setItem(storageKey, sessionId);
+            const send = (event, keepalive = false) => {
+                const body = JSON.stringify({ sessionId, event });
+                try {
+                    fetch(`${endpoint}/collect`, {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body,
+                        keepalive,
+                        credentials: 'omit'
+                    }).catch(() => {});
+                } catch (_) {}
+            };
+            send('start');
+            const heartbeat = window.setInterval(() => send('heartbeat'), 60_000);
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') send('heartbeat');
+            });
+            window.addEventListener('pagehide', () => {
+                window.clearInterval(heartbeat);
+                send('end', true);
+            }, { once: true });
+        })();
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').catch((error) => {
@@ -2076,5 +2110,98 @@
             });
         }
     </script>
+<script>
+(function () {
+  const COLLECT_URL = 'https://radiosix-analytics.bzrmmsrmft.workers.dev/collect';
+  const sessionId = crypto.randomUUID
+    ? crypto.randomUUID()
+    : 's-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+  const startedAt = Date.now();
+  let lastActiveAt = startedAt;
+  let heartbeatTimer = null;
+  let ended = false;
+
+  function post(event) {
+    const payload = {
+      event,
+      sessionId,
+      started_at: startedAt,
+      last_seen_at: Date.now(),
+      active_ms: Date.now() - lastActiveAt
+    };
+    fetch(COLLECT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(function () {});
+  }
+
+  post('start');
+  heartbeatTimer = setInterval(function () {
+    lastActiveAt = Date.now();
+    post('heartbeat');
+  }, 30000);
+
+  function sendEnd() {
+    if (ended) return;
+    ended = true;
+    clearInterval(heartbeatTimer);
+    post('end');
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') sendEnd();
+  });
+  window.addEventListener('pagehide', sendEnd);
+  window.addEventListener('beforeunload', sendEnd);
+})();
+</script>
+<!-- RadioSIX anonymous usage collector -->
+<script>
+(function () {
+  const COLLECT_URL = 'https://radiosix-analytics.bzrmmsrmft.workers.dev/collect';
+  const sessionId = crypto.randomUUID
+    ? crypto.randomUUID()
+    : 's-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+  const startedAt = Date.now();
+  let lastActiveAt = startedAt;
+  let heartbeatTimer = null;
+  let ended = false;
+
+  function post(event) {
+    const payload = {
+      event,
+      sessionId,
+      started_at: startedAt,
+      last_seen_at: Date.now(),
+      active_ms: Date.now() - lastActiveAt
+    };
+    fetch(COLLECT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(function () {});
+  }
+
+  post('start');
+  heartbeatTimer = setInterval(function () {
+    lastActiveAt = Date.now();
+    post('heartbeat');
+  }, 30000);
+
+  function sendEnd() {
+    if (ended) return;
+    ended = true;
+    clearInterval(heartbeatTimer);
+    post('end');
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') sendEnd();
+  });
+  window.addEventListener('pagehide', sendEnd);
+  window.addEventListener('beforeunload', sendEnd);
+})();
+</script>
 </body>
 </html>
