@@ -86,9 +86,11 @@ figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#d5bd87
 .recent-links a:hover{color:#efd49b;text-decoration:none;}
 .music-section .album-latest{order:3;}
 .music-section .album-singles-current{order:4;}
+.music-section .album-pair{order:10;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:14px 0;}
+.music-section .album-pair .media-row{margin:0;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
 @media(max-width:900px){.books-section{grid-template-columns:repeat(4,minmax(0,1fr));}.music-section figure.tile{width:clamp(86px,15vw,110px);}}
-@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section .recent-gallery{grid-template-columns:repeat(3,minmax(0,1fr));}.music-section figure.tile{width:clamp(84px,27vw,112px);}.music-section .recent-gallery figure.tile{width:auto;}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}.brand-intro .radiosix-row{position:static;transform:none;padding-top:12px;order:2;}}
+@media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .album-pair{grid-template-columns:1fr;gap:0;margin:0;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section .recent-gallery{grid-template-columns:repeat(3,minmax(0,1fr));}.music-section figure.tile{width:clamp(84px,27vw,112px);}.music-section .recent-gallery figure.tile{width:auto;}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}.brand-intro .radiosix-row{position:static;transform:none;padding-top:12px;order:2;}}
 @media(max-width:420px){.books-section{grid-template-columns:repeat(2,minmax(0,1fr));}.books-section .btn{font-size:.72rem;}}
 </style>
 <script>
@@ -371,6 +373,21 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 
+<div class="album-pair">
+<div class="media-row geometry-of-longing">
+<div class="media-content">
+<h3>Geometry of Longing</h3>
+<div class="btns">
+<a class="btn ytmusic" href="https://www.youtube.com/playlist?list=PLH0dqiM3apKI&amp;index=1" rel="noopener" target="_blank">🎧 YouTube Music</a>
+</div>
+<div class="gallery">
+<figure class="tile"><img alt="Hyperbolic Solitude" loading="lazy" data-src="assets/hyperbolicsolitude.webp?v=202610161000"><figcaption>Hyperbolic Solitude</figcaption></figure>
+<figure class="tile"><img alt="The Euclidean Heart" loading="lazy" data-src="assets/theeuclideanheart.webp?v=202610161000"><figcaption>The Euclidean Heart</figcaption></figure>
+<figure class="tile"><img alt="The Fibonacci Spiral" loading="lazy" data-src="assets/thefibonaccispiral.webp?v=202610161000"><figcaption>The Fibonacci Spiral</figcaption></figure>
+</div>
+</div>
+</div>
+
 <div class="media-row ultra-blue-spectrum">
 <div class="media-content">
 <h3>Ultra Blue Spectrum</h3>
@@ -381,6 +398,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="tile"><img alt="Caeruleum" loading="lazy" data-src="assets/caeruleum.webp?v=202609221000"><figcaption>Caeruleum</figcaption></figure>
 <figure class="tile"><img alt="Nocturnum" loading="lazy" data-src="assets/nocturnum.webp?v=202609221000"><figcaption>Nocturnum</figcaption></figure>
 <figure class="tile"><img alt="Spiculum" loading="lazy" data-src="assets/spiculum.webp?v=202609221000"><figcaption>Spiculum</figcaption></figure>
+</div>
 </div>
 </div>
 </div>
