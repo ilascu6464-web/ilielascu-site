@@ -5,3 +5,6 @@ FlyDBX.app/
 launch.sh
 assets/test.webp
 *.local
+
+# Utilitar CLI local (nu se publică)
+scripts/publish_cli.js
