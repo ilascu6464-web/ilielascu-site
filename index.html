@@ -92,6 +92,7 @@ figure.tile figcaption{padding:4px;font-size:9px;text-align:center;color:#d5bd87
 .music-section .album-pair{order:10;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:14px 0;}
 .music-section .album-pair .media-row{margin:0;}
 footer{margin:40px auto 20px;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--divider);padding-top:20px;}
+@media(min-width:721px){.music-section .smoke-blue-notes .gallery{max-width:950px;margin-left:auto;margin-right:auto;}.music-section .smoke-blue-notes figure.tile{width:calc((100% - 70px)/8);}}
 @media(max-width:900px){.books-section{grid-template-columns:repeat(4,minmax(0,1fr));}.music-section figure.tile{width:clamp(86px,15vw,110px);}}
 @media(max-width:720px){.media-row{grid-template-columns:1fr;gap:12px;padding:12px;}.media-row img.thumb{width:100%;height:auto;aspect-ratio:1/1;max-height:180px;}.section-title{font-size:1.5rem;}.books-section{gap:20px 12px;padding:16px;}.books-section .section-title{margin-top:28px;}.books-section .btn{font-size:.68rem;}.recent-releases{margin-bottom:22px;}.music-section .media-row{padding:16px 0 20px;}.music-section .album-pair{grid-template-columns:1fr;gap:0;margin:0;}.music-section .media-content h3{font-size:1.4rem;}.music-section .btns{justify-content:center;}.music-section .gallery{gap:8px;}.music-section .recent-gallery{grid-template-columns:repeat(3,minmax(0,1fr));}.music-section figure.tile{width:clamp(84px,27vw,112px);}.music-section .recent-gallery figure.tile{width:auto;}.brand-intro{flex-direction:column;padding-bottom:14px;}.brand-intro .contact-row{position:static;transform:none;padding-top:8px;}.brand-intro .radiosix-row{position:static;transform:none;padding-top:12px;order:2;}}
 @media(max-width:420px){.books-section{grid-template-columns:repeat(2,minmax(0,1fr));}.books-section .btn{font-size:.72rem;}}
@@ -361,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<figure class="tile"><img alt="Sintra" loading="lazy" data-src="assets/sintra.webp?v=202611061000"><figcaption>Sintra</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=gB6YOfCvZ0I&amp;list=PLEW7B2T0FEVs" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+
 <figure class="tile"><img alt="The Eastern Pulsar" loading="lazy" data-src="assets/theeasternpulsar.webp?v=202611061000"><figcaption>The Eastern Pulsar</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=c-fAzd8jrbg&amp;list=PLEW7B2T0FEVs" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
 <figure class="tile"><img alt="The Yemeni&#39;s Dance" loading="lazy" data-src="assets/theyemenisdance.webp?v=202611061000"><figcaption>The Yemeni&#39;s Dance</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=HF2QyKvqT_k&amp;list=PLEW7B2T0FEVs" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
 <figure class="tile"><img alt="Feu Follet live in Concert" loading="lazy" data-src="assets/feufolletliveinconcert.webp?v=202611061100"><figcaption>Feu Follet live in Concert</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=_xB5DksQrVk&amp;list=PLEW7B2T0FEVs" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
@@ -370,7 +371,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="tile"><img alt="Lost on the Delta" loading="lazy" data-src="assets/lostonthedelta.webp?v=202611071000"><figcaption>Lost on the Delta</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=gIhTVoLAFqs&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
 <figure class="tile"><img alt="Maryam Blues" loading="lazy" data-src="assets/maryamblues.webp?v=202611071000"><figcaption>Maryam Blues</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=AellfFNAHU4&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
 <figure class="tile"><img alt="Still by My Side" loading="lazy" data-src="assets/stillbymyside.webp?v=202611071000"><figcaption>Still by My Side</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=EdyDukdALTY&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
-<figure class="tile"><img alt="Tănase&#39;s Song" loading="lazy" data-src="assets/tanasessong.webp?v=202611071000"><figcaption>Tănase&#39;s Song</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=EvaLKRFw3Oc&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure></div>
+<figure class="tile"><img alt="Tănase&#39;s Song" loading="lazy" data-src="assets/tanasessong.webp?v=202611071000"><figcaption>Tănase&#39;s Song</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=EvaLKRFw3Oc&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure>
+<figure class="tile"><img alt="The Visitor" loading="lazy" data-src="assets/thevisitor.webp?v=202611081000"><figcaption>The Visitor</figcaption><div class="recent-links"><a href="https://www.youtube.com/watch?v=WnKSIAgQGn0&amp;list=PLU6G6tPqqRJk" rel="noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ilascu99" rel="noopener" target="_blank">TikTok</a></div></figure></div>
 </section>
 
 <div class="media-row neo-quantum album-latest">
@@ -413,7 +415,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <figure class="tile"><img alt="Lost on the Delta" loading="lazy" data-src="assets/lostonthedelta.webp?v=202611071000"><figcaption>Lost on the Delta</figcaption></figure>
 <figure class="tile"><img alt="Maryam Blues" loading="lazy" data-src="assets/maryamblues.webp?v=202611071000"><figcaption>Maryam Blues</figcaption></figure>
 <figure class="tile"><img alt="Still by My Side" loading="lazy" data-src="assets/stillbymyside.webp?v=202611071000"><figcaption>Still by My Side</figcaption></figure>
-<figure class="tile"><img alt="Tănase&#39;s Song" loading="lazy" data-src="assets/tanasessong.webp?v=202611071000"><figcaption>Tănase&#39;s Song</figcaption></figure></div>
+<figure class="tile"><img alt="Tănase&#39;s Song" loading="lazy" data-src="assets/tanasessong.webp?v=202611071000"><figcaption>Tănase&#39;s Song</figcaption></figure>
+<figure class="tile"><img alt="The Visitor" loading="lazy" data-src="assets/thevisitor.webp?v=202611081000"><figcaption>The Visitor</figcaption></figure></div>
 </div>
 </div>
 <div class="media-row mondo-brutal">
