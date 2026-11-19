@@ -182,10 +182,24 @@ function figureTitles(html, range) {
     .map(match => textContent(match[1]));
 }
 
-function makeAlbumTile({ title, assetName, version }) {
+function extractYouTubeVideoId(value) {
+  const trimmed = String(value || '').trim();
+  if (!trimmed) return '';
+
+  const parsed = parseUrl(trimmed, 'Linkul YouTube al piesei');
+  if (parsed.hostname === 'youtu.be') {
+    return parsed.pathname.replace(/^\/+/, '').split('/')[0] || '';
+  }
+
+  return parsed.searchParams.get('v') || '';
+}
+
+function makeAlbumTile({ title, assetName, version, youtubeUrl }) {
   const safeTitle = escapeHtml(title);
   const safeAsset = escapeHtml(assetName);
-  return `<figure class="tile"><img alt="${safeTitle}" loading="lazy" data-src="assets/${safeAsset}?v=${version}"><figcaption>${safeTitle}</figcaption></figure>`;
+  const videoId = extractYouTubeVideoId(youtubeUrl);
+  const dataYt = videoId ? ` data-yt="${escapeHtml(videoId)}"` : '';
+  return `<figure class="tile"><img alt="${safeTitle}" loading="lazy" data-src="assets/${safeAsset}?v=${version}"${dataYt}><figcaption>${safeTitle}</figcaption></figure>`;
 }
 
 function makeRecentTile({ title, assetName, version, youtubeUrl, tiktokUrl }) {
@@ -193,8 +207,10 @@ function makeRecentTile({ title, assetName, version, youtubeUrl, tiktokUrl }) {
   const safeAsset = escapeHtml(assetName);
   const safeYoutube = escapeHtml(normalizeTrackYoutubeUrl(youtubeUrl));
   const safeTikTok = escapeHtml(normalizeTikTokUrl(tiktokUrl));
+  const videoId = extractYouTubeVideoId(youtubeUrl);
+  const dataYt = videoId ? ` data-yt="${escapeHtml(videoId)}"` : '';
 
-  return `<figure class="tile"><img alt="${safeTitle}" loading="lazy" data-src="assets/${safeAsset}?v=${version}"><figcaption>${safeTitle}</figcaption><div class="recent-links"><a href="${safeYoutube}" rel="noopener" target="_blank">YouTube</a><a href="${safeTikTok}" rel="noopener" target="_blank">TikTok</a></div></figure>`;
+  return `<figure class="tile"><img alt="${safeTitle}" loading="lazy" data-src="assets/${safeAsset}?v=${version}"${dataYt}><figcaption>${safeTitle}</figcaption><div class="recent-links"><a href="${safeYoutube}" rel="noopener" target="_blank">YouTube</a><a href="${safeTikTok}" rel="noopener" target="_blank">TikTok</a></div></figure>`;
 }
 
 function normalizeAlbumYoutubeUrl(value) {

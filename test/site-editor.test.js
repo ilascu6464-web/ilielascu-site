@@ -80,6 +80,7 @@ test('keeps exactly ten recent releases and appends the newest track', () => {
 
   assert.doesNotMatch(html, /<figcaption>Recent 0<\/figcaption>/);
   assert.match(html, /<figcaption>Newest Track<\/figcaption>/);
+  assert.equal((html.match(/data-yt="new-video"/g) || []).length, 2);
   assert.equal((html.match(/recent-links/g) || []).length, 10);
 });
 

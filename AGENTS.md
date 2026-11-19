@@ -23,9 +23,9 @@ de pe branch-ul `main` sunt sursa de adevăr.
 
 1. Confirmă că imaginea există în `assets/`.
 2. Găsește albumul după `<h3>Numele albumului</h3>`.
-3. Adaugă piesa la finalul galeriei albumului:
+3. Adaugă piesa la finalul galeriei albumului (cu `data-yt="VIDEO_ID"` pentru butonul Play pe copertă, când este disponibil linkul YouTube):
    ```html
-   <figure class="tile"><img alt="TITLU" loading="lazy" data-src="assets/nume.webp?v=YYYYMMDDHHMM"><figcaption>TITLU</figcaption></figure>
+   <figure class="tile"><img alt="TITLU" loading="lazy" data-src="assets/nume.webp?v=YYYYMMDDHHMM" data-yt="VIDEO_ID"><figcaption>TITLU</figcaption></figure>
    ```
 4. Implicit, adaugă piesa și la finalul `Recent releases`, exceptând cazul în
    care utilizatorul spune explicit să rămână numai în album.
